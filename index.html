@@ -78,7 +78,7 @@
     }
     @keyframes typing-exit {
       from { width: 0; }
-      to { width: 16ch; } /* "Exit the Matrix!" is 15 chars */
+      to { width: 16ch; }
     }
     @keyframes deleting-exit {
       from { width: 16ch; }
@@ -86,7 +86,7 @@
     }
     @keyframes typing-believe {
       from { width: 0; }
-      to { width: 8ch; } /* "Believe" is 7 chars */
+      to { width: 8ch; }
     }
     @keyframes deleting-believe {
       from { width: 8ch; }
@@ -94,7 +94,7 @@
     }
     @keyframes typing-love {
       from { width: 0; }
-      to { width: 5ch; } /* "Love" is 4 chars */
+      to { width: 5ch; }
     }
     @keyframes deleting-love {
       from { width: 5ch; }
@@ -102,7 +102,7 @@
     }
     @keyframes typing-truth {
       from { width: 0; }
-      to { width: 6ch; } /* "Truth" is 5 chars */
+      to { width: 6ch; }
     }
     @keyframes deleting-truth {
       from { width: 6ch; }
@@ -143,6 +143,11 @@
       box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
       background: linear-gradient(45deg, rgba(128, 0, 255, 0.5), rgba(0, 255, 255, 0.5));
     }
+    #audio-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        }
   </style>
 </head>
 <body>
@@ -151,15 +156,75 @@
   </div>
   <div class="matrix-text" id="matrix-text"></div>
   <div class="button-container">
-    <a href="#" class="trippy-button">Psychedelics</a>
-    <a href="#" class="trippy-button">Telepathy</a>
-    <a href="#" class="trippy-button">Remote viewing</a>
-    <a href="mindsight.html" class="trippy-button">Mindsight</a>
-    <a href="#" class="trippy-button">Near death experience</a>
-    <a href="#" class="trippy-button">Out of body experience</a>
-    <a href="#" class="trippy-button">Non human intelligence</a>
-    <a href="#" class="trippy-button">Infinity</a>
-  </div>
+  <a href="#" class="trippy-button">Psychedelics</a>
+  <a href="#" class="trippy-button">Telepathy</a>
+  <a href="#" class="trippy-button">Remote viewing</a>
+  <a href="mindsight.html" class="trippy-button">Mindsight</a>
+  <a href="#" class="trippy-button">Near death experience</a>
+  <a href="#" class="trippy-button">Out of body experience</a>
+  <a href="#" class="trippy-button">Non human intelligence</a>
+  <a href="#" class="trippy-button">Infinity</a>
+</div>
+
+<!-- move the audio button OUTSIDE of .button-container -->
+<button id="audio-toggle" class="trippy-button">Play</button>
+<audio id="myAudio" preload="auto">
+    <source src="audio.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to the button and audio element
+            const audio = document.getElementById('myAudio');
+            const toggleButton = document.getElementById('audio-toggle');
+
+            // Check if elements are found
+            if (!audio || !toggleButton) {
+                console.error('Audio or button element not found.');
+                alert('Error: Could not find audio or button element.');
+                return;
+            }
+
+            // Track playing state
+            let isPlaying = false;
+
+            // Event listener for audio load errors
+            audio.onerror = function() {
+                console.error('Error loading audio file:', audio.error);
+                alert('Could not load audio file. Check the file path or format.');
+            };
+
+            // Event listeners for audio state changes
+            audio.onplay = function() {
+                isPlaying = true;
+                toggleButton.textContent = 'Pause';
+            };
+
+            audio.onpause = function() {
+                isPlaying = false;
+                toggleButton.textContent = 'Play';
+            };
+
+            // Toggle function on button click
+            toggleButton.addEventListener('click', function() {
+                console.log('Button clicked, isPlaying:', isPlaying); // Debug log
+                if (isPlaying) {
+                    audio.pause();
+                } else {
+                    audio.play().catch(function(error) {
+                        console.error('Error playing audio:', error);
+                        alert('Could not play audio. Ensure the file is valid and try again after interacting with the page.');
+                    });
+                }
+            });
+
+            // Log audio load status for debugging
+            audio.onloadeddata = function() {
+                console.log('Audio file loaded successfully.');
+            };
+        });
+    </script>
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
@@ -222,16 +287,16 @@
                   matrixText.className = 'matrix-text typing-truth';
                   setTimeout(() => {
                     matrixText.className = 'matrix-text deleting-truth';
-                    setTimeout(animateText, 600); // Loop after deleting "Truth"
-                  }, 900); // Time to type "Truth"
-                }, 600); // Time to delete "Love"
-              }, 750); // Time to type "Love"
-            }, 750); // Time to delete "Believe"
-          }, 1100); // Time to type "Believe"
-        }, 1100); // Time to delete "Exit the Matrix!"
-      }, 2250); // Time to type "Exit the Matrix!"
+                    setTimeout(animateText, 600);
+                  }, 900);
+                }, 600);
+              }, 750);
+            }, 750);
+          }, 1100);
+        }, 1100);
+      }, 2250);
     }
-    setTimeout(animateText, 1000); // Start after 1s delay
-  </script>
+    setTimeout(animateText, 1000);
+</script>
 </body>
 </html>
