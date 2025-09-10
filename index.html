@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychedelic Mandelbrot Zoom</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.2.1/big.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+        }
+        #mandelbrot {
+            display: block;
+            filter: blur(1px) brightness(1.2) contrast(1.3);
+        }
+        #matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mandelbrot"></canvas>
+    <canvas id="matrix"></canvas>
+    <script>
+        // Canvas setup
+        const mandelbrotCanvas = document.getElementById('mandelbrot');
+        const mandelbrotCtx = mandelbrotCanvas.getContext('2d');
+        const matrixCanvas = document.getElementById('matrix');
+        const matrixCtx = matrixCanvas.getContext('2d');
+
+        // Mandelbrot parameters
+        let zoom = 1;
+        let centerX = Big('-0.75'); // Baby Mandelbrot region
+        let centerY = Big('0.1');
+        const maxIter = 150;
+        let zoomSpeed = 0.9;
+        let isZooming = false;
+        let targetX, targetY;
+        let time = 0;
+
+        // Canvas sizing
+        let renderWidth, renderHeight;
+        function resizeCanvases() {
+            mandelbrotCanvas.width = window.innerWidth;
+            mandelbrotCanvas.height = window.innerHeight;
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+            // Adjust rendering resolution based on zoom
+            renderWidth = zoom > 1000 ? Math.floor(window.innerWidth / 2) : window.innerWidth;
+            renderHeight = zoom > 1000 ? Math.floor(window.innerHeight / 2) : window.innerHeight;
+        }
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
+
+        // Web Worker
+        const worker = new Worker('mandelbrot-worker.js');
+
+        // Handle worker messages
+        worker.onmessage = function(e) {
+            const { imageData, width, height } = e.data;
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = width;
+            tempCanvas.height = height;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.putImageData(new ImageData(imageData, width, height), 0, 0);
+            mandelbrotCtx.clearRect(0, 0, mandelbrotCanvas.width, mandelbrotCanvas.height);
+            mandelbrotCtx.drawImage(tempCanvas, 0, 0, mandelbrotCanvas.width, mandelbrotCanvas.height);
+        };
+
+        function drawMandelbrot() {
+            const scale = Big(4).div(zoom * Math.min(renderWidth, renderHeight));
+            worker.postMessage({
+                width: renderWidth,
+                height: renderHeight,
+                centerX: centerX.toString(),
+                centerY: centerY.toString(),
+                scale: scale.toString(),
+                maxIter,
+                time
+            });
+            time += 0.5;
+        }
+
+        // Matrix sentence animation
+        const sentence = "Exit the Matrix!";
+        const fontSize = 40;
+        let charIndex = 0;
+        let lastUpdate = 0;
+        const typingSpeed = 100;
+
+        function drawMatrix() {
+            matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            matrixCtx.font = `${fontSize}px monospace`;
+            matrixCtx.fillStyle = '#00ff00';
+            matrixCtx.textAlign = 'center';
+            const centerX = matrixCanvas.width / 2;
+            const centerY = matrixCanvas.height / 2;
+
+            const currentTime = performance.now();
+            if (currentTime - lastUpdate > typingSpeed) {
+                charIndex = (charIndex + 1) % (sentence.length + 5);
+                lastUpdate = currentTime;
+            }
+            const displayText = charIndex <= sentence.length ? sentence.slice(0, charIndex) : sentence;
+            matrixCtx.fillText(displayText, centerX, centerY);
+        }
+
+        // Animation loop
+        function animate() {
+            if (isZooming) {
+                zoom *= 1 / zoomSpeed;
+                const scale = Big(4).div(zoom * Math.min(renderWidth, renderHeight));
+                const dx = Big(targetX).minus(renderWidth / 2).times(scale).times(1 - zoomSpeed);
+                const dy = Big(targetY).minus(renderHeight / 2).times(scale).times(1 - zoomSpeed);
+                centerX = centerX.plus(dx);
+                centerY = centerY.plus(dy);
+                drawMandelbrot();
+            }
+            drawMatrix();
+            requestAnimationFrame(animate);
+        }
+
+        // Mouse events
+        mandelbrotCanvas.addEventListener('mousedown', (e) => {
+            if (e.button === 0) {
+                isZooming = true;
+                const rect = mandelbrotCanvas.getBoundingClientRect();
+                targetX = e.clientX - rect.left;
+                targetY = e.clientY - rect.top;
+            }
+        });
+
+        mandelbrotCanvas.addEventListener('mouseup', () => {
+            isZooming = false;
+        });
+
+        mandelbrotCanvas.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            isZooming = false;
+            zoom = 1;
+            centerX = Big('-0.75');
+            centerY = Big('0.1');
+            time = 0;
+            charIndex = 0;
+            lastUpdate = performance.now();
+            drawMandelbrot();
+        });
+
+        // Initial draw and start animation
+        drawMandelbrot();
+        animate();
+    </script>
+</body>
+</html>
