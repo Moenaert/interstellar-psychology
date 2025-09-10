@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psychedelic Mandelbrot Zoom</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.2.1/big.min.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -18,13 +17,13 @@
         }
         #mandelbrot {
             display: block;
-            filter: blur(1px) brightness(1.2) contrast(1.3);
+            filter: blur(1px) brightness(1.2) contrast(1.3); /* Psychedelic glow */
         }
         #matrix {
             position: absolute;
             top: 0;
             left: 0;
-            pointer-events: none;
+            pointer-events: none; /* Prevent interference with Mandelbrot canvas */
         }
     </style>
 </head>
@@ -32,63 +31,93 @@
     <canvas id="mandelbrot"></canvas>
     <canvas id="matrix"></canvas>
     <script>
-        // Canvas setup
+        // Mandelbrot Canvas
         const mandelbrotCanvas = document.getElementById('mandelbrot');
         const mandelbrotCtx = mandelbrotCanvas.getContext('2d');
+
+        // Matrix Canvas
         const matrixCanvas = document.getElementById('matrix');
         const matrixCtx = matrixCanvas.getContext('2d');
 
-        // Mandelbrot parameters
-        let zoom = 1;
-        let centerX = Big('-0.75'); // Baby Mandelbrot region
-        let centerY = Big('0.1');
-        const maxIter = 150;
-        let zoomSpeed = 0.9;
-        let isZooming = false;
-        let targetX, targetY;
-        let time = 0;
-
-        // Canvas sizing
-        let renderWidth, renderHeight;
+        // Set canvas sizes
         function resizeCanvases() {
             mandelbrotCanvas.width = window.innerWidth;
             mandelbrotCanvas.height = window.innerHeight;
             matrixCanvas.width = window.innerWidth;
             matrixCanvas.height = window.innerHeight;
-            // Adjust rendering resolution based on zoom
-            renderWidth = zoom > 1000 ? Math.floor(window.innerWidth / 2) : window.innerWidth;
-            renderHeight = zoom > 1000 ? Math.floor(window.innerHeight / 2) : window.innerHeight;
         }
         resizeCanvases();
         window.addEventListener('resize', resizeCanvases);
 
-        // Web Worker
-        const worker = new Worker('mandelbrot-worker.js');
-
-        // Handle worker messages
-        worker.onmessage = function(e) {
-            const { imageData, width, height } = e.data;
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = width;
-            tempCanvas.height = height;
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCtx.putImageData(new ImageData(imageData, width, height), 0, 0);
-            mandelbrotCtx.clearRect(0, 0, mandelbrotCanvas.width, mandelbrotCanvas.height);
-            mandelbrotCtx.drawImage(tempCanvas, 0, 0, mandelbrotCanvas.width, mandelbrotCanvas.height);
-        };
+        // Mandelbrot parameters
+        let zoom = 1;
+        let centerX = -0.75; // Baby Mandelbrot region
+        let centerY = 0.1;
+        const maxIter = 150;
+        let zoomSpeed = 0.85;
+        let isZooming = false;
+        let targetX, targetY;
+        let time = 0;
 
         function drawMandelbrot() {
-            const scale = Big(4).div(zoom * Math.min(renderWidth, renderHeight));
-            worker.postMessage({
-                width: renderWidth,
-                height: renderHeight,
-                centerX: centerX.toString(),
-                centerY: centerY.toString(),
-                scale: scale.toString(),
-                maxIter,
-                time
-            });
-            time += 0.5;
+            const width = mandelbrotCanvas.width;
+            const height = mandelbrotCanvas.height;
+            const imageData = mandelbrotCtx.createImageData(width, height);
+            const data = imageData.data;
+
+            const scale = 4 / (zoom * Math.min(width, height));
+
+            for (let px = 0; px < width; px++) {
+                for (let py = 0; py < height; py++) {
+                    const x0 = centerX + (px - width / 2) * scale;
+                    const y0 = centerY + (py - height / 2) * scale;
+                    let x = 0;
+                    let y = 0;
+                    let iter = 0;
+
+                    while (x * x + y * y <= 4 && iter < maxIter) {
+                        const xtemp = x * x - y * y + x0;
+                        y = 2 * x * y + y0;
+                        x = xtemp;
+                        iter++;
+                    }
+
+                    const index = (px + py * width) * 4;
+                    if (iter === maxIter) {
+                        data[index] = 0;
+                        data[index + 1] = 0;
+                        data[index + 2] = 0;
+                    } else {
+                        // Psychedelic palette: pink, green, blue, purple
+                        const hue = (iter / maxIter * 360 + time) % 360;
+                        let r, g, b;
+                        if (hue < 90) { // Pink to purple
+                            r = 255;
+                            g = Math.sin(hue / 90 * Math.PI) * 105;
+                            b = 255 - Math.sin(hue / 90 * Math.PI) * 100;
+                        } else if (hue < 180) { // Purple to blue
+                            r = 255 - Math.sin((hue - 90) / 90 * Math.PI) * 150;
+                            g = Math.sin((hue - 90) / 90 * Math.PI) * 100;
+                            b = 255;
+                        } else if (hue < 270) { // Blue to green
+                            r = Math.sin((hue - 180) / 90 * Math.PI) * 100;
+                            g = 255;
+                            b = 255 - Math.sin((hue - 180) / 90 * Math.PI) * 200;
+                        } else { // Green to pink
+                            r = 255 - Math.sin((hue - 270) / 90 * Math.PI) * 100;
+                            g = 255 - Math.sin((hue - 270) / 90 * Math.PI) * 150;
+                            b = Math.sin((hue - 270) / 90 * Math.PI) * 150;
+                        }
+                        data[index] = r;
+                        data[index + 1] = g;
+                        data[index + 2] = b;
+                    }
+                    data[index + 3] = 255;
+                }
+            }
+
+            mandelbrotCtx.putImageData(imageData, 0, 0);
+            time += 0.5; // Increment for color cycling
         }
 
         // Matrix sentence animation
@@ -96,43 +125,43 @@
         const fontSize = 40;
         let charIndex = 0;
         let lastUpdate = 0;
-        const typingSpeed = 100;
+        const typingSpeed = 100; // Milliseconds per character
 
         function drawMatrix() {
             matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
             matrixCtx.font = `${fontSize}px monospace`;
-            matrixCtx.fillStyle = '#00ff00';
+            matrixCtx.fillStyle = '#00ff00'; // Green Matrix text
             matrixCtx.textAlign = 'center';
             const centerX = matrixCanvas.width / 2;
             const centerY = matrixCanvas.height / 2;
 
+            // Calculate the substring to display
             const currentTime = performance.now();
             if (currentTime - lastUpdate > typingSpeed) {
-                charIndex = (charIndex + 1) % (sentence.length + 5);
+                charIndex = (charIndex + 1) % (sentence.length + 5); // +5 for pause at end
                 lastUpdate = currentTime;
             }
             const displayText = charIndex <= sentence.length ? sentence.slice(0, charIndex) : sentence;
+
             matrixCtx.fillText(displayText, centerX, centerY);
         }
 
-        // Animation loop
+        // Combined animation loop
         function animate() {
             if (isZooming) {
                 zoom *= 1 / zoomSpeed;
-                const scale = Big(4).div(zoom * Math.min(renderWidth, renderHeight));
-                const dx = Big(targetX).minus(renderWidth / 2).times(scale).times(1 - zoomSpeed);
-                const dy = Big(targetY).minus(renderHeight / 2).times(scale).times(1 - zoomSpeed);
-                centerX = centerX.plus(dx);
-                centerY = centerY.plus(dy);
+                const scale = 4 / (zoom * Math.min(mandelbrotCanvas.width, mandelbrotCanvas.height));
+                centerX += (targetX - mandelbrotCanvas.width / 2) * scale * (1 - zoomSpeed);
+                centerY += (targetY - mandelbrotCanvas.height / 2) * scale * (1 - zoomSpeed);
                 drawMandelbrot();
             }
             drawMatrix();
             requestAnimationFrame(animate);
         }
 
-        // Mouse events
+        // Mouse down to start zooming
         mandelbrotCanvas.addEventListener('mousedown', (e) => {
-            if (e.button === 0) {
+            if (e.button === 0) { // Left click
                 isZooming = true;
                 const rect = mandelbrotCanvas.getBoundingClientRect();
                 targetX = e.clientX - rect.left;
@@ -140,18 +169,20 @@
             }
         });
 
+        // Mouse up to stop zooming
         mandelbrotCanvas.addEventListener('mouseup', () => {
             isZooming = false;
         });
 
+        // Right-click to reset
         mandelbrotCanvas.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             isZooming = false;
             zoom = 1;
-            centerX = Big('-0.75');
-            centerY = Big('0.1');
+            centerX = -0.75; // Reset to baby Mandelbrot region
+            centerY = 0.1;
             time = 0;
-            charIndex = 0;
+            charIndex = 0; // Reset text animation
             lastUpdate = performance.now();
             drawMandelbrot();
         });
