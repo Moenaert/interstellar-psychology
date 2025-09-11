@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychedelics</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #0f0f23, #1a0033, #330066, #6600cc);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #e6ccff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff; }
+            to { text-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff, 0 0 80px #ff00ff; }
+        }
+        .description {
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        .explore {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 1.5em;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+        .links-section {
+            max-width: 800px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .link-item {
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .link-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 30px #00ffff;
+        }
+        .link-item a {
+            color: #e6ccff;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: block;
+            margin: 10px 0;
+        }
+        .link-item a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        .video-section {
+            max-width: 800px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .video-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff00ff;
+        }
+        .video-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .video-card h3 {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #ffcc00;
+            text-shadow: 0 0 5px #ffcc00;
+        }
+        .video-card p {
+            font-size: 0.9em;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin: 5px 0;
+        }
+        .video-card a {
+            color: #e6ccff;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .video-card a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Psychedelics</h1>
+    
+    <div class="description">
+Psychedelics can facilitate profound self-discovery by dissolving mental barriers and expanding consciousness. They often reveal interconnectedness, challenge rigid perspectives, and inspire awe, fostering personal growth and empathy.    </div>
+    
+<img src="psychedelics.PNG" style="display: block; margin: auto; width: 70%;">
+    <div class="explore">
+        <p>Explore the trippy world of Psychedelics through these mind-bending videos. </p>
+         <p>Dive into the rabbit hole and awaken your third eye!</p>
+    </div>
+    
+    
+    <div class="video-section">
+        <div class="video-card">
+            <img src="https://www.sunstonetherapies.com/wp-content/uploads/2024/02/image.png">
+            <h3>How to change your mind</h3>
+            <p>Explore the realm of psychedelics</p>
+            <a href="https://www.netflix.com/be-en/title/80229847" target="_blank">Watch on Netflix</a>
+        </div>
+
+        <div class="video-card">
+            <img src="https://i.ytimg.com/vi/fwZqVqbkyLM/mqdefault.jpg">
+            <h3>DMT: the spirit molecule</h3>
+            <p>Explore the realm of DMT</p>
+            <a href="https://www.netflix.com/be-en/title/80229847" target="_blank">Watch on Netflix</a>
+        </div>
+
+        <div class="video-card">
+            <img src="https://m.media-amazon.com/images/M/MV5BMjE2NjA1OGMtOWY3Yi00MGMxLTg4MDAtZjhlY2Q2ZDUyNjM5XkEyXkFqcGc@._V1_.jpg">
+            <h3>Magic Medicine</h3>
+            <p>Psychedelics a cure for depression?</p>
+            <a href="https://www.netflix.com/be-en/title/81409016" target="_blank">Watch on Netflix</a>
+        </div>
+
+        <div class="video-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/WSF_logo_300.jpg">
+            <h3>Psychedelics: Chemicals, Consciousness, and Creativity</h3>
+            <p>Lets talk psychedelics</p>
+            <a href="https://www.youtube.com/watch?v=kxFTWk9lLDU" target="_blank">Watch on Youtube</a>
+        </div>
+
+
+        
+
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 Mindsight Portal | Enter at Your Own Consciousness Risk | Learn The Mission: <a href="https://dariusjwright.com/my-mission/" style="color: #00FFFF;">dariusjwright.com/my-mission/</a></p>
+    </div>
+</body>
+</html>
