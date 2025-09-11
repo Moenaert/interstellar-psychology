@@ -76,6 +76,12 @@
     .deleting-truth {
       animation: deleting-truth 0.6s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
     }
+    .typing-peace {
+      animation: typing-peace 0.9s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
+    }
+    .deleting-peace {
+      animation: deleting-peace 0.6s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
+    }
     @keyframes typing-exit {
       from { width: 0; }
       to { width: 16ch; }
@@ -105,6 +111,14 @@
       to { width: 6ch; }
     }
     @keyframes deleting-truth {
+      from { width: 6ch; }
+      to { width: 0; }
+    }
+    @keyframes typing-peace {
+      from { width: 0; }
+      to { width: 6ch; }
+    }
+    @keyframes deleting-peace {
       from { width: 6ch; }
       to { width: 0; }
     }
@@ -158,7 +172,7 @@
   <div class="button-container">
   <a href="psychedelics.html" class="trippy-button">Psychedelics</a>
   <a href="telepathy.html" class="trippy-button">Telepathy</a>
-  <a href="#" class="trippy-button">Remote viewing</a>
+  <a href="remote-viewing.html" class="trippy-button">Remote viewing</a>
   <a href="mindsight.html" class="trippy-button">Mindsight</a>
   <a href="#" class="trippy-button">Near death experience</a>
   <a href="#" class="trippy-button">Out of body experience</a>
@@ -265,38 +279,38 @@
       window.addEventListener('resize', resizeVideo);
     }
 
-    // Text animation logic
-    const matrixText = document.getElementById('matrix-text');
-    function animateText() {
-      matrixText.textContent = 'Exit the Matrix! ';
-      matrixText.className = 'matrix-text typing-exit';
-      setTimeout(() => {
-        matrixText.className = 'matrix-text deleting-exit';
-        setTimeout(() => {
-          matrixText.textContent = 'Believe';
-          matrixText.className = 'matrix-text typing-believe';
-          setTimeout(() => {
-            matrixText.className = 'matrix-text deleting-believe';
-            setTimeout(() => {
-              matrixText.textContent = 'Love';
-              matrixText.className = 'matrix-text typing-love';
-              setTimeout(() => {
-                matrixText.className = 'matrix-text deleting-love';
-                setTimeout(() => {
-                  matrixText.textContent = 'Truth';
-                  matrixText.className = 'matrix-text typing-truth';
-                  setTimeout(() => {
-                    matrixText.className = 'matrix-text deleting-truth';
-                    setTimeout(animateText, 600);
-                  }, 900);
-                }, 600);
-              }, 750);
-            }, 750);
-          }, 1100);
-        }, 1100);
-      }, 2250);
+// Text animation logic
+const matrixText = document.getElementById('matrix-text');
+function animateText() {
+  const sequence = [
+    { text: 'Exit the Matrix! ', typeClass: 'typing-exit', deleteClass: 'deleting-exit', typeDuration: 2250, deleteDuration: 1100 },
+    { text: 'Believe', typeClass: 'typing-believe', deleteClass: 'deleting-believe', typeDuration: 1100, deleteDuration: 750 },
+    { text: 'Love', typeClass: 'typing-love', deleteClass: 'deleting-love', typeDuration: 750, deleteDuration: 750 },
+    { text: 'Truth', typeClass: 'typing-truth', deleteClass: 'deleting-truth', typeDuration: 900, deleteDuration: 600 },
+    { text: 'Peace', typeClass: 'typing-peace', deleteClass: 'deleting-peace', typeDuration: 900, deleteDuration: 600 }
+  ];
+
+  function displayWord(index) {
+    if (index >= sequence.length) {
+      setTimeout(animateText, 600); // Restart the loop
+      return;
     }
-    setTimeout(animateText, 1000);
+
+    const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
+    matrixText.textContent = text;
+    matrixText.className = `matrix-text ${typeClass}`;
+    setTimeout(() => {
+      matrixText.className = `matrix-text ${deleteClass}`;
+      setTimeout(() => {
+        displayWord(index + 1);
+      }, deleteDuration);
+    }, typeDuration);
+  }
+
+  displayWord(0);
+}
+setTimeout(animateText, 1000);
+
 </script>
 </body>
 </html>
