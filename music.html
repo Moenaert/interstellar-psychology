@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        body {
+            background: linear-gradient(45deg, #0f0f23, #1a0033, #330066, #6600cc);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #e6ccff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff; }
+            to { text-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff, 0 0 80px #ff00ff; }
+        }
+        .description {
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        .explore {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 1.5em;
+            color: #40ff00;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+        .links-section {
+            max-width: 800px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .link-item {
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .link-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 30px #00ffff;
+        }
+        .link-item a {
+            color: #e6ccff;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: block;
+            margin: 10px 0;
+        }
+        .link-item a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        .video-section {
+            max-width: 800px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .video-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff00ff;
+        }
+        .video-card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .video-card h3 {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #00ffea;
+            text-shadow: 0 0 5px #ffcc00;
+        }
+        .video-card p {
+            font-size: 0.9em;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin: 5px 0;
+        }
+        .video-card a {
+            color: #e6ccff;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .video-card a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Music</h1>
+    
+    <div class="description">
+In the quiet alchemy of creation, artists weave their souls into melodies, turning whispers of the divine into symphonies that echo in our hearts. Through every note and lyric, they share sacred messages—reminders of love's boundless light, the universe's gentle rhythm, and the spirit's eternal dance. In their music, we find not just sound, but a bridge to the infinite, inviting us to listen, feel, and awaken together.
+
+<div class="video-section">
+
+        <div class="video-card">
+            <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="The Telepathy tapes">
+            <h3>Imagine Dragons</h3>
+            <p>Believer</p>
+            <a href="https://www.youtube.com/watch?v=W0DM5lcj6mw&list=RDW0DM5lcj6mw&start_radio=1" target="_blank">Watch on Youtube</a>
+        </div>
+
+        <div class="video-card">
+            <img src="https://i.guim.co.uk/img/media/3b3b3bb5f4b08cc5718eab1bc3bae9c305eb2a9f/0_212_8256_4954/master/8256.jpg?width=1200&quality=85&auto=format&fit=max&s=45b3a52fbb147879145504ba6dbd8936" alt="The Telepathy tapes">
+            <h3>Mumford & Sons</h3>
+            <p>Awake My Soul</p>
+            <a href="https://www.youtube.com/watch?v=1EQzCoF7uA8&list=RD1EQzCoF7uA8&start_radio=1" target="_blank">Watch on Youtube</a>
+        </div>
+
+         <div class="video-card">
+            <img src="https://images.genius.com/b61f754f6aedc369398932f2c04bdefe.1000x1000x1.jpg" alt="The Telepathy tapes">
+            <h3>Michael jackson</h3>
+            <p>Heal The World</p>
+            <a href="https://www.youtube.com/watch?v=02CcUCPkw-s&list=RD02CcUCPkw-s&start_radio=1" target="_blank">Watch on Youtube</a>
+        </div>
+
+        <div class="video-card">
+            <img src="https://i.ebayimg.com/images/g/pxwAAOSwH-Bf6JFx/s-l400.jpg" alt="The Telepathy tapes">
+            <h3>Yannick Noah</h3>
+            <p>Simon Papa Tara</p>
+            <a href="https://www.youtube.com/watch?v=fyxHLnDODbA&list=RDfyxHLnDODbA&start_radio=1" target="_blank">Watch on Youtube</a>
+        </div>
+    
+    </div>
+    
+</body>
+</html>
