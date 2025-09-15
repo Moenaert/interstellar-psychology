@@ -54,10 +54,10 @@
       border-right: 3px solid #0f0;
     }
     .typing-exit {
-      animation: typing-exit 2.25s steps(15, end) forwards, blink-caret 0.75s step-end infinite;
+      animation: typing-exit 2.25s steps(9, end) forwards, blink-caret 0.75s step-end infinite;
     }
     .deleting-exit {
-      animation: deleting-exit 1.1s steps(15, end) forwards, blink-caret 0.75s step-end infinite;
+      animation: deleting-exit 1.1s steps(9, end) forwards, blink-caret 0.75s step-end infinite;
     }
     .typing-believe {
       animation: typing-believe 1.1s steps(7, end) forwards, blink-caret 0.75s step-end infinite;
@@ -85,10 +85,10 @@
     }
     @keyframes typing-exit {
       from { width: 0; }
-      to { width: 16ch; }
+      to { width: 12ch; }
     }
     @keyframes deleting-exit {
-      from { width: 16ch; }
+      from { width: 12ch; }
       to { width: 0; }
     }
     @keyframes typing-believe {
@@ -293,7 +293,7 @@
 const matrixText = document.getElementById('matrix-text');
 function animateText() {
   const sequence = [
-    { text: 'Exit the Matrix! ', typeClass: 'typing-exit', deleteClass: 'deleting-exit', typeDuration: 2250, deleteDuration: 1100 },
+    { text: 'Disclosure! ', typeClass: 'typing-exit', deleteClass: 'deleting-exit', typeDuration: 2250, deleteDuration: 1100 },
     { text: 'Believe', typeClass: 'typing-believe', deleteClass: 'deleting-believe', typeDuration: 1100, deleteDuration: 750 },
     { text: 'Love', typeClass: 'typing-love', deleteClass: 'deleting-love', typeDuration: 750, deleteDuration: 750 },
     //{ text: 'Truth', typeClass: 'typing-truth', deleteClass: 'deleting-truth', typeDuration: 900, deleteDuration: 600 },
