@@ -139,26 +139,60 @@
       gap: 15px;
     }
     .trippy-button {
-      background: linear-gradient(45deg, rgba(128, 0, 255, 0.3), rgba(0, 255, 255, 0.3));
-      border: 2px solid #0ff;
-      border-radius: 25px;
-      padding: 10px 20px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1.2rem;
-      color: #fff;
-      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
-      text-decoration: none;
-      min-width: 200px;
-
-    }
+  position: relative;
+  background: linear-gradient(270deg, #ff00ff, #00ffff, #ff00ff);
+  background-size: 600% 600%;
+  animation: psychedelicBackground 6s ease infinite, pulseScale 3s ease-in-out infinite;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.4rem;
+  color: white;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 6px #f0f,
+    0 0 9px #0ff,
+    0 0 12px #ff0;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  min-width: 220px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 0 12px #0ff, 0 0 24px #f0f, 0 0 36px #ff0;
+  z-index: 1;
+  overflow: hidden;
+}
     .trippy-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
-      background: linear-gradient(45deg, rgba(128, 0, 255, 0.5), rgba(0, 255, 255, 0.5));
-    }
+  animation: psychedelicBackground 3s ease infinite, pulseGlow 1.5s ease-in-out infinite;
+  transform: scale(1.12) rotate(1deg);
+  box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #f0f,
+    0 0 15px #0ff,
+    0 0 20px #ff0;
+}
+
+@keyframes psychedelicBackground {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
+  100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0;
+  }
+  50% {
+    box-shadow: 0 0 30px #fff, 0 0 60px #0ff, 0 0 90px #f0f;
+  }
+}
+
+@keyframes pulseScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
     #audio-toggle {
         position: fixed;
         bottom: 20px;
