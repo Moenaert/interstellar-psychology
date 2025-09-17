@@ -322,7 +322,7 @@
 const matrixText = document.getElementById('matrix-text');
 function animateText() {
   const sequence = [
-    { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 2000 },
+    { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 3999 },
   ];
 
   function displayWord(index) {
@@ -344,7 +344,7 @@ function animateText() {
 
   displayWord(0);
 }
-setTimeout(animateText, 1000);
+setTimeout(animateText, 3690);
 
 </script>
 </body>
