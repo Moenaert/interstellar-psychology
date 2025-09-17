@@ -169,7 +169,26 @@
         bottom: 20px;
         left: 20px;
         }
-  </style>
+  
+@keyframes typing-neo {
+  from { width: 0; }
+  to { width: 16ch; }
+}
+
+@keyframes deleting-neo {
+  from { width: 16ch; }
+  to { width: 0; }
+}
+
+.typing-neo {
+  animation: typing-neo 3s steps(16, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+.deleting-neo {
+  animation: deleting-neo 2s steps(16, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+</style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
@@ -303,11 +322,7 @@
 const matrixText = document.getElementById('matrix-text');
 function animateText() {
   const sequence = [
-    { text: 'Enlightment', typeClass: 'typing-exit', deleteClass: 'deleting-exit', typeDuration: 2250, deleteDuration: 1100 },
-    { text: 'Believe', typeClass: 'typing-believe', deleteClass: 'deleting-believe', typeDuration: 1100, deleteDuration: 750 },
-    { text: 'Love', typeClass: 'typing-love', deleteClass: 'deleting-love', typeDuration: 750, deleteDuration: 750 },
-    { text: 'Truth', typeClass: 'typing-truth', deleteClass: 'deleting-truth', typeDuration: 900, deleteDuration: 600 },
-    { text: 'Peace', typeClass: 'typing-peace', deleteClass: 'deleting-peace', typeDuration: 900, deleteDuration: 600 }
+    { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 2000 },
   ];
 
   function displayWord(index) {
