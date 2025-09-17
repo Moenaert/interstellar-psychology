@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <header class="header">
+    <h1>Music</h1>
+  </header>
+
+  <section class="intro">
+    <p>In the quiet alchemy of creation, artists weave their souls into melodies, turning whispers of the divine into symphonies that echo in our hearts. Through every note and lyric, they share sacred messages—reminders of love's boundless light, the universe's gentle rhythm, and the spirit's eternal dance. In their music, we find not just sound, but a bridge to the infinite, inviting us to listen, feel, and awaken together.</p>
+  </section>
+
+  <section class="video-grid">
+    <!-- Imagine Dragons -->
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=W0DM5lcj6mw" target="_blank">
+        <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="Imagine Dragons Believer">
+      </a>
+      <h3>Imagine Dragons</h3>
+      <p>Believer</p>
+      <a href="https://www.youtube.com/watch?v=W0DM5lcj6mw" target="_blank">Watch on YouTube</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=w3viBe2Q0P8" target="_blank">
+        <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="Imagine Dragons Radioactive">
+      </a>
+      <h3>Imagine Dragons</h3>
+      <p>Radioactive</p>
+      <a href="https://www.youtube.com/watch?v=w3viBe2Q0P8" target="_blank">Watch on YouTube</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=V5M2WZiAy6k" target="_blank">
+        <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="Imagine Dragons Natural">
+      </a>
+      <h3>Imagine Dragons</h3>
+      <p>Natural</p>
+      <a href="https://www.youtube.com/watch?v=V5M2WZiAy6k" target="_blank">Watch on YouTube</a>
+    </div>
+  </section>
+
+  <section class="video-grid">
+    <!-- Michael Jackson -->
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=02CcUCPkw-s" target="_blank">
+        <img src="https://images.genius.com/b61f754f6aedc369398932f2c04bdefe.1000x1000x1.jpg" alt="Michael Jackson Heal the World">
+      </a>
+      <h3>Michael Jackson</h3>
+      <p>Heal The World</p>
+      <a href="https://www.youtube.com/watch?v=02CcUCPkw-s" target="_blank">Watch on YouTube</a>
+    </div>
+
+    <!-- Yannick Noah -->
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=fyxHLnDODbA" target="_blank">
+        <img src="https://i.ebayimg.com/images/g/pxwAAOSwH-Bf6JFx/s-l400.jpg" alt="Yannick Noah Simon Papa Tara">
+      </a>
+      <h3>Yannick Noah</h3>
+      <p>Simon Papa Tara</p>
+      <a href="https://www.youtube.com/watch?v=fyxHLnDODbA" target="_blank">Watch on YouTube</a>
+    </div>
+
+    <!-- Mumford & Sons -->
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=1EQzCoF7uA8" target="_blank">
+        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTDl-oQaOUnpfQz5U73dt43tGTpScvTcOMEtwiqKeALQ-q2oLTW0S3kY-M4v9UqvoZ3s3a0fUWYvxQGP2HbSM441dPY_A0pgJYGRhiymw" alt="Mumford & Sons Awake My Soul">
+      </a>
+      <h3>Mumford & Sons</h3>
+      <p>Awake My Soul</p>
+      <a href="https://www.youtube.com/watch?v=1EQzCoF7uA8" target="_blank">Watch on YouTube</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Wake up, <a href="https://open.spotify.com/track/3v1ymXx6...a18" style="color:#00FFFF; text-decoration:none">Neo</a>...🥚</p>
+  </footer>
+
+<script>
+  document.querySelectorAll('.video-card').forEach(card => {
+    const duration = (Math.random() * 2 + 3).toFixed(1) + 's';
+    const delay = (Math.random() * 2).toFixed(1) + 's';
+    card.style.animationDuration = duration;
+    card.style.animationDelay = delay;
+  });
+</script>
+
+<script>
+  // Create floating particles
+  function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 3 + 's';
+      particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      container.appendChild(particle);
+    }
+  }
+  createParticles();
+</script>
+
+
+<script>
+// Wrap .video-card children into .card-inner so float (outer) and tilt (inner) don't conflict
+(function(){
+  document.querySelectorAll('.video-card').forEach(card => {
+    if (card.querySelector(':scope > .card-inner')) return; // already wrapped
+    const inner = document.createElement('div');
+    inner.className = 'card-inner';
+    // Move all children into inner
+    while (card.firstChild) inner.appendChild(card.firstChild);
+    card.appendChild(inner);
+  });
+})();
+</script>
+
+<!-- === Trippy Tilt JS (cursor-reactive 3D tilt + hover glow) === -->
+<script>
+  (function(){
+    const cards = document.querySelectorAll('.video-card');
+    const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+    cards.forEach(card => {
+      const bounds = () => card.getBoundingClientRect();
+      function handleMove(e) {
+        const b = bounds();
+        const x = (e.clientX - b.left) / b.width;   // 0..1
+        const y = (e.clientY - b.top) / b.height;   // 0..1
+        const tiltX = clamp((0.5 - y) * 18, -14, 14); // rotateX
+        const tiltY = clamp((x - 0.5) * 22, -18, 18); // rotateY
+        card.style.setProperty('--rx', tiltX.toFixed(2) + 'deg');
+        card.style.setProperty('--ry', tiltY.toFixed(2) + 'deg');
+      }
+      function handleLeave() {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      }
+      card.addEventListener('mousemove', handleMove);
+      card.addEventListener('mouseleave', handleLeave);
+      card.addEventListener('touchmove', (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        const t = e.touches[0];
+        handleMove({ clientX: t.clientX, clientY: t.clientY });
+      }, { passive: true });
+      card.addEventListener('touchend', handleLeave);
+    });
+  })();
+</script>
+</body>
+</html>

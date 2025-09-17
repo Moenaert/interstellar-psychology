@@ -1,0 +1,360 @@
+/* ========== Base Styles ========== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', monospace;
+  color: #fff;
+  overflow-x: hidden;
+  background: linear-gradient(45deg, #000428, #004e92, #8B00FF, #FF1493, #00FF7F, #FFD700);
+  background-size: 400% 400%;
+  animation: bg-shift 10s ease infinite;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 4em;
+  text-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF, 0 0 60px #FF00FF;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* ========== Sections ========== */
+.header {
+  text-align: center;
+  padding: 50px 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.intro {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #FF00FF;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.intro p {
+  animation: pulse-text 3s ease-in-out infinite;
+  will-change: text-shadow; /* hint for smoother animation */
+}
+
+.intro:hover {
+  border-color: #00FFFF;
+  box-shadow: 0 0 50px #FF00FF, inset 0 0 50px rgba(255, 0, 255, 0.2);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9em;
+}
+
+/* ========== Cards ========== */
+.video-card {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #FF00FF;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  animation: float 4s ease-in-out infinite;
+}
+
+.video-card:hover {
+  border-color: #00FFFF;
+  box-shadow: 0 0 50px #FF00FF, inset 0 0 50px rgba(255, 0, 255, 0.2);
+}
+
+.video-card:nth-child(odd):hover {
+  transform: translateY(-10px) rotate(2deg);
+}
+
+.video-card:nth-child(even):hover {
+  transform: translateY(-10px) rotate(-2deg);
+}
+
+.video-card img {
+  width: 63%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.video-card h3 {
+  margin: 5px 0;
+  font-size: 1.2em;
+  color: #00ffea;
+  text-shadow: 0 0 10px #FFD700;
+}
+
+.video-card p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.video-card a {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #e6ccff;
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.video-card a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
+}
+
+/* ========== Effects ========== */
+.particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00FFFF;
+  border-radius: 50%;
+  animation: twinkle 3s linear infinite;
+}
+
+
+/* Register custom property for composable float */
+@property --ty {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+/* ========== Animations ========== */
+@keyframes bg-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #FF00FF; }
+  to   { text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #00FFFF; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 50px #FF00FF; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-text {
+  0%, 100% {
+    text-shadow:
+      0 0 8px rgba(0,255,255,0.9),
+      0 0 14px rgba(0,255,255,0.6);
+  }
+  50% {
+    text-shadow:
+      0 0 20px #FF00FF,
+      0 0 40px #FF00FF;
+  }
+}
+
+
+
+
+
+/* === Trippy 3D Video Cards (hover tilt + neon glow) === */
+
+/* 3D stage for the tilt */
+.video-grid {
+  perspective: 900px;
+}
+
+/* Base card look + smooth transforms */
+.video-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(10,10,20,0.6);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  transform-style: preserve-3d;
+  transform: 
+  transition: transform 400ms cubic-bezier(.2,.8,.2,1),
+              filter 400ms ease, box-shadow 400ms ease;
+  will-change: transform, filter;
+  overflow: hidden;
+}
+
+/* Iridescent border ring that spins on hover */
+/* ring moved to .card-inner */
+
+/* Content sits above the glow */
+.video-card > * { position: relative; z-index: 1; }
+
+/* Image pop & parallax */
+.video-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  transform: translateZ(24px) scale(1);
+  transition: transform 400ms cubic-bezier(.2,.8,.2,1), filter 400ms ease;
+  will-change: transform;
+}
+.video-card:hover img {
+  transform: translateZ(36px) scale(1.06);
+  filter: saturate(1.3) contrast(1.05);
+}
+
+/* Neon/glitchy text */
+.video-card h3,
+.video-card p {
+  transform: translateZ(12px);
+  margin: 8px 2px 0;
+  color: #eaf7ff;
+  text-shadow:
+    0 0 6px rgba(0,255,255,.6),
+    0 0 12px rgba(128,0,255,.35);
+}
+.video-card h3 {
+  letter-spacing: 0.5px;
+  text-shadow:
+    1px 0 rgba(255,0,102,.45),
+    -1px 0 rgba(0,255,255,.45),
+    0 0 10px rgba(0,255,255,.35);
+}
+
+/* Link button hover shimmer */
+.video-card a {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #0ff;
+  
+  transform: translateZ(18px);
+  transition: transform 300ms ease, box-shadow 300ms ease, background 300ms ease;
+}
+.video-card:hover a {
+  transform: translateZ(24px);
+  box-shadow: 0 0 14px rgba(0,255,255,.5);
+  background: rgba(0,255,255,.08);
+}
+
+/* Whole-card hover lift */
+.video-card:hover {
+  transform: 
+  box-shadow: 0 18px 55px rgba(0, 255, 255, 0.18), 0 10px 30px rgba(0,0,0,0.45);
+  filter: drop-shadow(0 0 10px rgba(0,255,255,.15));
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .video-card,
+  .video-card img,
+  .video-card::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Spinner for border */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* === Tilt/Float separation: outer floats, inner tilts === */
+.video-card {
+  /* float only */
+  transform: translateY(var(--ty, 0px));
+}
+
+.video-card .card-inner {
+  position: relative;
+  border-radius: 16px;
+  transform-style: preserve-3d;
+  transform: 
+  transition: transform 400ms cubic-bezier(.2,.8,.2,1), filter 400ms ease, box-shadow 400ms ease;
+  will-change: transform, filter;
+}
+
+/* Move hover lift + shine to inner */
+.video-card:hover .card-inner {
+  transform: 
+  box-shadow: 0 18px 55px rgba(0, 255, 255, 0.18), 0 10px 30px rgba(0,0,0,0.45);
+  filter: drop-shadow(0 0 10px rgba(0,255,255,.15));
+}
+
+/* Make ::after ring attach to inner so it rotates with tilt */
+.video-card .card-inner::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #0ff, #80f, #f0f, #ff0, #0ff);
+  filter: blur(8px) saturate(1.6);
+  opacity: 0;
+  transition: opacity 400ms ease;
+  z-index: 0;
+  animation: spin 6s linear infinite paused;
+}
+.video-card:hover .card-inner::after {
+  opacity: 0.65;
+  animation-play-state: running;
+}
+
+/* Content sits above glow */
+.video-card .card-inner > * { position: relative; z-index: 1; }
+
+/* Parallax now targets elements under .card-inner */
+.video-card .card-inner img {
+  transform: translateZ(24px) scale(1);
+}
+.video-card:hover .card-inner img {
+  transform: translateZ(36px) scale(1.06);
+}
+.video-card .card-inner h3,
+.video-card .card-inner p,
+.video-card .card-inner a {
+  transform: translateZ(12px);
+}
+.video-card .card-inner a {
+  transform: translateZ(18px);
+}
+.video-card:hover .card-inner a {
+  transform: translateZ(24px);
+}
+
+/* Ensure base image width remains 100% under inner */
+.video-card > .card-inner > img { width: 100%; height: auto; border-radius: 12px; }
