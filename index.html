@@ -1,336 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interstellar Psychology</title>
-  <link rel="icon" href="../artefacts/favicon.png" type="image/png">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    #video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      opacity: 0;
-    }
-    #player {
-      width: 120vw;
-      height: 120vh;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 120%;
-      min-height: 120%;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .fade-in {
-      animation: fadeIn 2s ease-in forwards;
-    }
-    .matrix-text {
-      position: absolute;
-      top: 15%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 2.5rem;
-      color: #0f0; /* Matrix green */
-      text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      border-right: 3px solid #0f0;
-    }
-    .typing-exit {
-      animation: typing-exit 2.25s steps(8, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .deleting-exit {
-      animation: deleting-exit 1.1s steps(8, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .typing-believe {
-      animation: typing-believe 1.1s steps(7, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .deleting-believe {
-      animation: deleting-believe 0.75s steps(7, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .typing-love {
-      animation: typing-love 0.75s steps(4, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .deleting-love {
-      animation: deleting-love 0.6s steps(4, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .typing-truth {
-      animation: typing-truth 0.9s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .deleting-truth {
-      animation: deleting-truth 0.6s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .typing-peace {
-      animation: typing-peace 0.9s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    .deleting-peace {
-      animation: deleting-peace 0.6s steps(5, end) forwards, blink-caret 0.75s step-end infinite;
-    }
-    @keyframes typing-exit {
-      from { width: 0; }
-      to { width: 11ch; }
-    }
-    @keyframes deleting-exit {
-      from { width: 12ch; }
-      to { width: 0; }
-    }
-    @keyframes typing-believe {
-      from { width: 0; }
-      to { width: 8ch; }
-    }
-    @keyframes deleting-believe {
-      from { width: 8ch; }
-      to { width: 0; }
-    }
-    @keyframes typing-love {
-      from { width: 0; }
-      to { width: 5ch; }
-    }
-    @keyframes deleting-love {
-      from { width: 5ch; }
-      to { width: 0; }
-    }
-    @keyframes typing-truth {
-      from { width: 0; }
-      to { width: 6ch; }
-    }
-    @keyframes deleting-truth {
-      from { width: 6ch; }
-      to { width: 0; }
-    }
-    @keyframes typing-peace {
-      from { width: 0; }
-      to { width: 6ch; }
-    }
-    @keyframes deleting-peace {
-      from { width: 6ch; }
-      to { width: 0; }
-    }
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: #0f0; }
-    }
-    .button-container {
-      position: absolute;
-      top: 24%;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    .trippy-button {
-  position: relative;
-  background: linear-gradient(270deg, #ff00ff, #00ffff, #ff00ff);
-  background-size: 600% 600%;
-  animation: psychedelicBackground 6s ease infinite, pulseScale 3s ease-in-out infinite;
-  border: 2px solid transparent;
-  border-radius: 30px;
-  padding: 12px 24px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1.4rem;
-  color: white;
-  text-shadow:
-    0 0 3px #fff,
-    0 0 6px #f0f,
-    0 0 9px #0ff,
-    0 0 12px #ff0;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  min-width: 220px;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 0 12px #0ff, 0 0 24px #f0f, 0 0 36px #ff0;
-  z-index: 1;
-  overflow: hidden;
-}
-    .trippy-button:hover {
-  animation: psychedelicBackground 3s ease infinite, pulseGlow 1.5s ease-in-out infinite;
-  transform: scale(1.12) rotate(1deg);
-  box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0;
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #f0f,
-    0 0 15px #0ff,
-    0 0 20px #ff0;
-}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interstellar Psychology</title>
+<link rel="icon" type="image/png" href="../artefacts/favicon.png" />
+<style>
+  *{box-sizing:border-box}
+  body { margin: 0; padding: 0; overflow: hidden; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
 
-@keyframes psychedelicBackground {
-  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-  50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
-  100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
-}
+  /* === Video BG === */
+  #video-background { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: 0; }
+  #player { width: 120vw; height: 120vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 120%; min-height: 120%; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .fade-in { animation: fadeIn 2s ease-in forwards; }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0;
-  }
-  50% {
-    box-shadow: 0 0 30px #fff, 0 0 60px #0ff, 0 0 90px #f0f;
-  }
-}
+  /* === Matrix typing === */
+  .matrix-text { position: absolute; top: 14%; left: 50%; transform: translate(-50%, -50%); z-index: 2; font-family: 'Courier New', Courier, monospace; font-size: clamp(1.4rem, 3.2vw, 2.7rem); color: #0f0; text-shadow: 0 0 10px #0f0, 0 0 20px #0f0; white-space: nowrap; overflow: hidden; width: 0; border-right: 3px solid #0f0; }
+  @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #0f0; } }
+  @keyframes typing-neo { from { width: 0; } to { width: 16ch; } }
+  @keyframes deleting-neo { from { width: 16ch; } to { width: 0; } }
+  .typing-neo { animation: typing-neo 3s steps(16, end) forwards, blink-caret 0.75s step-end infinite; }
+  .deleting-neo { animation: deleting-neo 2s steps(16, end) forwards, blink-caret 0.75s step-end infinite; }
 
-@keyframes pulseScale {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-    #audio-toggle {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        }
-    #easter-egg {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        }
-  
-@keyframes typing-neo {
-  from { width: 0; }
-  to { width: 16ch; }
-}
+  /* === Trippy button === */
+  .trippy-button { display:inline-block; background: linear-gradient(270deg, rgba(255,0,255,.3), rgba(0,255,255,.3), rgba(255,255,0,.3), rgba(255,0,255,.3)); background-size: 800% 800%; animation: psychedelicBackground 6s ease infinite, pulseScale 3s ease-in-out infinite; border: 2px solid transparent; border-radius: 30px; padding: 14px 28px; font-family: 'Courier New', Courier, monospace; font-size: clamp(1rem, 2.2vw, 1.4rem); color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 15px #0ff, 0 0 20px #ff0; cursor: pointer; transition: all .3s ease-in-out; min-width: 200px; text-align: center; text-decoration: none; box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 40px #ff0, 0 0 60px #0ff; z-index: 1; overflow: hidden; backdrop-filter: blur(2px) saturate(1.1); margin: 12px; }
+  .trippy-button:hover { animation: psychedelicBackground 2s ease infinite, pulseGlow 1.5s ease-in-out infinite; transform: scale(1.12) rotate(.75deg); box-shadow: 0 0 25px #0ff, 0 0 50px #f0f, 0 0 75px #ff0; text-shadow: 0 0 6px #fff, 0 0 12px #f0f, 0 0 18px #0ff, 0 0 24px #ff0; }
 
-@keyframes deleting-neo {
-  from { width: 16ch; }
-  to { width: 0; }
-}
+  @keyframes psychedelicBackground { 0% { background-position: 0% 50%; filter: hue-rotate(0deg); } 50% { background-position: 100% 50%; filter: hue-rotate(180deg); } 100% { background-position: 0% 50%; filter: hue-rotate(360deg); } }
+  @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0; } 50% { box-shadow: 0 0 40px #fff, 0 0 60px #0ff, 0 0 90px #f0f; } }
+  @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-.typing-neo {
-  animation: typing-neo 3s steps(16, end) forwards, blink-caret 0.75s step-end infinite;
-}
 
-.deleting-neo {
-  animation: deleting-neo 2s steps(16, end) forwards, blink-caret 0.75s step-end infinite;
-}
+  /* Utility / fixed fun buttons */
+  #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 3; }
+  #easter-egg { position: fixed; bottom: 60px; left: 80px; z-index: 3; }
 
+  /* Canvas trail always on top but click-through */
+  #trippy-canvas{ position: fixed; inset: 0; pointer-events: none; z-index: 1000; }
+
+  /* Static button layout */
+  #button-container { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -40%); display: grid; grid-template-columns: repeat(5, auto); grid-gap: 20px; justify-content: center; }
+  #button-container .row2 { grid-column: span 5; display: grid; grid-template-columns: repeat(4, auto); grid-gap: 20px; justify-content: center; margin-top: 20px; }
 </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-604ZYF7TJT');
-</script>
 <body>
-  <div id="video-background">
-    <div id="player"></div>
+  <div id="video-background"><div id="player"></div></div>
+  <div id="matrix-text" class="matrix-text"></div>
+
+  <!-- Static buttons in two rows -->
+  <div id="button-container">
+    <a class="trippy-button" href="html/music.html">Music</a>
+    <a class="trippy-button" href="html/psychedelics.html">Psychedelics</a>
+    <a class="trippy-button" href="html/telepathy.html">Telepathy</a>
+    <a class="trippy-button" href="html/mindsight.html">Mindsight</a>
+    <a class="trippy-button" href="html/remote-viewing.html">Remote Viewing</a>
+    <div class="row2">
+      <a class="trippy-button" href="html/obe.html">Out of Body Experience</a>
+      <a class="trippy-button" href="html/nhi.html">Non Human Intelligence</a>
+      <a class="trippy-button" href="html/multiverse.html">Multiverse</a>
+      <a class="trippy-button" href="html/infinity.html">Infinity</a>
+    </div>
   </div>
-  <div class="matrix-text" id="matrix-text"></div>
-  <div class="button-container">
-  <a href="html/music.html" class="trippy-button">Music</a>
-  <a href="html/psychedelics.html" class="trippy-button">Psychedelics</a>
-  <a href="html/telepathy.html" class="trippy-button">Telepathy</a>
-  <a href="html/mindsight.html" class="trippy-button">Mindsight</a>
-  <a href="html/remote-viewing.html" class="trippy-button">Remote Viewing</a>
-  <a href="html/obe.html" class="trippy-button">Out of Body Experience</a>
-  <a href="html/nhi.html" class="trippy-button">Non Human Intelligence</a>
-  <a href="html/multiverse.html" class="trippy-button">Multiverse</a>
-  <a href="html/infinity.html" class="trippy-button">Infinity</a>
-  
-</div>
 
-<a id="easter-egg" class="trippy-button" href="html/easteregg.html">🥚</a>
+  <a id="easter-egg" class="trippy-button" href="html/easteregg.html">🥚</a>
+  <button id="audio-toggle" class="trippy-button">Play</button>
 
-<!-- move the audio button OUTSIDE of .button-container -->
-<button id="audio-toggle" class="trippy-button">🥚</button>
-<audio id="myAudio" preload="auto">
-    <source src="artefacts/interstellar.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+  <audio id="myAudio" preload="auto">
+    <source src="artefacts/interstellar.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+  </audio>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get references to the button and audio element
-            const audio = document.getElementById('myAudio');
-            const toggleButton = document.getElementById('audio-toggle');
+  <script>
+    // Audio toggle logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = document.getElementById('myAudio');
+      const toggleButton = document.getElementById('audio-toggle');
+      if (!audio || !toggleButton) return;
+      let isPlaying = false;
+      audio.addEventListener('error', () => alert('Could not load audio file. Check the file path.'));
+      audio.addEventListener('play', () => { isPlaying = true; toggleButton.textContent = 'Pause'; });
+      audio.addEventListener('pause', () => { isPlaying = false; toggleButton.textContent = 'Play'; });
+      toggleButton.addEventListener('click', () => { isPlaying ? audio.pause() : audio.play().catch(()=>alert('Tap the page once then try again.')); });
+    });
+  </script>
 
-            // Check if elements are found
-            if (!audio || !toggleButton) {
-                console.error('Audio or button element not found.');
-                alert('Error: Could not find audio or button element.');
-                return;
-            }
-
-            // Track playing state
-            let isPlaying = false;
-
-            // Event listener for audio load errors
-            audio.onerror = function() {
-                console.error('Error loading audio file:', audio.error);
-                alert('Could not load audio file. Check the file path or format.');
-            };
-
-            // Event listeners for audio state changes
-            audio.onplay = function() {
-                isPlaying = true;
-                toggleButton.textContent = 'Pause';
-            };
-
-            audio.onpause = function() {
-                isPlaying = false;
-                toggleButton.textContent = 'Play';
-            };
-
-            // Toggle function on button click
-            toggleButton.addEventListener('click', function() {
-                console.log('Button clicked, isPlaying:', isPlaying); // Debug log
-                if (isPlaying) {
-                    audio.pause();
-                } else {
-                    audio.play().catch(function(error) {
-                        console.error('Error playing audio:', error);
-                        alert('Could not play audio. Ensure the file is valid and try again after interacting with the page.');
-                    });
-                }
-            });
-
-            // Log audio load status for debugging
-            audio.onloadeddata = function() {
-                console.log('Audio file loaded successfully.');
-            };
-        });
-    </script>
-
+  <!-- YouTube BG -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let player;
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        videoId: '6ouG6L-2L3Q',
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          mute: 1,
-          loop: 1,
-          playlist: '6ouG6L-2L3Q',
-          showinfo: 0,
-          modestbranding: 1,
-          playsinline: 1
-        },
-        events: { 'onReady': onPlayerReady }
-      });
+      player = new YT.Player('player', { videoId: '6ouG6L-2L3Q', playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: '6ouG6L-2L3Q', showinfo: 0, modestbranding: 1, playsinline: 1 }, events: { 'onReady': onPlayerReady } });
     }
     function onPlayerReady(event) {
       event.target.playVideo();
@@ -338,48 +99,27 @@
       videoBackground.classList.add('fade-in');
       function resizeVideo() {
         const video = document.getElementById('player');
-        const aspectRatio = 16 / 9;
-        const windowRatio = window.innerWidth / window.innerHeight;
-        if (windowRatio > aspectRatio) {
-          video.style.width = '120vw';
-          video.style.height = `${120 * windowRatio / aspectRatio}vw`;
-        } else {
-          video.style.width = `${120 * aspectRatio / windowRatio}vh`;
-          video.style.height = '120vh';
-        }
+        const aspectRatio = 16/9; const windowRatio = window.innerWidth / window.innerHeight;
+        if (windowRatio > aspectRatio) { video.style.width = '120vw'; video.style.height = `${120 * windowRatio / aspectRatio}vw`; }
+        else { video.style.width = `${120 * aspectRatio / windowRatio}vh`; video.style.height = '120vh'; }
       }
-      resizeVideo();
-      window.addEventListener('resize', resizeVideo);
+      resizeVideo(); window.addEventListener('resize', resizeVideo);
     }
 
-// Text animation logic
-const matrixText = document.getElementById('matrix-text');
-function animateText() {
-  const sequence = [
-    { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 3999 },
-  ];
-
-  function displayWord(index) {
-    if (index >= sequence.length) {
-      setTimeout(animateText, 600); // Restart the loop
-      return;
+    // Matrix text animation
+    const matrixText = document.getElementById('matrix-text');
+    function animateText() {
+      const sequence = [ { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 2000 } ];
+      function displayWord(index) {
+        if (index >= sequence.length) { setTimeout(animateText, 600); return; }
+        const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
+        matrixText.textContent = text; matrixText.className = `matrix-text ${typeClass}`;
+        setTimeout(() => { matrixText.className = `matrix-text ${deleteClass}`; setTimeout(() => displayWord(index + 1), deleteDuration); }, typeDuration);
+      }
+      displayWord(0);
     }
+    setTimeout(animateText, 3690);
+  </script>
 
-    const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
-    matrixText.textContent = text;
-    matrixText.className = `matrix-text ${typeClass}`;
-    setTimeout(() => {
-      matrixText.className = `matrix-text ${deleteClass}`;
-      setTimeout(() => {
-        displayWord(index + 1);
-      }, deleteDuration);
-    }, typeDuration);
-  }
-
-  displayWord(0);
-}
-setTimeout(animateText, 3690);
-
-</script>
 </body>
 </html>
