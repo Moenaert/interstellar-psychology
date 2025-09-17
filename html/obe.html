@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Out of Body Experience</title>
+  <link rel="icon" href="../artefacts/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-604ZYF7TJT');
+</script>
+<body class="obe">
+  <div class="particles" id="particles"></div>
+
+  <header class="header">
+    <h1>Out of Body Experience</h1>
+  </header>
+
+  <section class="intro">
+    <p>Many report a renewed sense of purpose, reduced fear of death, and increased spirituality or belief in an afterlife. Some undergo personality changes, becoming more compassionate or altruistic, while others may struggle with integrating the experience, facing skepticism or existential questions. NDEs can reshape one’s worldview, relationships, and priorities, often leading to lasting psychological and spiritual transformation.</p>
+  </section>
+
+  <section class="explore-intro">
+    <p>Open your mind and explore the trippy world of Out of Body Experiences through these mind-bending videos.</p>
+    <p>Dive deep into the rabbit hole and awaken your third eye!</p>
+  </section>
+
+  <section class="video-grid">
+    <div class="video-card">
+      <a href="https://www.youtube.com/@AnthonyCheneProduction/playlists" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/PgYO3VB6ubo/hqdefault.jpg" alt="Anthony Chene production" />
+      </a>
+      <h3>Anthony Chene production</h3>
+      <p>Documentaries and interviews about Near Death Experiences</p>
+      <a href="https://www.youtube.com/@AnthonyCheneProduction/playlists" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=_aHCQnpJWMo" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/_aHCQnpJWMo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBi8FuFUwyEUORudIAdQqytAAX47A" alt="The nature of reality With Darius J. Wright" />
+      </a>
+      <h3>The nature of reality With Darius J. Wright</h3>
+      <p>Master Out of Body Experiencer Darius J. Wright</p>
+      <a href="https://www.youtube.com/watch?v=_aHCQnpJWMo" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>Learn Darius J. Wright's <a href="https://dariusjwright.com/my-mission" style="color: #00FFFF; text-decoration: none">Mission</a></p>
+  </div>
+
+  <script>
+    // Floating particles (parity with mindsight.html)
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        container.appendChild(particle);
+      }
+    }
+    createParticles();
+  </script>
+
+  <script>
+    // Random card animation duration/delay (same as mindsight.html)
+    document.querySelectorAll('.video-card').forEach(card => {
+      const duration = (Math.random() * 2 + 3).toFixed(1) + 's';
+      const delay = (Math.random() * 2).toFixed(1) + 's';
+      card.style.animationDuration = duration;
+      card.style.animationDelay = delay;
+    });
+  </script>
+
+  <script>
+    // Wrap video-card children into card-inner (parity with mindsight.html)
+    (function(){
+      document.querySelectorAll('.video-card').forEach(card => {
+        if (card.querySelector(':scope > .card-inner')) return;
+        const inner = document.createElement('div');
+        inner.className = 'card-inner';
+        while (card.firstChild) inner.appendChild(card.firstChild);
+        card.appendChild(inner);
+      });
+    })();
+  </script>
+
+  <script>
+    // Cursor‑reactive 3D tilt (parity with mindsight.html)
+    (function(){
+      const cards = document.querySelectorAll('.video-card');
+      const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+      cards.forEach(card => {
+        const bounds = () => card.getBoundingClientRect();
+        function handleMove(e) {
+          const b = bounds();
+          const x = (e.clientX - b.left) / b.width;
+          const y = (e.clientY - b.top) / b.height;
+          const tiltX = clamp((0.5 - y) * 18, -14, 14);
+          const tiltY = clamp((x - 0.5) * 22, -18, 18);
+          card.style.setProperty('--rx', tiltX.toFixed(2) + 'deg');
+          card.style.setProperty('--ry', tiltY.toFixed(2) + 'deg');
+        }
+        function handleLeave() {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        }
+        card.addEventListener('mousemove', handleMove);
+        card.addEventListener('mouseleave', handleLeave);
+        card.addEventListener('touchmove', (e) => {
+          if (!e.touches || !e.touches[0]) return;
+          const t = e.touches[0];
+          handleMove({ clientX: t.clientX, clientY: t.clientY });
+        }, { passive: true });
+        card.addEventListener('touchend', handleLeave);
+      });
+    })();
+  </script>
+</body>
+</html>
