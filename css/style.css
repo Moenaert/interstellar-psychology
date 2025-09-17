@@ -254,3 +254,54 @@ h1 {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   body { background: #000428; background-size: auto; }
 }
+
+/* Glowing image frame */
+.glowing-image {
+  border: 2px solid #ff00ff;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  animation: glowPulse 3.2s ease infinite;
+}
+.glowing-image:hover {
+  box-shadow: 0 0 50px #FF00FF, inset 0 0 50px rgba(255, 0, 255, 0.2);
+  border-color: #00FFFF;
+}
+
+@keyframes glowPulse {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.centered { text-align: center; }
+.pad-36 { padding: 36px; }
+.pad-27 { padding: 27px; }
+.w-42 { width: 42%; display: block; margin: 0 auto; }
+.w-35 { width: 35%; display: block; margin: 0 auto; }
+
+.explore-intro {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 1.6;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  border: 2px solid #40ff00;
+  box-shadow: 0 0 30px rgba(64, 255, 0, 0.3);
+  animation: pulseGreen 3s ease infinite;
+  color: #40ff00;
+  text-shadow: 0 0 6px #00ff99, 0 0 12px #00ffcc;
+}
+
+.explore-intro:hover {
+  box-shadow: 0 0 50px #40ff00, inset 0 0 50px rgba(64, 255, 0, 0.2);
+  border-color: #00ffff;
+}
+
+/* Green glowing pulse */
+@keyframes pulseGreen {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}

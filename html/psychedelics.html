@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psychedelics</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-604ZYF7TJT');
+</script>
+<body class="psychedelics">
+  <div class="particles" id="particles"></div>
+
+  <header class="header">
+    <h1>Psychedelics</h1>
+  </header>
+
+  <section class="intro">
+    <p>Psychedelics are illegal not because a loving government is concerned that you may jump out of a third story window. Psychedelics are illegal because they dissolve opinion structures and culturally laid down models of behaviour and information processing. They open you up to the possibility that everything you know is wrong.</p>
+    <p>~ Terence McKenna</p>
+  </section>
+
+  <section class="centered pad-36">
+    <img src="../artefacts/psychedelics.PNG" alt="psychedelics artwork" class="glowing-image w-42" />
+  </section>
+
+  <section class="explore-intro">
+    <p>Open your mind and explore the trippy world of Psychedelics through these mind-bending videos.</p>
+    <p>Dive deep into the rabbit hole and awaken your third eye!</p>
+  </section>
+
+  <section class="video-grid">
+    <div class="video-card">
+      <a href="https://www.netflix.com/be-en/title/81183477" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/bxABOiay6oA/hq720.jpg" alt="Fantastic Fungi" />
+      </a>
+      <h3>Fantastic Fungi</h3>
+      <p>Explore the hidden mushroom realm</p>
+      <a href="https://www.netflix.com/be-en/title/81183477" target="_blank" rel="noopener">Watch on Netflix</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.netflix.com/be-en/title/80229847" target="_blank" rel="noopener">
+        <img src="https://www.sunstonetherapies.com/wp-content/uploads/2024/02/image.png" alt="How to Change Your Mind" />
+      </a>
+      <h3>How to Change Your Mind</h3>
+      <p>Explore the realm of psychedelics</p>
+      <a href="https://www.netflix.com/be-en/title/80229847" target="_blank" rel="noopener">Watch on Netflix</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.netflix.com/be-en/title/80229847" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/fwZqVqbkyLM/mqdefault.jpg" alt="DMT: The Spirit Molecule" />
+      </a>
+      <h3>DMT: The Spirit Molecule</h3>
+      <p>Explore the realm of DMT</p>
+      <a href="https://www.netflix.com/be-en/title/80229847" target="_blank" rel="noopener">Watch on Netflix</a>
+    </div>
+  </section>
+
+  <section class="video-grid">
+    <div class="video-card">
+      <a href="https://www.netflix.com/be-en/title/81409016" target="_blank" rel="noopener">
+        <img src="https://m.media-amazon.com/images/S/pv-target-images/394b4c2338e183a0d14c6d93ad7e297e37197db8c95b9ba9bf49ceb077771d95.jpg" alt="Magic Medicine" />
+      </a>
+      <h3>Magic Medicine</h3>
+      <p>Psychedelics as a cure for depression?</p>
+      <a href="https://www.netflix.com/be-en/title/81409016" target="_blank" rel="noopener">Watch on Netflix</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=kxFTWk9lLDU" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/AQY43_3tvCA/maxresdefault.jpg" alt="Psychedelics Talk" />
+      </a>
+      <h3>Psychedelics at World Science Festival</h3>
+      <p>Let’s talk psychedelics</p>
+      <a href="https://www.youtube.com/watch?v=kxFTWk9lLDU" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+
+    <div class="video-card">
+      <a href="https://www.youtube.com/watch?v=uvntuZzXcAM" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/uvntuZzXcAM/maxresdefault.jpg" alt="Psychedelic Ascension" />
+      </a>
+      <h3>Psychedelic Ascension</h3>
+      <p>Mr Traumatik</p>
+      <a href="https://www.youtube.com/watch?v=uvntuZzXcAM" target="_blank" rel="noopener">Watch on YouTube</a>
+    </div>
+  </section>
+
+  <section class="centered pad-27">
+    <img src="../artefacts/chart.webp" alt="psychedelics chart" class="glowing-image w-35" />
+  </section>
+
+  <script>
+    // Floating particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        container.appendChild(particle);
+      }
+    }
+    createParticles();
+  </script>
+
+  <script>
+    // Random card animation duration/delay
+    document.querySelectorAll('.video-card').forEach(card => {
+      const duration = (Math.random() * 2 + 3).toFixed(1) + 's';
+      const delay = (Math.random() * 2).toFixed(1) + 's';
+      card.style.animationDuration = duration;
+      card.style.animationDelay = delay;
+    });
+  </script>
+
+  <script>
+    // Wrap video-card children into card-inner
+    (function(){
+      document.querySelectorAll('.video-card').forEach(card => {
+        if (card.querySelector(':scope > .card-inner')) return;
+        const inner = document.createElement('div');
+        inner.className = 'card-inner';
+        while (card.firstChild) inner.appendChild(card.firstChild);
+        card.appendChild(inner);
+      });
+    })();
+  </script>
+
+  <script>
+    // Cursor-reactive 3D tilt
+    (function(){
+      const cards = document.querySelectorAll('.video-card');
+      const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
+      cards.forEach(card => {
+        const bounds = () => card.getBoundingClientRect();
+        function handleMove(e) {
+          const b = bounds();
+          const x = (e.clientX - b.left) / b.width;
+          const y = (e.clientY - b.top) / b.height;
+          const tiltX = clamp((0.5 - y) * 18, -14, 14);
+          const tiltY = clamp((x - 0.5) * 22, -18, 18);
+          card.style.setProperty('--rx', tiltX.toFixed(2) + 'deg');
+          card.style.setProperty('--ry', tiltY.toFixed(2) + 'deg');
+        }
+        function handleLeave() {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        }
+        card.addEventListener('mousemove', handleMove);
+        card.addEventListener('mouseleave', handleLeave);
+        card.addEventListener('touchmove', (e) => {
+          if (!e.touches || !e.touches[0]) return;
+          const t = e.touches[0];
+          handleMove({ clientX: t.clientX, clientY: t.clientY });
+        }, { passive: true });
+        card.addEventListener('touchend', handleLeave);
+      });
+    })();
+  </script>
+</body>
+</html>
