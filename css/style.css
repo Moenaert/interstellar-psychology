@@ -71,12 +71,6 @@ h1 {
   perspective: 900px;
 }
 
-.footer {
-  text-align: center;
-  padding: 30px;
-  font-size: 0.9em;
-}
-
 .particles {
   position: fixed;
   inset: 0;
