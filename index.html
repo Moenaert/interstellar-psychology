@@ -109,7 +109,7 @@
     // Matrix text animation
     const matrixText = document.getElementById('matrix-text');
     function animateText() {
-      const sequence = [ { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 2000 } ];
+      const sequence = [ { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 3690 } ];
       function displayWord(index) {
         if (index >= sequence.length) { setTimeout(animateText, 600); return; }
         const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
