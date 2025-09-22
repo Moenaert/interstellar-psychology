@@ -19,23 +19,31 @@
 <body class="mindsight">
   <div class="particles" id="particles"></div>
 
-  <header class="header">
-    <nav class="nav-bar">
+  <!-- Header -->
+ <header class="header">
+  <nav class="nav-bar float-card">
+    <div class="card-inner">
       <a href="../index.html">Interstellar Psychology</a>
-    </nav>
-    <nav class="nav-bar">
-    <a href="music.html">Music</a>
-    <a href="psychedelics.html">Psychedelics</a>
-    <a href="telepathy.html">Telepathy</a>
-    <a href="mindsight.html"  class="active">Mindsight</a>
-    <a href="remote-viewing.html">Remote Viewing</a>
-    <a href="obe.html">Out of Body Experience</a>
-    <a href="nhi.html">Non Human Intelligence</a>
-    <a href="multiverse.html">Multiverse</a>
-    <a href="infinity.html">Infinity</a>
+    </div>
   </nav>
-    <h1>Mindsight</h1>
-  </header>
+
+ <nav class="nav-bar">
+    <a href="music.html" class="float-card">Music</a>
+    <a href="psychedelics.html" class="float-card">Psychedelics</a>
+    <a href="telepathy.html" class="float-card">Telepathy</a>
+    <a href="mindsight.html" class="float-card active">Mindsight</a>
+    <a href="remote-viewing.html" class="float-card">Remote Viewing</a>
+    <a href="obe.html" class="float-card">Out of Body Experience</a>
+    <a href="nhi.html" class="float-card">Non Human Intelligence</a>
+    <a href="multiverse.html" class="float-card">Multiverse</a>
+    <a href="infinity.html" class="float-card">Infinity</a>
+</nav>
+
+
+  <h1 class="float-card">
+    <div class="card-inner">Mindsight</div>
+  </h1>
+</header>
 
   <section class="intro">
         <p>At 11 years old, Happy is activating dormant abilities that go far beyond ordinary vision. What he demonstrates here is not imagination or guesswork—it's real perception beyond the physical eyes. By tapping into his soul awareness and expanding his consciousness, Happy is able to see what others can’t, showing us the potential that lives within all of us when the inner senses are awakened. This is more than a skill. It’s a reminder of who we truly are & the abilities we have with practice.</p>
@@ -133,50 +141,11 @@
 </div>
 </section>
 
-
 <div class="footer">
         <p>Begin <a href="https://share.google/K8bcbMDo6zG3OvdRQ" style="color: #00FFFF; text-decoration: none">now</a>, your potential is limitless!</p>
     </div>
 
-
-  <script>
-    // Floating particles (matches psychedelics.html behavior)
-    function createParticles() {
-      const container = document.getElementById('particles');
-      for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 3 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        container.appendChild(particle);
-      }
-    }
-    createParticles();
-  </script>
-
-  <script>
-    // Random card animation duration/delay (same as psychedelics.html)
-    document.querySelectorAll('.video-card').forEach(card => {
-      const duration = (Math.random() * 2 + 3).toFixed(1) + 's';
-      const delay = (Math.random() * 2).toFixed(1) + 's';
-      card.style.animationDuration = duration;
-      card.style.animationDelay = delay;
-    });
-  </script>
-
-  <script>
-    // Wrap video-card children into card-inner (parity with psychedelics.html)
-    (function(){
-      document.querySelectorAll('.video-card').forEach(card => {
-        if (card.querySelector(':scope > .card-inner')) return;
-        const inner = document.createElement('div');
-        inner.className = 'card-inner';
-        while (card.firstChild) inner.appendChild(card.firstChild);
-        card.appendChild(inner);
-      });
-    })();
-  </script>
+  <!-- Scripts -->
+  <script src="../javascript/scripts.js"></script>
 </body>
 </html>

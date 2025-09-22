@@ -19,23 +19,31 @@
 <body class="psychedelics">
   <div class="particles" id="particles"></div>
 
-  <header class="header">
-    <nav class="nav-bar">
+  <!-- Header -->
+ <header class="header">
+  <nav class="nav-bar float-card">
+    <div class="card-inner">
       <a href="../index.html">Interstellar Psychology</a>
-    </nav>
-    <nav class="nav-bar">
-    <a href="music.html">Music</a>
-    <a href="psychedelics.html">Psychedelics</a>
-    <a href="telepathy.html">Telepathy</a>
-    <a href="mindsight.html">Mindsight</a>
-    <a href="remote-viewing.html">Remote Viewing</a>
-    <a href="obe.html">Out of Body Experience</a>
-    <a href="nhi.html">Non Human Intelligence</a>
-    <a href="multiverse.html">Multiverse</a>
-    <a href="infinity.html"  class="active">Infinity</a>
+    </div>
   </nav>
-    <h1>Infinity</h1>
-  </header>
+
+ <nav class="nav-bar">
+    <a href="music.html" class="float-card">Music</a>
+    <a href="psychedelics.html" class="float-card">Psychedelics</a>
+    <a href="telepathy.html" class="float-card">Telepathy</a>
+    <a href="mindsight.html" class="float-card">Mindsight</a>
+    <a href="remote-viewing.html" class="float-card">Remote Viewing</a>
+    <a href="obe.html" class="float-card">Out of Body Experience</a>
+    <a href="nhi.html" class="float-card">Non Human Intelligence</a>
+    <a href="multiverse.html" class="float-card">Multiverse</a>
+    <a href="infinity.html" class="float-card active">Infinity</a>
+</nav>
+
+
+  <h1 class="float-card">
+    <div class="card-inner">Infinity</div>
+  </h1>
+</header>
 
   <section class="intro">
     <p>The universe spirals inward and outward, a kaleidoscope of endless mirrors.
@@ -106,44 +114,7 @@
   </p>
 </div>
 
-  <script>
-    // Floating particles
-    function createParticles() {
-      const container = document.getElementById('particles');
-      for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 3 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        container.appendChild(particle);
-      }
-    }
-    createParticles();
-  </script>
-
-  <script>
-    // Random card animation duration/delay
-    document.querySelectorAll('.video-card').forEach(card => {
-      const duration = (Math.random() * 2 + 3).toFixed(1) + 's';
-      const delay = (Math.random() * 2).toFixed(1) + 's';
-      card.style.animationDuration = duration;
-      card.style.animationDelay = delay;
-    });
-  </script>
-
-  <script>
-    // Wrap video-card children into card-inner
-    (function(){
-      document.querySelectorAll('.video-card').forEach(card => {
-        if (card.querySelector(':scope > .card-inner')) return;
-        const inner = document.createElement('div');
-        inner.className = 'card-inner';
-        while (card.firstChild) inner.appendChild(card.firstChild);
-        card.appendChild(inner);
-      });
-    })();
-  </script>
+  <!-- Scripts -->
+  <script src="../javascript/scripts.js"></script>
 </body>
 </html>

@@ -198,6 +198,14 @@ h1 {
 
 .video-card .card-inner > * { position: relative; z-index: 1; }
 
+.float-card {
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
 /* Card image */
 .video-card .card-inner img {
   width: 100%;
