@@ -1,27 +1,41 @@
-<!-- Doctor of Philosophy -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Screen Image</title>
-    <link rel="icon" href="../artefacts/favicon.png" type="image/png">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two Images Side by Side</title>
+  <link rel="icon" href="../artefacts/favicon.png" type="image/png">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;           /* put images side by side */
+      justify-content: flex-start; /* align left */
+      align-items: center;     /* center vertically */
+      background: white;       /* keep the white background */
+    }
+    img {
+        max-height: 100%;        /* keep height inside screen */
+        object-fit: contain;     /* no distortion */
+    }
+   .main-img {
+        flex: 0 0 auto;   /* fixed size */
+        max-height: 100%;
         }
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-    </style>
+
+    .second-img {
+        flex: 1;          /* grow into remaining space */
+        object-fit: contain;
+        height: 70%;     /* fill height */
+    }
+
+  </style>
 </head>
 <body>
-    <img src="../artefacts/albertus-magnus.jpg" alt="Dollar Bill">
+  <img src="../artefacts/albertus-magnus.jpg" alt="Albertus Magnus" class="main-img">
+  <img src="../artefacts/phd.jpeg" alt="PhD Image" class="second-img">
 </body>
 </html>
+
