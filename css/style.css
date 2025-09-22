@@ -22,6 +22,42 @@ body {
   animation: bg-shift 10s ease infinite;
 }
 
+/* Navigation Bar */
+.nav-bar {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.nav-bar a {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  color: #0ff;
+  padding: 12px 18x;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 6px rgba(0,255,255,0.7);
+}
+
+.nav-bar a:hover,
+.nav-bar a:focus-visible {
+  background: rgba(0,255,255,0.08);
+  color: #ff00ff;
+  box-shadow: 0 0 12px rgba(255,0,255,0.6);
+  outline: none;
+}
+
+.nav-bar a.active {
+  color: #ff00f2;
+  text-shadow: 0 0 8px #ffd700, 0 0 16px #ff00ff;
+  background: rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.5);
+  pointer-events: none; /* Prevents clicking on the active link */
+}
+
 /* Headings */
 h1 {
   margin: 0;

@@ -1,4 +1,3 @@
-<!-- Doctor of Philosophy -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,31 +6,57 @@
   <title>Telepathy</title>
   <link rel="icon" href="../artefacts/favicon.png" type="image/png">
   <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-604ZYF7TJT');
+  </script>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-604ZYF7TJT');
-</script>
 <body class="telepathy">
+
+  <!-- Particle background -->
   <div class="particles" id="particles"></div>
 
+  <!-- Header -->
   <header class="header">
+   <nav class="nav-bar">
+      <a href="../index.html">Interstellar Psychology</a>
+    </nav>
+    <nav class="nav-bar">
+    <a href="music.html">Music</a>
+    <a href="psychedelics.html">Psychedelics</a>
+    <a href="telepathy.html"  class="active">Telepathy</a>
+    <a href="mindsight.html">Mindsight</a>
+    <a href="remote-viewing.html">Remote Viewing</a>
+    <a href="obe.html">Out of Body Experience</a>
+    <a href="nhi.html">Non Human Intelligence</a>
+    <a href="multiverse.html">Multiverse</a>
+    <a href="infinity.html">Infinity</a>
+  </nav>
     <h1>Telepathy</h1>
   </header>
 
+  <!-- Intro -->
   <section class="intro">
-    <p>In a world that often dismisses the extraordinary as mere fantasy, <em>The Telepathy Tapes</em> explores the profound abilities of non-speakers with autism—individuals who have long been misunderstood and underestimated.</p>
+    <p>
+      In a world that often dismisses the extraordinary as mere fantasy,
+      <em>The Telepathy Tapes</em> explores the profound abilities of
+      non-speakers with autism—individuals who have long been misunderstood
+      and underestimated.
+    </p>
   </section>
 
-  <section class="explore-intro" >
+  <!-- Explore intro -->
+  <section class="explore-intro">
     <p>Open your mind and explore the trippy realm of Telepathy through these mind-bending videos.</p>
     <p>Dive deep into the cosmic rabbit hole and awaken your third eye!</p>
   </section>
 
+  <!-- Videos -->
   <section class="video-grid">
     <div class="video-card">
       <a href="https://www.youtube.com/watch?v=mxLpiSuvOJk&list=PL6lsUJdGLFx7OGLRQCQfHQPWcMDPc5Ey" target="_blank" rel="noopener">
@@ -47,20 +72,22 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTKqJBSdVFawx7jUfhJiadpZSK3hUVBU9zLA&s" alt="Reality Check: NewsNation Deep Dive" />
       </a>
       <h3>Reality Check</h3>
-      <p>Ross Coulthart discusses telepathy with Dr. Julia Mossbridge and Ky Dickens.</p>
+      <p>
+        Ross Coulthart discusses telepathy with Dr. Julia Mossbridge
+        and Ky Dickens.
+      </p>
       <a href="https://www.youtube.com/watch?v=fHp43kKxatM&t=3780s" target="_blank" rel="noopener">Watch on YouTube</a>
     </div>
   </section>
 
-  <div class="footer">
-  <p>
-    Interstellar Psychology 
-    <span class="heart"> ❤️</span>
-  </p>
-</div>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Interstellar Psychology <span class="heart">❤️</span></p>
+  </footer>
 
+  <!-- Scripts -->
   <script>
-    // Floating particles (matches psychedelics.html behavior)
+    // Floating particles
     function createParticles() {
       const container = document.getElementById('particles');
       for (let i = 0; i < 50; i++) {
@@ -74,21 +101,15 @@
       }
     }
     createParticles();
-  </script>
 
-  <script>
-    // Random card animation duration/delay (same as psychedelics.html)
+    // Randomize video card float timings
     document.querySelectorAll('.video-card').forEach(card => {
-      const duration = (Math.random() * 2 + 3).toFixed(1) + 's';
-      const delay = (Math.random() * 2).toFixed(1) + 's';
-      card.style.animationDuration = duration;
-      card.style.animationDelay = delay;
+      card.style.animationDuration = (Math.random() * 2 + 3).toFixed(1) + 's';
+      card.style.animationDelay = (Math.random() * 2).toFixed(1) + 's';
     });
-  </script>
 
-  <script>
-    // Wrap video-card children into card-inner (parity with psychedelics.html)
-    (function(){
+    // Wrap video-card children into .card-inner
+    (function() {
       document.querySelectorAll('.video-card').forEach(card => {
         if (card.querySelector(':scope > .card-inner')) return;
         const inner = document.createElement('div');
@@ -99,36 +120,5 @@
     })();
   </script>
 
-  <script>
-    // Cursor‑reactive 3D tilt (parity with psychedelics.html)
-    (function(){
-      const cards = document.querySelectorAll('.video-card');
-      const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
-      cards.forEach(card => {
-        const bounds = () => card.getBoundingClientRect();
-        function handleMove(e) {
-          const b = bounds();
-          const x = (e.clientX - b.left) / b.width;
-          const y = (e.clientY - b.top) / b.height;
-          const tiltX = clamp((0.5 - y) * 18, -14, 14);
-          const tiltY = clamp((x - 0.5) * 22, -18, 18);
-          card.style.setProperty('--rx', tiltX.toFixed(2) + 'deg');
-          card.style.setProperty('--ry', tiltY.toFixed(2) + 'deg');
-        }
-        function handleLeave() {
-          card.style.setProperty('--rx', '0deg');
-          card.style.setProperty('--ry', '0deg');
-        }
-        card.addEventListener('mousemove', handleMove);
-        card.addEventListener('mouseleave', handleLeave);
-        card.addEventListener('touchmove', (e) => {
-          if (!e.touches || !e.touches[0]) return;
-          const t = e.touches[0];
-          handleMove({ clientX: t.clientX, clientY: t.clientY });
-        }, { passive: true });
-        card.addEventListener('touchend', handleLeave);
-      });
-    })();
-  </script>
 </body>
 </html>

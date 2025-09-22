@@ -20,6 +20,20 @@
   <div class="particles" id="particles"></div>
 
   <header class="header">
+    <nav class="nav-bar">
+      <a href="../index.html">Interstellar Psychology</a>
+    </nav>
+    <nav class="nav-bar">
+    <a href="music.html">Music</a>
+    <a href="psychedelics.html">Psychedelics</a>
+    <a href="telepathy.html">Telepathy</a>
+    <a href="mindsight.html">Mindsight</a>
+    <a href="remote-viewing.html">Remote Viewing</a>
+    <a href="obe.html" class="active">Out of Body Experience</a>
+    <a href="nhi.html">Non Human Intelligence</a>
+    <a href="multiverse.html">Multiverse</a>
+    <a href="infinity.html">Infinity</a>
+  </nav>
     <h1>Out of Body Experience</h1>
   </header>
 
@@ -92,38 +106,6 @@
         inner.className = 'card-inner';
         while (card.firstChild) inner.appendChild(card.firstChild);
         card.appendChild(inner);
-      });
-    })();
-  </script>
-
-  <script>
-    // Cursor‑reactive 3D tilt (parity with mindsight.html)
-    (function(){
-      const cards = document.querySelectorAll('.video-card');
-      const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
-      cards.forEach(card => {
-        const bounds = () => card.getBoundingClientRect();
-        function handleMove(e) {
-          const b = bounds();
-          const x = (e.clientX - b.left) / b.width;
-          const y = (e.clientY - b.top) / b.height;
-          const tiltX = clamp((0.5 - y) * 18, -14, 14);
-          const tiltY = clamp((x - 0.5) * 22, -18, 18);
-          card.style.setProperty('--rx', tiltX.toFixed(2) + 'deg');
-          card.style.setProperty('--ry', tiltY.toFixed(2) + 'deg');
-        }
-        function handleLeave() {
-          card.style.setProperty('--rx', '0deg');
-          card.style.setProperty('--ry', '0deg');
-        }
-        card.addEventListener('mousemove', handleMove);
-        card.addEventListener('mouseleave', handleLeave);
-        card.addEventListener('touchmove', (e) => {
-          if (!e.touches || !e.touches[0]) return;
-          const t = e.touches[0];
-          handleMove({ clientX: t.clientX, clientY: t.clientY });
-        }, { passive: true });
-        card.addEventListener('touchend', handleLeave);
       });
     })();
   </script>
