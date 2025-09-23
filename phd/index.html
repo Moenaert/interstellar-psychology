@@ -6,17 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doctor of Philosophy</title>
   <link rel="icon" href="../artefacts/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../css/style.css">
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      display: flex;           /* put images side by side */
-      justify-content: flex-start; /* align left */
-      align-items: center;     /* center vertically */
-      background: white;       /* keep the white background */
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
     }
+
     img {
         max-height: 100%;        /* keep height inside screen */
         object-fit: contain;     /* no distortion */
@@ -27,16 +28,20 @@
         }
 
     .second-img {
-        flex: 1;          /* grow into remaining space */
-        object-fit: contain;
-        height: 39%;     /* fill height */
+        flex: 0 0 auto;
+        max-height: 100%;
+        margin-left: 333px;
     }
-
+    
   </style>
 </head>
 <body>
+  <div class="particles" id="particles"></div>
   <img src="../artefacts/albertus-magnus.jpg" alt="Albertus Magnus" class="main-img">
-  <img src="../artefacts/phd.jpeg" alt="PhD Image" class="second-img">
+  <img src="../artefacts/phd.jpeg" alt="PhD Image" class="second-img glowing-image">
+
+ 
+  <script src="../javascript/scripts.js"></script>
 </body>
 </html>
 
