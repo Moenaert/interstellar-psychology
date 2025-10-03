@@ -1,6 +1,6 @@
 //Doctor of Philosophy - Gilles Moenaert
 // Apply floating animation to header like video cards
-document.querySelectorAll('.float-card').forEach(el => {
+document.querySelectorAll('.video-card, .float-card').forEach(el => {
   el.style.animationDuration = (Math.random() * 2 + 3).toFixed(1) + 's';
   el.style.animationDelay = (Math.random() * 2).toFixed(1) + 's';
 });
