@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase A Multiverse of Love</title>
+    <link rel="icon" href="../../../artefacts/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .payment-info {
+            margin: 20px 0;
+        }
+       .dogecoin-address {
+            font-family: monospace;
+            background-color: #f8f405;
+            color: #000000; /* Black text */
+            padding: 10px;
+            display: inline-block;
+            margin: 10px 0;
+        }       
+        .pepe-address {
+            font-family: monospace;
+            background-color: #05f83a;
+            color: #000000; /* Black text */
+            padding: 10px;
+            display: inline-block;
+            margin: 10px 0;
+        }    
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+        .message {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 80%;
+            max-width: 400px;
+            height: 100px;
+            padding: 10px;
+            margin: 0 auto 10px auto;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-604ZYF7TJT');
+</script>
+<body>
+    <body class="purchase">
+     <div class="particles" id="particles"></div>
+
+  <h1 class="float-card">
+    <div class="card-inner">A Multiverse of Love</div>
+  </h1>
+
+   <section class="centered pad-36">
+    <img src="../../../artefacts/A-Multiverse-of-Love.png" 
+         alt="Psychedelics artwork" 
+         class="glowing-image w-42" 
+         style="width: 27%;" />
+</section>
+
+    <div class="payment-info">
+        <p><strong>Price:</strong> €420.69</p>
+
+        <p>To purchase the book, please send the payment in Dogecoin OR Pepe to the address below:</p>
+        <p><span id="dogePrice">Loading...</span> DOGE</p>
+        <section class="centered">
+        <img src="../../../artefacts/dogewallet.png" style="width: 12%;">
+        </section>
+        <p class="dogecoin-address">DPr9yusdZ37758AEgFjUU6hfL5UiM2WYeT</p>
+
+        <p><strong>Pepe:</strong> <span id="pepePrice">Loading...</span> PEPE</p>
+        <section class="centered">
+        <img src="../../../artefacts/pepewallet.png" style="width: 12%;">
+        </section>
+        <p class="pepe-address">0xed525bd95179D3600C84367521285864f5965A03</p>
+
+
+        <p>After making your payment, please indicate whether you used Doge or Pepe, and provide your transaction ID and delivery address details below to receive your book.</p>
+    <form action="mailto:neo@interstellar-psychology.com" method="post" enctype="text/plain">
+        <textarea name="message" placeholder="Please specify whether you paid with Doge or Pepe, and enter your transaction ID and delivery details here." required></textarea>
+        <button type="submit">Send</button>
+    </form>
+       <script>
+            async function updateCryptoPrices() {
+            const euroAmount = 420.69;
+
+            // Fetch both DOGE and PEPE prices in EUR from CoinGecko
+            const response = await fetch(
+                'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin,pepe&vs_currencies=eur'
+            );
+            const data = await response.json();
+
+            // DOGE calculation
+            const dogeRate = data.dogecoin.eur;
+            const dogeEquivalent = euroAmount / dogeRate;
+            document.getElementById('dogePrice').textContent = dogeEquivalent.toFixed(2);
+
+            // PEPE calculation
+            const pepeRate = data.pepe.eur;
+            const pepeEquivalent = euroAmount / pepeRate;
+            document.getElementById('pepePrice').textContent = pepeEquivalent.toFixed(0); // PEPE often has many decimals, round to whole number
+            }
+
+            // Run on page load
+            updateCryptoPrices();
+        </script>
+    </div>
+    <a href="../"><button style="background-color: purple; color: white;">Go Back</button></a>
+
+ <!-- Scripts -->
+  <script src="../../../javascript/scripts.js"></script>
+</body>
+</html>
