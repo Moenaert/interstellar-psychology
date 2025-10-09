@@ -92,7 +92,7 @@
 </section>
 
     <div class="payment-info">
-        <p><strong>Price:</strong> €420.69</p>
+        <p><strong>Price:</strong> $420.69</p>
 
         <p>To purchase the book, please send the payment in Dogecoin OR Pepe to the address below:</p>
         <p><span id="dogePrice">Loading...</span> DOGE</p>
@@ -115,22 +115,22 @@
     </form>
        <script>
             async function updateCryptoPrices() {
-            const euroAmount = 420.69;
+            const dollarAmount = 420.69;
 
             // Fetch both DOGE and PEPE prices in EUR from CoinGecko
             const response = await fetch(
-                'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin,pepe&vs_currencies=eur'
+                'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin,pepe&vs_currencies=usd'
             );
             const data = await response.json();
 
             // DOGE calculation
-            const dogeRate = data.dogecoin.eur;
-            const dogeEquivalent = euroAmount / dogeRate;
+            const dogeRate = data.dogecoin.usd
+            const dogeEquivalent = dollarAmount / dogeRate;
             document.getElementById('dogePrice').textContent = dogeEquivalent.toFixed(2);
 
             // PEPE calculation
-            const pepeRate = data.pepe.eur;
-            const pepeEquivalent = euroAmount / pepeRate;
+            const pepeRate = data.pepe.usd;
+            const pepeEquivalent = dollarAmount / pepeRate;
             document.getElementById('pepePrice').textContent = pepeEquivalent.toFixed(0); // PEPE often has many decimals, round to whole number
             }
 
