@@ -212,6 +212,36 @@
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  .tooltip-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tooltip-text {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .tooltip-text.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
 </style>
 
 
@@ -242,12 +272,12 @@
                 <img src="../../../artefacts/dogewallet.png" alt="MyDoge QR" class="doge-qr">
                 <div class="doge-address-container">
                     <p id="dogeAddress" class="dogecoin-address">DPr9yusdZ37758AEgFjUU6hfL5UiM2WYeT</p>
-                    <button id="copyDogeBtn" aria-label="Copy Dogecoin address">
+                    <button id="copyDogeBtn" aria-label="Copy Dogecoin address" class="tooltip-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#000000" viewBox="0 0 24 24">
                             <path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1Zm3 4H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm0 18H8V7h11v16Z"/>
                         </svg>
+                    <span id="copyTooltip" class="tooltip-text">Copied!</span>
                     </button>
-                    <span id="copyTooltip">Copied!</span>
                 </div>
             </div>
 
@@ -256,12 +286,12 @@
                 <img src="../../../artefacts/pepewallet.png" alt="Pepe Wallet QR" class="pepe-qr">
                 <div class="pepe-address-container">
                     <p id="pepeAddress" class="pepe-address">0xed525bd95179D3600C84367521285864f5965A03</p>
-                    <button id="copyPepeBtn" aria-label="Copy Pepe address">
+                    <button id="copyPepeBtn" aria-label="Copy Pepe address" class="tooltip-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="#000000" viewBox="0 0 24 24">
                             <path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1Zm3 4H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm0 18H8V7h11v16Z"/>
                         </svg>
+                    <span id="copyPepeTooltip" class="tooltip-text">Copied!</span>
                     </button>
-                    <span id="copyPepeTooltip">Copied!</span>
                 </div>
             </div>
         </div>
