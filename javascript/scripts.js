@@ -84,6 +84,78 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMailForm();
 });
 
+// === Audio toggle logic ===
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('myAudio');
+  const toggleButton = document.getElementById('audio-toggle');
+  if (!audio || !toggleButton) return;
+  let isPlaying = false;
+  audio.addEventListener('error', () => alert('Could not load audio file. Check the file path.'));
+  audio.addEventListener('play', () => { isPlaying = true; toggleButton.textContent = 'Pause'; });
+  audio.addEventListener('pause', () => { isPlaying = false; toggleButton.textContent = 'Play'; });
+  toggleButton.addEventListener('click', () => {
+    isPlaying ? audio.pause() : audio.play().catch(()=>alert('Tap the page once then try again.'));
+  });
+});
+
+// === YouTube Background ===
+let player;
+
+// Treat as mobile when viewport is small OR pointer is coarse
+const prefersNoVideo =
+  matchMedia('(max-width: 768px)').matches ||
+  matchMedia('(pointer: coarse)').matches;
+
+// YouTube API calls this when it loads (desktop only, because we load the API only on desktop)
+function onYouTubeIframeAPIReady() {
+  if (prefersNoVideo) {
+    // Safety: if container exists, hide it (CSS also hides it)
+    const bg = document.getElementById('video-background');
+    if (bg) bg.style.display = 'none';
+    return;
+  }
+
+  player = new YT.Player('player', {
+    videoId: '6ouG6L-2L3Q',
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      mute: 1,
+      loop: 1,
+      playlist: '6ouG6L-2L3Q',
+      showinfo: 0,
+      modestbranding: 1,
+      playsinline: 1
+    },
+    events: { 'onReady': onPlayerReady }
+  });
+}
+
+function onPlayerReady(event) {
+  // Fade in container immediately on desktop
+  const videoBackground = document.getElementById('video-background');
+  if (videoBackground) videoBackground.classList.add('fade-in');
+
+  event.target.mute();
+  event.target.playVideo().catch(() => {});
+
+  // Keep your resize logic
+  function resizeVideo() {
+    const video = document.getElementById('player');
+    const aspectRatio = 16 / 9;
+    const windowRatio = window.innerWidth / window.innerHeight;
+    if (windowRatio > aspectRatio) {
+      video.style.width = '120vw';
+      video.style.height = `${120 * windowRatio / aspectRatio}vw`;
+    } else {
+      video.style.width = `${120 * aspectRatio / windowRatio}vh`;
+      video.style.height = '120vh';
+    }
+  }
+  resizeVideo();
+  window.addEventListener('resize', resizeVideo);
+}
+
 
 // === Fade-in Buttons ===
 window.addEventListener('DOMContentLoaded', () => {

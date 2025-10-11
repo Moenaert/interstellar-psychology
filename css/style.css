@@ -271,10 +271,12 @@ h1 {
   margin: 0 auto;
 }
 .w-42 {
-  width: 42%;
-  max-width: 600px;
+  width: 19%;
+  max-width: 420px;
   min-width: 200px;
+  margin: 0 auto;
 }
+
 
 .w-35 { width: 35%; }
 
