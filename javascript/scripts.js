@@ -128,8 +128,21 @@ function onPlayerReady(event) {
       video.style.height = '120vh';
     }
   }
-  resizeVideo();
+    resizeVideo();
   window.addEventListener('resize', resizeVideo);
+
+  // === iPhone autoplay fix ===
+  // Safari iOS blocks autoplay until a touch gesture happens.
+  // This listens for the first touch and then plays the video muted.
+  document.addEventListener('touchstart', () => {
+    if (player && typeof player.playVideo === 'function') {
+      const state = player.getPlayerState();
+      if (state !== 1) { // Not already playing
+        player.mute();   // Force mute for autoplay compliance
+        player.playVideo().catch(() => {});
+      }
+    }
+  }, { once: true });
 }
 
 // === Matrix Text Animation ===
