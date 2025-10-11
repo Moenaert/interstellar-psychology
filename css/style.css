@@ -925,43 +925,83 @@ textarea:focus {
 
 /* === Mobile fix for payment section === */
 @media (max-width: 768px) {
+/* === Mobile fix for crypto layout === */
+@media (max-width: 768px) {
+  /* Stack Doge and Pepe cards vertically */
   .crypto-container {
     flex-direction: column;
     align-items: center;
-    gap: 32px;
-    margin-top: 30px;
+    gap: 40px;
   }
 
+  /* Ensure each card’s content stacks (QR above address) */
   .doge-card,
   .pepe-card {
     width: 90%;
     margin: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .doge-qr,
   .pepe-qr {
-    width: 60%;
-    max-width: 240px;
+    width: 65%;
+    max-width: 260px;
+    margin-bottom: 16px;
   }
 
+  /* Address and copy button below QR */
+  .doge-address-container,
+  .pepe-address-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Reset weird X transforms */
+  #dogeAddress,
+  #pepeAddress,
+  #copyDogeBtn,
+  #copyPepeBtn {
+    transform: none !important;
+  }
+
+  /* Make address readable and centered */
   .dogecoin-address,
   .pepe-address {
     font-size: 0.9rem;
     word-break: break-all;
     text-align: center;
+    width: 100%;
   }
+}}
 
-  .doge-address-container,
-  .pepe-address-container {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  #dogeAddress,
-  #pepeAddress,
-  #copyDogeBtn,
-  #copyPepeBtn {
-    transform: none;
+/* === Mobile title size adjustment === */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2em !important;  /* much smaller and fits nicely */
+    line-height: 1.2;
+    padding: 20px 10px 0;
   }
 }
 
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8em !important;  /* extra small phones */
+  }
+}
+
+/* === Mobile fix for spacing below payment form === */
+@media (max-width: 768px) {
+  .form-wrapper {
+    margin-bottom: 48px; /* ensures gap before Go Back button */
+  }
+
+  /* Optional: make sure button has consistent spacing too */
+  a button {
+    margin-top: 10px;
+  }
+}
