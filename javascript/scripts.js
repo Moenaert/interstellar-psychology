@@ -83,3 +83,81 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCopyButton('copyPepeBtn', 'pepeAddress', 'copyPepeTooltip');
   setupMailForm();
 });
+
+// === Audio toggle logic ===
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('myAudio');
+  const toggleButton = document.getElementById('audio-toggle');
+  if (!audio || !toggleButton) return;
+  let isPlaying = false;
+  audio.addEventListener('error', () => alert('Could not load audio file. Check the file path.'));
+  audio.addEventListener('play', () => { isPlaying = true; toggleButton.textContent = 'Pause'; });
+  audio.addEventListener('pause', () => { isPlaying = false; toggleButton.textContent = 'Play'; });
+  toggleButton.addEventListener('click', () => {
+    isPlaying ? audio.pause() : audio.play().catch(()=>alert('Tap the page once then try again.'));
+  });
+});
+
+// === YouTube Background ===
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    videoId: '6ouG6L-2L3Q',
+    playerVars: {
+      autoplay: 1, controls: 0, mute: 1, loop: 1,
+      playlist: '6ouG6L-2L3Q', showinfo: 0,
+      modestbranding: 1, playsinline: 1
+    },
+    events: { 'onReady': onPlayerReady }
+  });
+}
+
+function onPlayerReady(event) {
+  event.target.playVideo();
+  const videoBackground = document.getElementById('video-background');
+  videoBackground.classList.add('fade-in');
+  function resizeVideo() {
+    const video = document.getElementById('player');
+    const aspectRatio = 16 / 9;
+    const windowRatio = window.innerWidth / window.innerHeight;
+    if (windowRatio > aspectRatio) {
+      video.style.width = '120vw';
+      video.style.height = `${120 * windowRatio / aspectRatio}vw`;
+    } else {
+      video.style.width = `${120 * aspectRatio / windowRatio}vh`;
+      video.style.height = '120vh';
+    }
+  }
+  resizeVideo();
+  window.addEventListener('resize', resizeVideo);
+}
+
+// === Matrix Text Animation ===
+const matrixText = document.getElementById('matrix-text');
+function animateText() {
+  const sequence = [
+    { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 3690 }
+  ];
+  function displayWord(index) {
+    if (index >= sequence.length) { setTimeout(animateText, 600); return; }
+    const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
+    matrixText.textContent = text;
+    matrixText.className = `matrix-text ${typeClass}`;
+    setTimeout(() => {
+      matrixText.className = `matrix-text ${deleteClass}`;
+      setTimeout(() => displayWord(index + 1), deleteDuration);
+    }, typeDuration);
+  }
+  displayWord(0);
+}
+setTimeout(animateText, 4200);
+
+// === Fade-in Buttons ===
+window.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.trippy-button');
+  buttons.forEach(btn => {
+    void btn.offsetWidth;
+    btn.classList.add('fade-in');
+  });
+});
+

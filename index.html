@@ -6,43 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Interstellar Psychology</title>
 <link rel="icon" type="image/png" href="../artefacts/favicon.png" />
+<link rel="stylesheet" href="css/style.css">
 <style>
-  *{box-sizing:border-box}
-  body { margin: 0; padding: 0; overflow: hidden; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
-
-  /* === Video BG === */
-  #video-background { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: 0; }
-  #player { width: 120vw; height: 120vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 120%; min-height: 120%; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .fade-in { animation: fadeIn 2s ease-in forwards; }
-
-  /* === Matrix typing === */
-  .matrix-text { position: absolute; top: 14%; left: 50%; transform: translate(-50%, -50%); z-index: 2; font-family: 'Courier New', Courier, monospace; font-size: clamp(1.4rem, 3.2vw, 2.7rem); color: #0f0; text-shadow: 0 0 10px #0f0, 0 0 20px #0f0; white-space: nowrap; overflow: hidden; width: 0; border-right: 3px solid #0f0; }
-  @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #0f0; } }
-  @keyframes typing-neo { from { width: 0; } to { width: 16ch; } }
-  @keyframes deleting-neo { from { width: 16ch; } to { width: 0; } }
-  .typing-neo { animation: typing-neo 3s steps(16, end) forwards, blink-caret 0.75s step-end infinite; }
-  .deleting-neo { animation: deleting-neo 2s steps(16, end) forwards, blink-caret 0.75s step-end infinite; }
-
-  /* === Trippy button === */
-  .trippy-button { display:inline-block; background: linear-gradient(270deg, rgba(255,0,255,.3), rgba(0,255,255,.3), rgba(255,255,0,.3), rgba(255,0,255,.3)); background-size: 800% 800%; animation: psychedelicBackground 6s ease infinite, pulseScale 3s ease-in-out infinite; border: 2px solid transparent; border-radius: 30px; padding: 14px 28px; font-family: 'Courier New', Courier, monospace; font-size: clamp(1rem, 2.2vw, 1.4rem); color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 15px #0ff, 0 0 20px #ff0; cursor: pointer; transition: all .3s ease-in-out; min-width: 200px; text-align: center; text-decoration: none; box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 40px #ff0, 0 0 60px #0ff; z-index: 1; overflow: hidden; backdrop-filter: blur(2px) saturate(1.1); margin: 12px; }
-  .trippy-button:hover { animation: psychedelicBackground 2s ease infinite, pulseGlow 1.5s ease-in-out infinite; transform: scale(1.12) rotate(.75deg); box-shadow: 0 0 25px #0ff, 0 0 50px #f0f, 0 0 75px #ff0; text-shadow: 0 0 6px #fff, 0 0 12px #f0f, 0 0 18px #0ff, 0 0 24px #ff0; }
-
-  @keyframes psychedelicBackground { 0% { background-position: 0% 50%; filter: hue-rotate(0deg); } 50% { background-position: 100% 50%; filter: hue-rotate(180deg); } 100% { background-position: 0% 50%; filter: hue-rotate(360deg); } }
-  @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0; } 50% { box-shadow: 0 0 40px #fff, 0 0 60px #0ff, 0 0 90px #f0f; } }
-  @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-
-
-  /* Utility / fixed fun buttons */
-  #audio-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 3; }
-  #easter-egg { position: fixed; bottom: 60px; left: 80px; z-index: 3; }
-
-  /* Canvas trail always on top but click-through */
-  #trippy-canvas{ position: fixed; inset: 0; pointer-events: none; z-index: 1000; }
-
-  /* Static button layout */
-  #button-container { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -40%); display: grid; grid-template-columns: repeat(5, auto); grid-gap: 20px; justify-content: center; }
-  #button-container .row2 { grid-column: span 5; display: grid; grid-template-columns: repeat(4, auto); grid-gap: 20px; justify-content: center; margin-top: 20px; }
+  
 </style>
 </head>
 
@@ -50,27 +16,32 @@
   <div id="video-background"><div id="player"></div></div>
   <div id="matrix-text" class="matrix-text"></div>
 
-  <!-- Static buttons in two rows -->
   <div id="button-container">
+  <div class="row1">
     <a class="trippy-button" href="phd/music/">Music</a>
     <a class="trippy-button" href="phd/psychedelics/">Psychedelics</a>
     <a class="trippy-button" href="phd/telepathy/">Telepathy</a>
     <a class="trippy-button" href="phd/mindsight/">Mindsight</a>
     <a class="trippy-button" href="phd/remote-viewing/">Remote Viewing</a>
-    <div class="row2">
-      <a class="trippy-button" href="phd/out-of-body-experience/">Out of Body Experience</a>
-      <a class="trippy-button" href="phd/non-human-intelligence/">Non Human Intelligence</a>
-      <a class="trippy-button" href="phd/multiverse/">Multiverse</a>
-      <a class="trippy-button" href="phd/infinity/">Infinity</a>
-    </div>
   </div>
 
-  <a id="easter-egg" class="trippy-button" href="phd/easter-egg/">🥚</a>
-  <button id="audio-toggle" class="trippy-button">🥚</button>
+  <div class="row2">
+    <a class="trippy-button" href="phd/out-of-body-experience/">Out of Body Experience</a>
+    <a class="trippy-button" href="phd/non-human-intelligence/">Non Human Intelligence</a>
+    <a class="trippy-button" href="phd/multiverse/">Multiverse</a>
+    <a class="trippy-button" href="phd/infinity/">Infinity</a>
+  </div>
+
+  <div id="egg-container">
+    <a id="easter-egg" class="trippy-button" href="phd/easter-egg/">🥚 Easter Egg</a>
+    <button id="audio-toggle" class="trippy-button">🎵 Audio</button>
+  </div>
+</div>
+
 
   <audio id="myAudio" preload="auto">
     <source src="artefacts/interstellar.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
+    Your browser does not support the audio element.
   </audio>
 
   <script>
@@ -119,8 +90,20 @@
       }
       displayWord(0);
     }
-    setTimeout(animateText, 6660);
+    setTimeout(animateText, 4200);
   </script>
+
+  <script>
+  // Apply the fade-in class once, sequentially
+  window.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.trippy-button');
+    buttons.forEach((btn) => {
+      // trigger a reflow so delays apply properly
+      void btn.offsetWidth;
+      btn.classList.add('fade-in');
+    });
+  });
+</script>
 
 </body>
 </html>
