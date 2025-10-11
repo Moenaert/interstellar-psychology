@@ -100,7 +100,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // === YouTube Background ===
 let player;
+
+// Detect mobile (simpler and reliable enough)
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 function onYouTubeIframeAPIReady() {
+  // Skip YouTube background entirely on mobile
+  if (isMobile) {
+    const bg = document.getElementById('video-background');
+    if (bg) bg.style.display = 'none'; // Hide the video container
+    document.body.classList.add('psychedelic-bg'); // optional hook if you want custom mobile styling
+    return;
+  }
+
+  // Otherwise, run the desktop YouTube background
   player = new YT.Player('player', {
     videoId: '6ouG6L-2L3Q',
     playerVars: {
@@ -111,6 +124,7 @@ function onYouTubeIframeAPIReady() {
     events: { 'onReady': onPlayerReady }
   });
 }
+
 
 function onPlayerReady(event) {
   event.target.playVideo();
