@@ -1061,3 +1061,7 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
+.sidebar-nav a.active {
+  color: #ff00f2;
+}
+
