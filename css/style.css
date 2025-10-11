@@ -1033,3 +1033,12 @@ textarea:focus {
   height: auto;
 }
 
+@media (max-width: 768px) {
+  .sidebar-nav {
+    animation: cosmicFlow 24s linear infinite;
+    backdrop-filter: none;
+    background-blend-mode: normal;
+    background: radial-gradient(circle at 20% 20%, rgba(0, 0, 64, 0.9), rgba(10, 0, 40, 0.98) 70%);
+  }
+}
+
