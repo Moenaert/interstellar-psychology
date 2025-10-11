@@ -439,10 +439,10 @@ h1 {
 .dogecoin-address { background-color: #ffeb3b; }
 .pepe-address { background-color: #05f83a; }
 
-#dogeAddress { transform: translateX(33px); }
-#copyDogeBtn { transform: translateX(27px); }
-#pepeAddress { transform: translateX(36px); }
-#copyPepeBtn { transform: translateX(30px); }
+#dogeAddress { transform: translateX(18px); }
+#copyDogeBtn { transform: translateX(12px); }
+#pepeAddress { transform: translateX(21px); }
+#copyPepeBtn { transform: translateX(15px); }
 
 button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):not(.go-back-btn)  {
   background-color: #4CAF50;
