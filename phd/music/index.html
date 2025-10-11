@@ -127,59 +127,5 @@
   <!-- Scripts -->
   <script src="../../javascript/scripts.js"></script>
 
-<script>
-  const menuButton = document.querySelector('.menu-toggle');
-
-  // Create overlay and sidebar dynamically
-  let overlay = document.querySelector('.sidebar-overlay');
-  let sidebar = document.querySelector('.sidebar-nav');
-
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'sidebar-overlay';
-    document.body.appendChild(overlay);
-  }
-
-  if (!sidebar) {
-    sidebar = document.createElement('nav');
-    sidebar.className = 'sidebar-nav';
-    const sourceNav = document.querySelector('.nav-bar:nth-of-type(2)');
-    if (sourceNav) sidebar.innerHTML = sourceNav.innerHTML;
-    document.body.appendChild(sidebar);
-  }
-
-  // Toggle sidebar fade in/out
-  function toggleSidebar() {
-    const isOpen = sidebar.classList.contains('open');
-    sidebar.classList.toggle('open', !isOpen);
-    overlay.classList.toggle('show', !isOpen);
-  }
-
-  // ☰ button toggles sidebar both ways
-  menuButton.addEventListener('click', toggleSidebar);
-
-  // Clicking overlay closes sidebar
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('show');
-  });
-
-  // Close sidebar when a link is clicked (optional fade-out before navigation)
-  sidebar.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (link && link.href) {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('show');
-      e.preventDefault();
-      setTimeout(() => { window.location.href = link.href; }, 300);
-    }
-  });
-</script>
-
-
-
-
-
-
 </body>
 </html>
