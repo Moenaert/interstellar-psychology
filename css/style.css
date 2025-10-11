@@ -14,13 +14,18 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Orbitron', monospace;
   color: #fff;
   overflow-x: hidden;
   background: linear-gradient(45deg, #000428, #004e92, #8B00FF, #FF1493, #00FF7F, #FFD700);
   background-size: 400% 400%;
   animation: bg-shift 10s ease infinite;
 }
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&family=Monoton&display=swap');
+
+h1, h2 {
+  font-family: 'Monoton', cursive;
+}
+
 
 /* Navigation Bar */
 .nav-bar {
@@ -86,6 +91,7 @@ h1 {
   line-height: 1.6;
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.5);
+  font-family: 'Zen Dots', cursive;
 }
 
 .intro {
@@ -374,11 +380,11 @@ h1 {
 .pepe-address { background-color: #05f83a; }
 
 #dogeAddress { transform: translateX(33px); }
-#copyDogeBtn { transform: translateX(15px); }
+#copyDogeBtn { transform: translateX(27px); }
 #pepeAddress { transform: translateX(36px); }
-#copyPepeBtn { transform: translateX(18px); }
+#copyPepeBtn { transform: translateX(30px); }
 
-button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle) {
+button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):not(.go-back-btn)  {
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -1036,5 +1042,22 @@ textarea:focus {
     background-blend-mode: normal;
     background: radial-gradient(circle at 20% 20%, rgba(0, 0, 64, 0.9), rgba(10, 0, 40, 0.98) 70%);
   }
+}
+
+.go-back-btn {
+  background-color: purple;
+  color: white;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.go-back-btn:hover {
+  background-color: #b200ff;
+  transform: translateY(-2px);
 }
 
