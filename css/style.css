@@ -1005,3 +1005,9 @@ textarea:focus {
     margin-top: 10px;
   }
 }
+
+/* Hide the video background on phone-sized or touch-first devices */
+@media (max-width: 768px), (pointer: coarse) {
+  #video-background { display: none !important; }
+}
+

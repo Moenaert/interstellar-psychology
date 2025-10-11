@@ -58,52 +58,103 @@
     });
   </script>
 
-  <!-- YouTube BG -->
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    let player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', { videoId: '6ouG6L-2L3Q', playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: '6ouG6L-2L3Q', showinfo: 0, modestbranding: 1, playsinline: 1 }, events: { 'onReady': onPlayerReady } });
-    }
-    function onPlayerReady(event) {
-      event.target.playVideo();
-      const videoBackground = document.getElementById('video-background');
-      videoBackground.classList.add('fade-in');
-      function resizeVideo() {
-        const video = document.getElementById('player');
-        const aspectRatio = 16/9; const windowRatio = window.innerWidth / window.innerHeight;
-        if (windowRatio > aspectRatio) { video.style.width = '120vw'; video.style.height = `${120 * windowRatio / aspectRatio}vw`; }
-        else { video.style.width = `${120 * aspectRatio / windowRatio}vh`; video.style.height = '120vh'; }
-      }
-      resizeVideo(); window.addEventListener('resize', resizeVideo);
+<!-- === YouTube Background Loader === -->
+<script>
+  // Detect mobile or touch-first device
+  const prefersNoVideo =
+    matchMedia('(max-width: 768px)').matches ||
+    matchMedia('(pointer: coarse)').matches;
+
+  if (!prefersNoVideo) {
+    // Only load the YouTube API on desktop
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+  }
+
+  let player;
+
+  // Called by YouTube API after it loads
+  function onYouTubeIframeAPIReady() {
+    if (prefersNoVideo) {
+      const bg = document.getElementById('video-background');
+      if (bg) bg.style.display = 'none';
+      return;
     }
 
-    // Matrix text animation
-    const matrixText = document.getElementById('matrix-text');
-    function animateText() {
-      const sequence = [ { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 3690 } ];
-      function displayWord(index) {
-        if (index >= sequence.length) { setTimeout(animateText, 600); return; }
-        const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
-        matrixText.textContent = text; matrixText.className = `matrix-text ${typeClass}`;
-        setTimeout(() => { matrixText.className = `matrix-text ${deleteClass}`; setTimeout(() => displayWord(index + 1), deleteDuration); }, typeDuration);
-      }
-      displayWord(0);
-    }
-    setTimeout(animateText, 4200);
-  </script>
+    player = new YT.Player('player', {
+      videoId: '6ouG6L-2L3Q',
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        mute: 1,
+        loop: 1,
+        playlist: '6ouG6L-2L3Q',
+        showinfo: 0,
+        modestbranding: 1,
+        playsinline: 1
+      },
+      events: { 'onReady': onPlayerReady }
+    });
+  }
 
-  <script>
-  // Apply the fade-in class once, sequentially
+  function onPlayerReady(event) {
+    const videoBackground = document.getElementById('video-background');
+    if (videoBackground) videoBackground.classList.add('fade-in');
+    event.target.mute();
+    event.target.playVideo().catch(() => {});
+
+    function resizeVideo() {
+      const video = document.getElementById('player');
+      const aspectRatio = 16 / 9;
+      const windowRatio = window.innerWidth / window.innerHeight;
+      if (windowRatio > aspectRatio) {
+        video.style.width = '120vw';
+        video.style.height = `${120 * windowRatio / aspectRatio}vw`;
+      } else {
+        video.style.width = `${120 * aspectRatio / windowRatio}vh`;
+        video.style.height = '120vh';
+      }
+    }
+    resizeVideo();
+    window.addEventListener('resize', resizeVideo);
+  }
+</script>
+
+<script>
+  // Re-enable sequential fade-in for trippy buttons
   window.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.trippy-button');
-    buttons.forEach((btn) => {
-      // trigger a reflow so delays apply properly
+    buttons.forEach(btn => {
+      // Force reflow for animation delay
       void btn.offsetWidth;
       btn.classList.add('fade-in');
     });
   });
 </script>
+
+<script>
+// === Matrix Text Animation ===
+const matrixText = document.getElementById('matrix-text');
+function animateText() {
+  const sequence = [
+    { text: 'Wake up, Neo...', typeClass: 'typing-neo', deleteClass: 'deleting-neo', typeDuration: 3000, deleteDuration: 3690 }
+  ];
+  function displayWord(index) {
+    if (index >= sequence.length) { setTimeout(animateText, 600); return; }
+    const { text, typeClass, deleteClass, typeDuration, deleteDuration } = sequence[index];
+    matrixText.textContent = text;
+    matrixText.className = `matrix-text ${typeClass}`;
+    setTimeout(() => {
+      matrixText.className = `matrix-text ${deleteClass}`;
+      setTimeout(() => displayWord(index + 1), deleteDuration);
+    }, typeDuration);
+  }
+  displayWord(0);
+}
+setTimeout(animateText, 4200);
+</script>
+
 
 </body>
 </html>
