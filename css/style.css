@@ -277,6 +277,13 @@ h1 {
   margin: 0 auto;
 }
 
+.w-79 {
+  width: 100%;
+  max-width: 420px;
+  min-width: 200px;
+  margin: 0 auto;
+}
+
 
 .w-35 { width: 35%; }
 
@@ -1011,5 +1018,18 @@ textarea:focus {
 /* Hide the video background on phone-sized or touch-first devices */
 @media (max-width: 768px), (pointer: coarse) {
   #video-background { display: none !important; }
+}
+
+.responsive-image-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.responsive-img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
 }
 
