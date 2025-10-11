@@ -270,7 +270,12 @@ h1 {
   display: block;
   margin: 0 auto;
 }
-.w-42 { width: 42%; }
+.w-42 {
+  width: 42%;
+  max-width: 600px;
+  min-width: 200px;
+}
+
 .w-35 { width: 35%; }
 
 /* Glowing image frame */
@@ -917,3 +922,46 @@ textarea:focus {
 .nav-bar {
   display: none !important;
 }
+
+/* === Mobile fix for payment section === */
+@media (max-width: 768px) {
+  .crypto-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin-top: 30px;
+  }
+
+  .doge-card,
+  .pepe-card {
+    width: 90%;
+    margin: 0;
+  }
+
+  .doge-qr,
+  .pepe-qr {
+    width: 60%;
+    max-width: 240px;
+  }
+
+  .dogecoin-address,
+  .pepe-address {
+    font-size: 0.9rem;
+    word-break: break-all;
+    text-align: center;
+  }
+
+  .doge-address-container,
+  .pepe-address-container {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #dogeAddress,
+  #pepeAddress,
+  #copyDogeBtn,
+  #copyPepeBtn {
+    transform: none;
+  }
+}
+
