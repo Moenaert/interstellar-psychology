@@ -2,32 +2,54 @@
    Doctor of Philosophy
    Interstellar Psychology
    Gilles Moenaert
+   (Optimized for smoothness while keeping effects)
    ========================== */
 
+/* --------------------
+   Global design tokens
+--------------------- */
 :root {
-  --ring-blur: 8px;
+  --ring-blur: 6px;            /* slightly lighter ring blur */
   --card-radius: 16px;
+  --shadow-soft: 0 10px 24px rgba(0,0,0,.28);
+  --shadow-pop: 0 18px 38px rgba(0,0,0,.38);
+  --glow-cyan: 0 0 14px rgba(0,255,255,.35);
+  --glow-fuchsia: 0 0 16px rgba(255,0,255,.28);
+  --glow-gold: 0 0 16px rgba(255,215,0,.28);
+  --anim-speed: 1;             /* master speed multiplier (1 = normal) */
 }
 
+/* Make layout calculations consistent */
 * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  overflow-x: hidden;
-  background: linear-gradient(45deg, #000428, #004e92, #8B00FF, #FF1493, #00FF7F, #FFD700);
-  background-size: 400% 400%;
-  animation: bg-shift 10s ease infinite;
-}
+/* --------------------
+   Typography
+--------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&family=Monoton&display=swap');
 
 h1, h2 {
   font-family: 'Monoton', cursive;
 }
 
+/* --------------------
+   Root / body
+--------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  overflow-x: hidden;
 
-/* Navigation Bar */
+  /* Animated gradient, slowed + GPU hint */
+  background: linear-gradient(45deg, #000428, #004e92, #8B00FF, #FF1493, #00FF7F, #FFD700);
+  background-size: 200% 200%;
+  animation: bg-shift calc(25s * var(--anim-speed)) linear infinite;
+  will-change: background-position;
+}
+
+/* --------------------
+   Navigation
+--------------------- */
 .nav-bar {
   margin-top: 15px;
   margin-bottom: 30px;
@@ -43,8 +65,9 @@ h1, h2 {
   color: #39ff14;
   padding: 6px;
   border-radius: 10px;
-  transition: all 0.3s ease;
+  transition: transform .2s ease, box-shadow .2s ease, color .2s ease, background .2s ease;
   text-shadow: 0 0 6px rgba(0,255,255,0.7);
+  will-change: transform;
 }
 
 .nav-bar a:hover,
@@ -60,19 +83,24 @@ h1, h2 {
   text-shadow: 0 0 8px #ffd700, 0 0 16px #ff00ff;
   background: rgba(255, 215, 0, 0.1);
   box-shadow: 0 0 14px rgba(255, 215, 0, 0.5);
-  pointer-events: none; /* Prevents clicking on the active link */
+  pointer-events: none;
 }
 
-/* Headings */
+/* --------------------
+   Headers
+--------------------- */
 h1 {
   margin: 0;
   text-align: center;
   font-size: 4em;
   text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 60px #f0f;
-  animation: glow 2s ease-in-out infinite alternate;
+  animation: glow calc(3s * var(--anim-speed)) ease-in-out infinite alternate;
+  will-change: filter, text-shadow;
 }
 
-/* Header */
+/* --------------------
+   Header wrapper
+--------------------- */
 .header {
   text-align: center;
   padding: 50px 20px;
@@ -80,7 +108,9 @@ h1 {
   z-index: 10;
 }
 
-/* Intro text box */
+/* --------------------
+   Intro boxes
+--------------------- */
 .intro,
 .explore-intro {
   max-width: 800px;
@@ -92,38 +122,37 @@ h1 {
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.5);
   font-family: 'Zen Dots', cursive;
+  contain: paint; /* isolate paints */
 }
 
 .intro {
   border: 2px solid #f0f;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.22);
+  animation: float calc(6s * var(--anim-speed)) ease-in-out infinite;
+  will-change: transform;
 }
 
 .intro p {
-  animation: pulse-text 3s ease-in-out infinite;
+  animation: pulse-text calc(6s * var(--anim-speed)) ease-in-out infinite;
   will-change: text-shadow;
 }
 
 .intro:hover {
   border-color: #0ff;
-  box-shadow: 0 0 50px #f0f, inset 0 0 50px rgba(255, 0, 255, 0.2);
+  box-shadow: 0 0 40px #f0f, inset 0 0 32px rgba(255, 0, 255, 0.18);
 }
 
 .explore-intro {
   border: 2px solid #40ff00;
-  box-shadow: 0 0 30px rgba(64, 255, 0, 0.3);
+  box-shadow: 0 0 24px rgba(64, 255, 0, 0.22);
   color: #40ff00;
   text-shadow: 0 0 6px #0f9, 0 0 12px #0cc;
-  animation: pulseGreen 3s ease infinite;
+  animation: pulseGreen calc(6s * var(--anim-speed)) ease infinite;
 }
 
-.explore-intro:hover {
-  border-color: #0ff;
-  box-shadow: 0 0 50px #40ff00, inset 0 0 50px rgba(64, 255, 0, 0.2);
-}
-
-/* Grid for videos */
+/* --------------------
+   Video grid
+--------------------- */
 .video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -134,7 +163,9 @@ h1 {
   perspective: 900px;
 }
 
-/* Particles background */
+/* --------------------
+   Particles background
+--------------------- */
 .particles {
   position: fixed;
   inset: 0;
@@ -142,6 +173,7 @@ h1 {
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  contain: strict;
 }
 
 .particle {
@@ -150,38 +182,50 @@ h1 {
   height: 4px;
   background: #0ff;
   border-radius: 50%;
-  animation: twinkle 3s linear infinite;
+  animation: twinkle calc(6s * var(--anim-speed)) linear infinite;
+  will-change: opacity, transform;
 }
 
-/* Cards */
+/* --------------------
+   Cards
+--------------------- */
 .video-card {
   position: relative;
   border-radius: var(--card-radius);
   padding: 14px;
   background: rgba(10, 10, 20, 0.6);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
-  transform: translateY(var(--ty, 0px));
-  transition: transform 400ms cubic-bezier(.2,.8,.2,1), filter 400ms ease, box-shadow 400ms ease;
-  animation: float 4s ease-in-out infinite;
+
+  /* Float only when needed to reduce constant work */
+  animation: float calc(8s * var(--anim-speed)) ease-in-out infinite paused;
+  transform: translateZ(0);
+  will-change: transform, filter, box-shadow;
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1),
+              filter 300ms ease,
+              box-shadow 300ms ease;
   text-align: center;
+  backdrop-filter: blur(6px);
 }
 
 .video-card:hover {
-  box-shadow: 0 18px 55px rgba(0, 255, 255, 0.18), 0 10px 30px rgba(0, 0, 0, 0.45);
-  filter: drop-shadow(0 0 10px rgba(0, 255, 255, .15));
+  animation-play-state: running;
+  box-shadow: var(--shadow-pop), 0 0 10px rgba(0, 255, 255, .15);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, .12));
 }
 
 .video-card .card-inner {
   position: relative;
   border-radius: var(--card-radius);
   transform-style: preserve-3d;
-  transition: transform 400ms cubic-bezier(.2,.8,.2,1);
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
 }
 
-.video-card:hover .card-inner {
-  transform: rotateX(3deg) rotateY(-3deg);
+@media (hover: hover) {
+  .video-card:hover .card-inner {
+    transform: rotateX(3deg) rotateY(-3deg);
+  }
 }
 
 .video-card .card-inner::after {
@@ -190,15 +234,16 @@ h1 {
   inset: -2px;
   border-radius: inherit;
   background: conic-gradient(from 0deg, #0ff, #80f, #f0f, #ff0, #0ff);
-  filter: blur(var(--ring-blur)) saturate(1.6);
+  filter: blur(var(--ring-blur)) saturate(1.4);
   opacity: 0;
-  transition: opacity 400ms ease;
-  animation: spin 6s linear infinite paused;
+  transition: opacity 250ms ease;
+  animation: spin calc(8s * var(--anim-speed)) linear infinite paused;
   z-index: 0;
+  will-change: opacity, filter, transform;
 }
 
 .video-card:hover .card-inner::after {
-  opacity: 0.65;
+  opacity: 0.55;
   animation-play-state: running;
 }
 
@@ -206,6 +251,7 @@ h1 {
 
 .float-card {
   animation-name: float;
+  animation-duration: calc(8s * var(--anim-speed));
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -219,12 +265,15 @@ h1 {
   object-fit: cover;
   border-radius: 12px;
   transform: translateZ(24px);
-  transition: transform 400ms cubic-bezier(.2,.8,.2,1), filter 400ms ease;
+  transition: transform 260ms cubic-bezier(.2,.8,.2,1), filter 260ms ease;
+  will-change: transform, filter;
 }
 
-.video-card:hover .card-inner img {
-  transform: translateZ(36px) scale(1.06);
-  filter: saturate(1.3) contrast(1.05);
+@media (hover: hover) {
+  .video-card:hover .card-inner img {
+    transform: translateZ(36px) scale(1.05);
+    filter: saturate(1.22) contrast(1.04);
+  }
 }
 
 /* Card text */
@@ -233,14 +282,14 @@ h1 {
   transform: translateZ(12px);
   margin: 8px 2px 0;
   color: #eaf7ff;
-  text-shadow: 0 0 6px rgba(0, 255, 255, .6), 0 0 12px rgba(128, 0, 255, .35);
+  text-shadow: 0 0 6px rgba(0, 255, 255, .5), 0 0 10px rgba(128, 0, 255, .28);
 }
 
 .video-card .card-inner h3 {
   letter-spacing: 0.5px;
-  text-shadow: 1px 0 rgba(255, 0, 102, .45),
-               -1px 0 rgba(0, 255, 255, .45),
-               0 0 10px rgba(0, 255, 255, .35);
+  text-shadow: 1px 0 rgba(255, 0, 102, .35),
+               -1px 0 rgba(0, 255, 255, .35),
+               0 0 8px rgba(0, 255, 255, .28);
 }
 
 /* Card button */
@@ -252,13 +301,14 @@ h1 {
   text-decoration: none;
   color: #0ff;
   transform: translateZ(18px);
-  transition: transform 300ms ease, box-shadow 300ms ease, background 300ms ease, color 200ms ease;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, color 150ms ease;
+  will-change: transform;
 }
 
 .video-card .card-inner a:hover,
 .video-card .card-inner a:focus-visible {
   transform: translateZ(24px);
-  box-shadow: 0 0 14px rgba(0, 255, 255, .5);
+  box-shadow: 0 0 14px rgba(0, 255, 255, .45);
   background: rgba(0, 255, 255, .08);
   outline: none;
 }
@@ -268,10 +318,13 @@ h1 {
   outline-offset: 3px;
 }
 
-/* Utility */
+/* --------------------
+   Utilities
+--------------------- */
 .centered { text-align: center; }
 .pad-36 { padding: 36px; }
 .pad-27 { padding: 27px; }
+
 .w-42, .w-35 {
   display: block;
   margin: 0 auto;
@@ -290,22 +343,24 @@ h1 {
   margin: 0 auto;
 }
 
-
 .w-35 { width: 35%; }
 
 /* Glowing image frame */
 .glowing-image {
   border: 2px solid #f0f;
   border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-  animation: glowPulse 3.2s ease infinite;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.22);
+  animation: glowPulse calc(3.2s * var(--anim-speed)) ease infinite;
+  will-change: transform;
 }
 .glowing-image:hover {
   border-color: #0ff;
-  box-shadow: 0 0 50px #f0f, inset 0 0 50px rgba(255, 0, 255, 0.2);
+  box-shadow: 0 0 40px #f0f, inset 0 0 30px rgba(255, 0, 255, 0.18);
 }
 
-/* Footer */
+/* --------------------
+   Footer
+--------------------- */
 .footer {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: #fff;
@@ -320,7 +375,7 @@ h1 {
   color: #0ff;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s ease;
+  transition: color .2s ease;
 }
 .footer a:hover {
   color: #66fcf1;
@@ -329,30 +384,33 @@ h1 {
 
 .heart {
   display: inline-block;
-  animation: pulse 1.5s infinite;
+  animation: pulse calc(1.8s * var(--anim-speed)) infinite;
+  will-change: transform;
 }
 
-/* Animations */
+/* --------------------
+   Animations
+--------------------- */
 @keyframes bg-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 @keyframes glow {
-  from { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #f0f; }
-  to   { text-shadow: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #0ff; }
+  from { text-shadow: 0 0 16px #0ff, 0 0 26px #0ff, 0 0 38px #f0f; }
+  to   { text-shadow: 0 0 10px #f0f, 0 0 18px #f0f, 0 0 26px #0ff; }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 @keyframes twinkle {
   0%, 100% { opacity: 0; transform: scale(0); }
   50% { opacity: 1; transform: scale(1); }
 }
 @keyframes pulse-text {
-  0%, 100% { text-shadow: 0 0 8px rgba(0,255,255,0.9), 0 0 14px rgba(0,255,255,0.6); }
-  50% { text-shadow: 0 0 20px #f0f, 0 0 40px #f0f; }
+  0%, 100% { text-shadow: 0 0 8px rgba(0,255,255,0.8), 0 0 12px rgba(0,255,255,0.5); }
+  50% { text-shadow: 0 0 18px #f0f, 0 0 30px #f0f; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes glowPulse {
@@ -365,9 +423,12 @@ h1 {
 }
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.18); }
 }
 
+/* --------------------
+   Crypto addresses
+--------------------- */
 .dogecoin-address, .pepe-address {
   font-family: monospace;
   color: #000;
@@ -390,13 +451,15 @@ button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):not(.go-back-btn)  {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color .2s ease, transform .2s ease;
 }
 button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):hover {
   background-color: #45a049;
 }
 
-
+/* --------------------
+   Crypto layout
+--------------------- */
 .crypto-container {
   display: flex;
   justify-content: center;
@@ -454,7 +517,7 @@ button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):hover {
   font-size: 12px;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity .2s ease;
   pointer-events: none;
   z-index: 10;
 }
@@ -463,6 +526,9 @@ button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):hover {
   opacity: 1;
 }
 
+/* --------------------
+   Form
+--------------------- */
 .form-wrapper {
   display: flex;
   justify-content: center;
@@ -472,15 +538,16 @@ button:not(.doge-btn):not(.pepe-btn):not(.menu-toggle):hover {
 
 .form-container {
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
   border-radius: 20px;
   padding: 2rem;
   max-width: 480px;
   width: 90%;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   text-align: center;
   margin-top: 40px;
-  animation: fadeIn 0.8s ease forwards;
+  animation: fadeIn .6s ease forwards;
+  will-change: transform, opacity;
 }
 
 .form-container h2 {
@@ -528,7 +595,8 @@ textarea:focus {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+  will-change: transform;
 }
 
 .doge-btn {
@@ -549,115 +617,104 @@ textarea:focus {
   transform: translateY(-1px);
 }
 
+/* --------------------
+   Base resets and fonts
+--------------------- */
+:root{
+  --matrix-space: clamp(120px, 32vh, 240px);
+}
 
-
-*{box-sizing:border-box}
-  :root{
-    /* Space reserved under the matrix animation for mobile */
-    --matrix-space: clamp(120px, 32vh, 240px);
-  }
-
-  body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* hide horizontal scroll */
-  overflow-y: auto;   /* enable vertical scroll */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+/* --------------------
+   Video background
+--------------------- */
+#video-background { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: 0; }
+#player { width: 120vw; height: 120vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 120%; min-height: 120%; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn .8s ease-in forwards; }
+#video-background,
+#player { pointer-events: none !important; }
 
-  /* === Video BG === */
-  #video-background { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: 0; }
-  #player { width: 120vw; height: 120vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 120%; min-height: 120%; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .fade-in { animation: fadeIn 2s ease-in forwards; }
-  #video-background,
-  #player {
-    pointer-events: none !important;
-  }
+/* --------------------
+   Matrix typing
+--------------------- */
+.matrix-text {
+  position: absolute; top: 14%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 2; font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(1.4rem, 3.2vw, 2.7rem); color: #0f0;
+  text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+  white-space: nowrap; overflow: hidden; width: 0; border-right: 3px solid #0f0;
+}
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #0f0; } }
+@keyframes typing-neo { from { width: 0; } to { width: 16ch; } }
+@keyframes deleting-neo { from { width: 16ch; } to { width: 0; } }
+.typing-neo { animation: typing-neo 3s steps(16, end) forwards, blink-caret .75s step-end infinite; }
+.deleting-neo { animation: deleting-neo 2s steps(16, end) forwards, blink-caret .75s step-end infinite; }
 
-
-  /* === Matrix typing === */
-  .matrix-text {
-    position: absolute; top: 14%; left: 50%; transform: translate(-50%, -50%);
-    z-index: 2; font-family: 'Courier New', Courier, monospace;
-    font-size: clamp(1.4rem, 3.2vw, 2.7rem); color: #0f0;
-    text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-    white-space: nowrap; overflow: hidden; width: 0; border-right: 3px solid #0f0;
-  }
-  @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #0f0; } }
-  @keyframes typing-neo { from { width: 0; } to { width: 16ch; } }
-  @keyframes deleting-neo { from { width: 16ch; } to { width: 0; } }
-  .typing-neo { animation: typing-neo 3s steps(16, end) forwards, blink-caret 0.75s step-end infinite; }
-  .deleting-neo { animation: deleting-neo 2s steps(16, end) forwards, blink-caret 0.75s step-end infinite; }
-
-  /* === Trippy button === */
-  .trippy-button {
-    display:inline-block;
-    background: linear-gradient(270deg,
-    rgba(255,0,255,0.3),
-    rgba(0,255,255,0.3),
-    rgba(255,255,0,0.3),
-    rgba(255,0,255,0.3)
+/* --------------------
+   Trippy buttons
+--------------------- */
+.trippy-button {
+  display:inline-block;
+  background: linear-gradient(270deg,
+    rgba(255,0,255,0.28),
+    rgba(0,255,255,0.28),
+    rgba(255,255,0,0.28),
+    rgba(255,0,255,0.28)
   ) !important;
-    background-size: 800% 800%;
-    animation: psychedelicBackground 6s ease infinite, pulseScale 3s ease-in-out infinite;
-    border: 2px solid transparent; border-radius: 30px; padding: 14px 28px;
-    font-family: 'Courier New', Courier, monospace; font-size: clamp(1rem, 2.2vw, 1.4rem);
-    color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 15px #0ff, 0 0 20px #ff0;
-    cursor: pointer; transition: all .3s ease-in-out; min-width: 200px; text-align: center; text-decoration: none;
-    box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 40px #ff0, 0 0 60px #0ff;
-    z-index: 1; overflow: hidden; backdrop-filter: blur(2px) saturate(1.1); margin: 12px;
-  }
-  .trippy-button:hover {
-    animation: psychedelicBackground 2s ease infinite, pulseGlow 1.5s ease-in-out infinite;
-    transform: scale(1.12) rotate(.75deg);
-    box-shadow: 0 0 25px #0ff, 0 0 50px #f0f, 0 0 75px #ff0;
-    text-shadow: 0 0 6px #fff, 0 0 12px #f0f, 0 0 18px #0ff, 0 0 24px #ff0;
-  }
-  @keyframes psychedelicBackground {
-    0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-    50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
-    100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
-  }
-  @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #ff0; } 50% { box-shadow: 0 0 40px #fff, 0 0 60px #0ff, 0 0 90px #f0f; } }
-  @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  background-size: 600% 600%;
+  animation: psychedelicBackground calc(8s * var(--anim-speed)) ease infinite, pulseScale calc(3s * var(--anim-speed)) ease-in-out infinite;
+  border: 2px solid transparent; border-radius: 30px; padding: 14px 28px;
+  font-family: 'Courier New', Courier, monospace; font-size: clamp(1rem, 2.2vw, 1.4rem);
+  color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 15px #0ff, 0 0 20px #ff0;
+  cursor: pointer; transition: transform .2s ease-in-out, box-shadow .2s ease-in-out, filter .2s ease-in-out;
+  min-width: 200px; text-align: center; text-decoration: none;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 36px #ff0, 0 0 48px #0ff;
+  z-index: 1; overflow: hidden; backdrop-filter: blur(2px) saturate(1.08);
+  margin: 12px;
+  will-change: transform, filter;
+}
+.trippy-button:hover {
+  animation: psychedelicBackground calc(4s * var(--anim-speed)) ease infinite, pulseGlow calc(1.5s * var(--anim-speed)) ease-in-out infinite;
+  transform: scale(1.08) rotate(.5deg);
+  box-shadow: 0 0 22px #0ff, 0 0 42px #f0f, 0 0 60px #ff0;
+}
+@keyframes psychedelicBackground {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
+  100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
+}
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 16px #0ff, 0 0 28px #f0f, 0 0 44px #ff0; } 50% { box-shadow: 0 0 30px #fff, 0 0 42px #0ff, 0 0 56px #f0f; } }
+@keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
-  /* Canvas trail always on top but click-through */
-  #trippy-canvas{ position: fixed; inset: 0; pointer-events: none; z-index: 1000; }
+/* Canvas trail always on top but click-through */
+#trippy-canvas{ position: fixed; inset: 0; pointer-events: none; z-index: 1000; }
 
-  /* === Desktop button layout (unchanged) === */
-  #button-container {
-    position: absolute; top: 40%; left: 50%; transform: translate(-50%, -40%);
-    display: grid; grid-template-columns: repeat(5, auto); grid-gap: 20px; justify-content: center;
-  }
-  #button-container .row2 {
-    grid-column: span 5;
-    display: grid; grid-template-columns: repeat(4, auto); grid-gap: 20px; justify-content: center; margin-top: 20px;
-  }
-
-  /* Eggs under the trippy grid (desktop) */
-  #egg-container {
-    grid-column: 1 / -1;
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 20px;
-  }
-  /* Ensure eggs are not fixed anywhere */
-  #easter-egg, #audio-toggle {
-    position: static !important; inset: auto !important; z-index: 1; min-width: 160px;
-  }
-
-  /* === Desktop layout (horizontal rows) === */
+/* Desktop button layout */
 #button-container {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-  display: grid;
-  grid-template-columns: repeat(5, auto); /* First row: 5 buttons side by side */
-  grid-gap: 20px;
-  justify-content: center;
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%, -40%);
+  display: grid; grid-template-columns: repeat(5, auto); grid-gap: 20px; justify-content: center;
+}
+#button-container .row2 {
+  grid-column: span 5;
+  display: grid; grid-template-columns: repeat(4, auto); grid-gap: 20px; justify-content: center; margin-top: 20px;
 }
 
+/* Eggs under the trippy grid (desktop) */
+#egg-container {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 20px;
+}
+#easter-egg, #audio-toggle {
+  position: static !important; inset: auto !important; z-index: 1; min-width: 160px;
+}
+
+/* Duplicate fixed (kept once, optimized) */
 #button-container .row1 {
   grid-column: span 5;
   display: grid;
@@ -666,25 +723,9 @@ textarea:focus {
   justify-content: center;
 }
 
-#button-container .row2 {
-  grid-column: span 5;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-#egg-container {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-}
-
-/* === Mobile layout (stacked buttons, extra top gap, narrower width) === */
+/* --------------------
+   Mobile layout
+--------------------- */
 @media (max-width: 768px) {
   body {
     overflow: auto;
@@ -692,104 +733,63 @@ textarea:focus {
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
              env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
-
-  /* Matrix text slightly higher on phones */
   .matrix-text {
     top: 8%;
     font-size: clamp(1.2rem, 6vw, 2rem);
   }
-
-  /* Stack layout — more space below matrix, cleaner alignment */
   #button-container {
-    position: static;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 140px auto 24px; /* 🔹 larger gap below matrix text */
-    width: 100%;
-    max-width: 400px; /* limits how wide the button stack can be */
+    position: static; top: auto; left: auto; transform: none;
+    margin: 140px auto 24px;
+    width: 100%; max-width: 400px;
     padding: 0 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px; /* consistent vertical spacing */
+    display: flex; flex-direction: column; align-items: center; gap: 18px;
   }
-
   #button-container .row1,
   #button-container .row2,
   #egg-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%;
   }
-
-  /* 🔹 Make buttons narrower */
   #button-container a.trippy-button,
   #button-container button.trippy-button {
-    width: 80%;       /* smaller width */
-    max-width: 300px; /* tighter visual bound */
+    width: 80%;
+    max-width: 300px;
     margin: 0 auto;
     min-width: 0;
   }
 }
 
-/* === Mysterious one-time row-by-row fade-in animation (stable) === */
+/* --------------------
+   One-time fade-in sequence
+--------------------- */
 @keyframes fadeInMystic {
-  0% {
-    opacity: 0;
-    transform: translateY(15px) scale(0.96);
-    filter: blur(6px);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(0) scale(1.03);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
+  0% { opacity: 0; transform: translateY(12px) scale(0.98); filter: blur(5px); }
+  60% { opacity: 1; transform: translateY(0) scale(1.02); filter: blur(0); }
+  100% { opacity: 1; transform: none; filter: none; }
 }
-
-/* All trippy buttons start hidden */
 .trippy-button {
-  opacity: 0;
-  transform: translateY(10px);
-  filter: blur(3px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0; transform: translateY(8px); filter: blur(2px);
 }
+.trippy-button.fade-in { animation: fadeInMystic 1s ease forwards; }
+.trippy-button:hover { opacity: 1 !important; transform: scale(1.08) rotate(.5deg); }
 
-/* When the 'fade-in' class is applied, they animate once */
-.trippy-button.fade-in {
-  animation: fadeInMystic 1.2s ease forwards;
-}
+/* Sequential delays */
+.row1 .trippy-button:nth-of-type(1) { animation-delay: .16s; }
+.row1 .trippy-button:nth-of-type(2) { animation-delay: .32s; }
+.row1 .trippy-button:nth-of-type(3) { animation-delay: .48s; }
+.row1 .trippy-button:nth-of-type(4) { animation-delay: .64s; }
+.row1 .trippy-button:nth-of-type(5) { animation-delay: .8s; }
 
-/* Prevent hover from affecting opacity */
-.trippy-button:hover {
-  opacity: 1 !important;
-  transform: scale(1.12) rotate(.75deg);
-}
+.row2 .trippy-button:nth-of-type(1) { animation-delay: 1.0s; }
+.row2 .trippy-button:nth-of-type(2) { animation-delay: 1.16s; }
+.row2 .trippy-button:nth-of-type(3) { animation-delay: 1.32s; }
+.row2 .trippy-button:nth-of-type(4) { animation-delay: 1.48s; }
 
-/* === Sequential delays per row === */
-.row1 .trippy-button:nth-of-type(1) { animation-delay: 0.2s; }
-.row1 .trippy-button:nth-of-type(2) { animation-delay: 0.4s; }
-.row1 .trippy-button:nth-of-type(3) { animation-delay: 0.6s; }
-.row1 .trippy-button:nth-of-type(4) { animation-delay: 0.8s; }
-.row1 .trippy-button:nth-of-type(5) { animation-delay: 1.0s; }
+#egg-container .trippy-button:nth-of-type(1) { animation-delay: 1.64s; }
+#egg-container .trippy-button:nth-of-type(2) { animation-delay: 1.8s; }
 
-.row2 .trippy-button:nth-of-type(1) { animation-delay: 1.4s; }
-.row2 .trippy-button:nth-of-type(2) { animation-delay: 1.6s; }
-.row2 .trippy-button:nth-of-type(3) { animation-delay: 1.8s; }
-.row2 .trippy-button:nth-of-type(4) { animation-delay: 2.0s; }
-
-#egg-container .trippy-button:nth-of-type(1) { animation-delay: 2.2s; }
-#egg-container .trippy-button:nth-of-type(2) { animation-delay: 2.4s; }
-
-
-/* --- Audio button fix --- */
+/* --------------------
+   Audio toggle
+--------------------- */
 #audio-toggle.trippy-button {
   position: static !important;
   inset: auto !important;
@@ -797,10 +797,10 @@ textarea:focus {
   min-width: 160px;
   display: inline-block;
   background: linear-gradient(270deg,
-    rgba(255,0,255,.3),
-    rgba(0,255,255,.3),
-    rgba(255,255,0,.3),
-    rgba(255,0,255,.3)
+    rgba(255,0,255,.28),
+    rgba(0,255,255,.28),
+    rgba(255,255,0,.28),
+    rgba(255,0,255,.28)
   );
   border-radius: 30px;
   padding: 14px 28px;
@@ -808,16 +808,16 @@ textarea:focus {
   color: #fff;
   text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 15px #0ff, 0 0 20px #ff0;
   cursor: pointer;
-  box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 40px #ff0, 0 0 60px #0ff;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 36px #ff0, 0 0 48px #0ff;
 }
-
 #audio-toggle.trippy-button:hover {
-  transform: scale(1.12) rotate(.75deg);
-  box-shadow: 0 0 25px #0ff, 0 0 50px #f0f, 0 0 75px #ff0;
+  transform: scale(1.08) rotate(.5deg);
+  box-shadow: 0 0 22px #0ff, 0 0 42px #f0f, 0 0 60px #ff0;
 }
 
-/* === Floating Menu Button (always visible) === */
-/* === Floating Menu Button (trippy purple style) === */
+/* --------------------
+   Floating menu button
+--------------------- */
 .menu-toggle {
   position: fixed;
   top: 20px;
@@ -825,32 +825,30 @@ textarea:focus {
   z-index: 5000;
   background: transparent !important;
   border: none !important;
-  color: #fff; /* You can change this depending on your logo/icon color */
+  color: #fff;
   padding: 10px;
   cursor: pointer;
   font-size: 1.8rem;
   text-shadow: none;
   box-shadow: none;
-  transition: transform 0.2s ease;
+  transition: transform .2s ease, color .2s ease;
 }
-
 .menu-toggle:hover {
-  transform: scale(1.1);
-  color: #0ff; /* Optional: slight color change on hover */
+  transform: scale(1.06);
+  color: #0ff;
 }
 
-
-
-/* === Trippy color shimmer animation === */
+/* --------------------
+   Sidebar (cosmic overlay)
+--------------------- */
 @keyframes trippyPulse {
   0%   { filter: hue-rotate(0deg); box-shadow: 0 0 10px #a020f0; }
-  25%  { filter: hue-rotate(90deg); box-shadow: 0 0 16px #ff00ff; }
-  50%  { filter: hue-rotate(180deg); box-shadow: 0 0 20px #c0f; }
-  75%  { filter: hue-rotate(270deg); box-shadow: 0 0 16px #ff66ff; }
+  25%  { filter: hue-rotate(90deg); box-shadow: 0 0 14px #ff00ff; }
+  50%  { filter: hue-rotate(180deg); box-shadow: 0 0 18px #c0f; }
+  75%  { filter: hue-rotate(270deg); box-shadow: 0 0 14px #ff66ff; }
   100% { filter: hue-rotate(360deg); box-shadow: 0 0 10px #a020f0; }
 }
 
-/* === Sidebar (cosmic overlay) === */
 .sidebar-nav {
   position: fixed;
   top: 0;
@@ -867,26 +865,25 @@ textarea:focus {
   opacity: 0;
   pointer-events: none;
   transform: translateX(-40px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity .3s ease, transform .3s ease;
 
-  /* 🌌 Cosmic animated background */
   background: radial-gradient(circle at 20% 20%, rgba(0, 0, 64, 0.9), rgba(10, 0, 40, 0.98) 70%),
               repeating-conic-gradient(from 45deg, #0ff, #80f, #f0f, #ff0, #0ff);
   background-blend-mode: overlay;
-  background-size: 400% 400%;
-  animation: cosmicFlow 18s ease infinite;
-  backdrop-filter: blur(10px) saturate(1.2);
-  box-shadow: 4px 0 24px rgba(0, 255, 255, 0.4);
-  border-right: 2px solid rgba(0,255,255,0.3);
+  background-size: 300% 300%;
+  animation: cosmicFlow calc(18s * var(--anim-speed)) ease infinite;
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  backdrop-filter: blur(10px) saturate(1.15);
+  box-shadow: 4px 0 24px rgba(0, 255, 255, 0.35);
+  border-right: 2px solid rgba(0,255,255,0.25);
+  will-change: transform, opacity, filter;
 }
-
 .sidebar-nav.open {
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
 }
 
-/* === Overlay (dim background behind sidebar) === */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -894,7 +891,7 @@ textarea:focus {
   backdrop-filter: blur(4px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity .3s ease;
   z-index: 3500;
 }
 .sidebar-overlay.show {
@@ -902,7 +899,6 @@ textarea:focus {
   pointer-events: auto;
 }
 
-/* === Sidebar Links === */
 .sidebar-nav a {
   width: 80%;
   text-align: center;
@@ -913,137 +909,105 @@ textarea:focus {
   color: #0ff;
   text-shadow: 0 0 6px rgba(0,255,255,0.8);
   background: rgba(0,0,0,0.3);
-  box-shadow: 0 0 12px rgba(0,255,255,0.15);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(0,255,255,0.12);
+  transition: transform .2s ease, color .2s ease, box-shadow .2s ease, background .2s ease;
+  will-change: transform;
 }
 .sidebar-nav a:hover {
   color: #ff00ff;
   background: rgba(255, 0, 255, 0.12);
-  box-shadow: 0 0 16px rgba(255, 0, 255, 0.5);
+  box-shadow: 0 0 16px rgba(255, 0, 255, 0.42);
 }
 
-/* === Cosmic animation === */
+/* Cosmic animation */
 @keyframes cosmicFlow {
   0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
   50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
   100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
 }
 
-/* Hide the old nav bars */
-.nav-bar {
-  display: none !important;
-}
+/* Hide the old nav bars if you use sidebar */
+.nav-bar { display: none !important; }
 
-/* === Mobile fix for payment section === */
-@media (max-width: 768px) {
-/* === Mobile fix for crypto layout === */
+/* --------------------
+   Mobile fixes
+--------------------- */
 @media (max-width: 768px) {
   /* Stack Doge and Pepe cards vertically */
-  .crypto-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+  .crypto-container { flex-direction: column; align-items: center; gap: 40px; }
+
+  .doge-card, .pepe-card {
+    width: 90%; margin: 0; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   }
 
-  /* Ensure each card’s content stacks (QR above address) */
-  .doge-card,
-  .pepe-card {
-    width: 90%;
-    margin: 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  .doge-qr, .pepe-qr {
+    width: 65%; max-width: 260px; margin-bottom: 16px;
   }
 
-  .doge-qr,
-  .pepe-qr {
-    width: 65%;
-    max-width: 260px;
-    margin-bottom: 16px;
+  .doge-address-container, .pepe-address-container {
+    flex-direction: column; align-items: center; justify-content: center; gap: 8px;
   }
 
-  /* Address and copy button below QR */
-  .doge-address-container,
-  .pepe-address-container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  /* Reset weird X transforms */
-  #dogeAddress,
-  #pepeAddress,
-  #copyDogeBtn,
-  #copyPepeBtn {
+  #dogeAddress, #pepeAddress, #copyDogeBtn, #copyPepeBtn {
     transform: none !important;
   }
 
-  /* Make address readable and centered */
-  .dogecoin-address,
-  .pepe-address {
-    font-size: 0.9rem;
-    word-break: break-all;
-    text-align: center;
-    width: 100%;
+  .dogecoin-address, .pepe-address {
+    font-size: .9rem; word-break: break-all; text-align: center; width: 100%;
   }
-}}
+}
 
-/* === Mobile title size adjustment === */
+/* Mobile title size adjustment */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.2em !important;  /* much smaller and fits nicely */
+    font-size: 2.2em !important;
     line-height: 1.2;
     padding: 20px 10px 0;
   }
 }
-
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.8em !important;  /* extra small phones */
-  }
+  h1 { font-size: 1.8em !important; }
 }
 
-/* === Mobile fix for spacing below payment form === */
+/* Mobile spacing below payment form */
 @media (max-width: 768px) {
-  .form-wrapper {
-    margin-bottom: 48px; /* ensures gap before Go Back button */
-  }
-
-  /* Optional: make sure button has consistent spacing too */
-  a button {
-    margin-top: 10px;
-  }
+  .form-wrapper { margin-bottom: 48px; }
+  a button { margin-top: 10px; }
 }
 
 /* Hide the video background on phone-sized or touch-first devices */
 @media (max-width: 768px), (pointer: coarse) {
   #video-background { display: none !important; }
+  /* Lighter effects for mobile & touch */
+  .video-card,
+  .form-container { backdrop-filter: none !important; background: rgba(10, 10, 20, 0.82); }
+  .sidebar-nav { backdrop-filter: none; }
 }
 
+/* Responsive images */
 .responsive-image-row {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
-
 .responsive-img {
   width: 100%;
   max-width: 350px;
   height: auto;
 }
 
+/* Sidebar tweaks on small screens */
 @media (max-width: 768px) {
   .sidebar-nav {
-    animation: cosmicFlow 24s linear infinite;
+    animation: cosmicFlow calc(24s * var(--anim-speed)) linear infinite;
     backdrop-filter: none;
     background-blend-mode: normal;
     background: radial-gradient(circle at 20% 20%, rgba(0, 0, 64, 0.9), rgba(10, 0, 40, 0.98) 70%);
   }
 }
 
+/* Go back button */
 .go-back-btn {
   background-color: purple;
   color: white;
@@ -1052,16 +1016,35 @@ textarea:focus {
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background .2s ease, transform .2s ease;
   margin-bottom: 20px;
 }
-
 .go-back-btn:hover {
   background-color: #b200ff;
   transform: translateY(-2px);
 }
 
-.sidebar-nav a.active {
-  color: #ff00f2;
+.sidebar-nav a.active { color: #ff00f2; }
+
+/* --------------------
+   Accessibility & motion prefs
+--------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  #video-background { display: none !important; }
+  body { background-size: cover; }
 }
 
+/* --------------------
+   Progressive enhancement
+--------------------- */
+@supports not (backdrop-filter: blur(2px)) {
+  .trippy-button { background: rgba(0,0,0,0.4); }
+}
+@supports not (backdrop-filter: blur(6px)) {
+  .video-card, .form-container { background: rgba(10, 10, 20, 0.82); }
+}
