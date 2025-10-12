@@ -378,6 +378,8 @@ h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
 }
 
 .footer a {
