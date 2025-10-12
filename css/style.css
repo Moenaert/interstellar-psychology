@@ -337,10 +337,23 @@ h1 {
 
 .w-79 {
   width: 100%;
-  max-width: 420px;
-  min-width: 200px;
   margin: 0 auto;
 }
+
+@media (min-width: 600px) {
+  .w-79 {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .w-79 {
+    width: 33%;
+  }
+}
+
+
+
 
 .w-35 { width: 35%; }
 
