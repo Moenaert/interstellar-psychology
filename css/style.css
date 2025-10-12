@@ -669,7 +669,8 @@ body {
   background-size: 600% 600%;
   animation: psychedelicBackground calc(8s * var(--anim-speed)) ease infinite, pulseScale calc(3s * var(--anim-speed)) ease-in-out infinite;
   border: 2px solid transparent; border-radius: 30px; padding: 14px 28px;
-  font-family: 'Courier New', Courier, monospace; font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
   color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #f0f, 0 0 15px #0ff, 0 0 20px #ff0;
   cursor: pointer; transition: transform .2s ease-in-out, box-shadow .2s ease-in-out, filter .2s ease-in-out;
   min-width: 200px; text-align: center; text-decoration: none;
@@ -879,7 +880,10 @@ body {
   box-shadow: 4px 0 24px rgba(0, 255, 255, 0.35);
   border-right: 2px solid rgba(0,255,255,0.25);
   will-change: transform, opacity, filter;
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(1rem, 2.2vw, 1.4rem);
 }
+
 .sidebar-nav.open {
   opacity: 1;
   transform: translateX(0);
