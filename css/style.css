@@ -772,19 +772,22 @@ body {
 .trippy-button:hover { opacity: 1 !important; transform: scale(1.08) rotate(.5deg); }
 
 /* Sequential delays */
-.row1 .trippy-button:nth-of-type(1) { animation-delay: .16s; }
-.row1 .trippy-button:nth-of-type(2) { animation-delay: .32s; }
-.row1 .trippy-button:nth-of-type(3) { animation-delay: .48s; }
-.row1 .trippy-button:nth-of-type(4) { animation-delay: .64s; }
-.row1 .trippy-button:nth-of-type(5) { animation-delay: .8s; }
+.row1 .trippy-button:nth-of-type(1) { animation-delay: 0s; }
+.row1 .trippy-button:nth-of-type(2) { animation-delay: 0.36s; }
+.row1 .trippy-button:nth-of-type(3) { animation-delay: 0.72s; }
+.row1 .trippy-button:nth-of-type(4) { animation-delay: 1.08s; }
+.row1 .trippy-button:nth-of-type(5) { animation-delay: 1.44s; }
 
-.row2 .trippy-button:nth-of-type(1) { animation-delay: 1.0s; }
-.row2 .trippy-button:nth-of-type(2) { animation-delay: 1.16s; }
-.row2 .trippy-button:nth-of-type(3) { animation-delay: 1.32s; }
-.row2 .trippy-button:nth-of-type(4) { animation-delay: 1.48s; }
+.row2 .trippy-button:nth-of-type(1) { animation-delay: 1.8s; }
+.row2 .trippy-button:nth-of-type(2) { animation-delay: 2.16s; }
+.row2 .trippy-button:nth-of-type(3) { animation-delay: 2.52s; }
+.row2 .trippy-button:nth-of-type(4) { animation-delay: 2.88s; }
 
-#egg-container .trippy-button:nth-of-type(1) { animation-delay: 1.64s; }
-#egg-container .trippy-button:nth-of-type(2) { animation-delay: 1.8s; }
+#egg-container .trippy-button:nth-child(1) { animation-delay: 3.24s; }
+#egg-container .trippy-button:nth-child(2) { animation-delay: 3.6s; }
+
+
+
 
 /* --------------------
    Audio toggle
