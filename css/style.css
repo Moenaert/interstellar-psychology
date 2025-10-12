@@ -961,6 +961,11 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
   .dogecoin-address, .pepe-address {
     font-size: .9rem; word-break: break-all; text-align: center; width: 100%;
   }
+  @media (max-width: 600px) {
+  .pepe-address {
+    font-size: 0.75rem; /* smaller on phones */
+  }
+}
 }
 
 /* Mobile title size adjustment */
