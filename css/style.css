@@ -782,7 +782,7 @@ body {
   opacity: 0; transform: translateY(8px); filter: blur(2px);
 }
 .trippy-button.fade-in { animation: fadeInMystic 1s ease forwards; }
-.trippy-button:hover { opacity: 1 !important; transform: scale(1.08) rotate(.5deg); }
+.trippy-button.fade-in:hover { transform: scale(1.08) rotate(.5deg); }
 
 /* Sequential delays */
 .row1 .trippy-button:nth-of-type(1) { animation-delay: 0s; }
