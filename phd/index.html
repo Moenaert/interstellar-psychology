@@ -33,6 +33,26 @@
         margin-left: 333px;
     }
     
+    /* Mobile responsive layout */
+    @media (max-width: 768px) {
+        html, body {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .main-img, .second-img {
+            max-width: 90%;
+            max-height: 45vh;
+            margin: 10px 0;
+        }
+        
+        .second-img {
+            margin-left: 0;
+        }
+    }
+    
   </style>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-604ZYF7TJT"></script>
