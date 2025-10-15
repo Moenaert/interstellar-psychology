@@ -19,6 +19,16 @@
 </head>
 <body class="psychedelics">
 
+  <!-- Audio Player (Persistent) -->
+  <button id="audio-toggle" aria-label="Toggle music" title="Toggle music">
+    <svg id="audio-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5v14l11-7-11-7z" />
+    </svg>
+  </button>
+  <audio id="myAudio" preload="auto" loop>
+    <source src="../../artefacts/interstellar.mp3" type="audio/mpeg"/>
+  </audio>
+
   <!-- Particle background -->
   <div class="particles" id="particles"></div>
 
@@ -148,5 +158,6 @@
 
   <!-- Scripts -->
   <script src="../../javascript/scripts.js"></script>
+  <script src="../../javascript/persistent-audio.js"></script>
 </body>
 </html>

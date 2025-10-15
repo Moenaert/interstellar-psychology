@@ -85,18 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // === Audio toggle logic ===
-document.addEventListener('DOMContentLoaded', function() {
-  const audio = document.getElementById('myAudio');
-  const toggleButton = document.getElementById('audio-toggle');
-  if (!audio || !toggleButton) return;
-  let isPlaying = false;
-  audio.addEventListener('error', () => alert('Could not load audio file. Check the file path.'));
-  audio.addEventListener('play', () => { isPlaying = true; toggleButton.textContent = 'Pause'; });
-  audio.addEventListener('pause', () => { isPlaying = false; toggleButton.textContent = 'Play'; });
-  toggleButton.addEventListener('click', () => {
-    isPlaying ? audio.pause() : audio.play().catch(()=>alert('Tap the page once then try again.'));
-  });
-});
+// Now handled by persistent-audio.js
 
 // === YouTube Background ===
 let player;
