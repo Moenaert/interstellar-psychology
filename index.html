@@ -25,6 +25,15 @@
 </head>
 
 <body>
+  <button id="audio-toggle" aria-label="Toggle music" title="Toggle music">
+    <svg id="audio-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5v14l11-7-11-7z" />
+    </svg>
+  </button>
+  <audio id="myAudio" preload="auto" loop>
+    <source src="artefacts/interstellar.mp3" type="audio/mpeg"/>
+  </audio>
+
   <div id="video-background"><div id="player"></div></div>
   <div id="matrix-text" class="matrix-text"></div>
 
@@ -46,29 +55,8 @@
 
   <div id="egg-container">
     <a id="easter-egg" class="trippy-button" href="phd/easter-egg/">🥚 Easter Egg</a>
-    <button id="audio-toggle" class="trippy-button">🎵 Audio</button>
   </div>
 </div>
-
-
-  <audio id="myAudio" preload="auto">
-    <source src="artefacts/interstellar.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
-
-  <script>
-    // Audio toggle logic
-    document.addEventListener('DOMContentLoaded', function() {
-      const audio = document.getElementById('myAudio');
-      const toggleButton = document.getElementById('audio-toggle');
-      if (!audio || !toggleButton) return;
-      let isPlaying = false;
-      audio.addEventListener('error', () => alert('Could not load audio file. Check the file path.'));
-      audio.addEventListener('play', () => { isPlaying = true; toggleButton.textContent = 'Pause'; });
-      audio.addEventListener('pause', () => { isPlaying = false; toggleButton.textContent = 'Play'; });
-      toggleButton.addEventListener('click', () => { isPlaying ? audio.pause() : audio.play().catch(()=>alert('Tap the page once then try again.')); });
-    });
-  </script>
 
 <!-- === YouTube Background Loader === -->
 <script>
@@ -165,6 +153,53 @@ function animateText() {
   displayWord(0);
 }
 setTimeout(animateText, 3900);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const audio = document.getElementById('myAudio');
+  const toggle = document.getElementById('audio-toggle');
+  const icon = document.getElementById('audio-icon');
+  if (!audio || !toggle || !icon) return;
+
+  let started = false;
+
+  // Play the audio on the first click
+  function startAudio() {
+    if (!started) {
+      audio.play().catch(() => {});
+      started = true;
+      updateIcon();
+    }
+  }
+
+  document.body.addEventListener('click', startAudio, { once: true });
+
+  // Toggle between play/pause when the button is clicked
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+    updateIcon();
+  });
+
+  // Sync icon with play/pause state
+  audio.addEventListener('play', updateIcon);
+  audio.addEventListener('pause', updateIcon);
+
+  // Function to update icon based on the audio state
+  function updateIcon() {
+    if (audio.paused) {
+      // Play icon (🔊)
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5v14l11-7-11-7z" />';
+    } else {
+      // Pause icon (||)
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v18h4V3z M15 3v18h4V3z" />';
+    }
+  }
+});
+
 </script>
 
 
