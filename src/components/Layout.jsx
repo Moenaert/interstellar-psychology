@@ -65,7 +65,7 @@ const Layout = ({ children }) => {
         const opacity = Math.max(0.3, 1 - distance * 0.35);
         const blur = Math.min(distance * 1.5, 4);
         
-        item.style.transform = `translateY(${translateY}px) scale(${scale})`;
+        item.style.transform = `translate(0, calc(-50% + ${translateY}px)) scale(${scale})`;
         item.style.opacity = opacity;
         item.style.filter = `blur(${blur}px)`;
         item.style.zIndex = Math.round(100 - distance * 10);

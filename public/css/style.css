@@ -1367,7 +1367,6 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
 
 .wheel-container a {
   left: 20% !important;
-  transform: translate(0, -50%) !important;
   text-align: left !important;
   max-width: 250px !important;
 }
