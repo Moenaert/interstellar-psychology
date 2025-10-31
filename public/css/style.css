@@ -160,6 +160,12 @@ h1 {
   margin: 40px auto;
   padding: 0 20px;
   perspective: 900px;
+  justify-content: center;
+}
+
+/* For grids with exactly 2 items, limit the column width */
+.video-grid:has(.video-card:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(250px, 400px));
 }
 
 /* --------------------
