@@ -1303,3 +1303,24 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
   align-items: center;
   justify-content: center;
 }
+
+/* Buttery smooth wheel - remove CSS transitions, let JS handle it */
+.wheel-container a {
+  transition: none !important;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Hardware acceleration */
+.wheel-container {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Smooth rendering */
+.sidebar-nav {
+  contain: layout style paint;
+}

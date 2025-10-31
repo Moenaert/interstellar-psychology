@@ -20,71 +20,107 @@ const Layout = ({ children }) => {
     return location.pathname === path;
   };
 
-  // Infinite wheel scrolling effect
+  // Buttery smooth infinite wheel scrolling
   useEffect(() => {
     if (!isSidebarOpen || !wheelRef.current) return;
 
     const wheel = wheelRef.current;
-    const items = wheel.querySelectorAll('a');
-    const itemHeight = items[0]?.offsetHeight || 0;
+    const items = Array.from(wheel.querySelectorAll('a'));
     const itemCount = items.length;
     
-    let currentIndex = 0;
-    let startY = 0;
+    let currentRotation = 0;
+    let targetRotation = 0;
+    let velocity = 0;
+    let lastY = 0;
+    let lastTime = 0;
     let isDragging = false;
+    let animationFrame = null;
 
-    const updateWheel = (index) => {
-      // Normalize index to loop
-      currentIndex = ((index % itemCount) + itemCount) % itemCount;
-      
-      items.forEach((item, i) => {
-        const offset = i - currentIndex;
+    const itemSpacing = 100; // Distance between items in pixels
+
+    const updateWheel = () => {
+      // Smooth interpolation
+      const diff = targetRotation - currentRotation;
+      currentRotation += diff * 0.15; // Smooth easing
+
+      // Apply momentum/friction
+      if (!isDragging) {
+        velocity *= 0.92; // Friction
+        currentRotation += velocity;
+      }
+
+      // Update each item's position
+      items.forEach((item, index) => {
+        const offset = index - (currentRotation / itemSpacing);
         const normalizedOffset = ((offset % itemCount) + itemCount) % itemCount;
-        const adjustedOffset = normalizedOffset > itemCount / 2 ? normalizedOffset - itemCount : normalizedOffset;
+        const adjustedOffset = normalizedOffset > itemCount / 2 
+          ? normalizedOffset - itemCount 
+          : normalizedOffset;
+
+        const translateY = adjustedOffset * itemSpacing;
+        const distance = Math.abs(adjustedOffset);
         
-        const translateY = adjustedOffset * (itemHeight + 40);
-        const scale = adjustedOffset === 0 ? 1.1 : 0.85;
-        const opacity = adjustedOffset === 0 ? 1 : 0.5;
+        // Smooth scaling and opacity based on distance from center
+        const scale = Math.max(0.7, 1.2 - distance * 0.25);
+        const opacity = Math.max(0.3, 1 - distance * 0.35);
+        const blur = Math.min(distance * 1.5, 4);
         
         item.style.transform = `translateY(${translateY}px) scale(${scale})`;
         item.style.opacity = opacity;
-        item.style.transition = isDragging ? 'none' : 'all 0.3s ease';
+        item.style.filter = `blur(${blur}px)`;
+        item.style.zIndex = Math.round(100 - distance * 10);
       });
+
+      // Continue animation
+      animationFrame = requestAnimationFrame(updateWheel);
     };
 
     const handleTouchStart = (e) => {
-      startY = e.touches[0].clientY;
       isDragging = true;
+      lastY = e.touches[0].clientY;
+      lastTime = Date.now();
+      velocity = 0;
+      targetRotation = currentRotation;
     };
 
     const handleTouchMove = (e) => {
       if (!isDragging) return;
       
-      const deltaY = e.touches[0].clientY - startY;
-      const threshold = 50;
+      const currentY = e.touches[0].clientY;
+      const currentTime = Date.now();
+      const deltaY = currentY - lastY;
+      const deltaTime = Math.max(1, currentTime - lastTime);
       
-      if (Math.abs(deltaY) > threshold) {
-        const direction = deltaY > 0 ? -1 : 1;
-        currentIndex += direction;
-        updateWheel(currentIndex);
-        startY = e.touches[0].clientY;
-      }
+      // Calculate velocity for momentum
+      velocity = (deltaY / deltaTime) * 16; // Scale for 60fps
+      
+      // Direct manipulation while dragging
+      currentRotation -= deltaY * 0.8;
+      targetRotation = currentRotation;
+      
+      lastY = currentY;
+      lastTime = currentTime;
     };
 
     const handleTouchEnd = () => {
       isDragging = false;
-      updateWheel(currentIndex);
+      // Snap to nearest item
+      const snapTarget = Math.round(currentRotation / itemSpacing) * itemSpacing;
+      targetRotation = snapTarget;
     };
 
     const handleWheel = (e) => {
       e.preventDefault();
-      const direction = e.deltaY > 0 ? 1 : -1;
-      currentIndex += direction;
-      updateWheel(currentIndex);
+      velocity += e.deltaY * 0.1;
+      // Snap to nearest item
+      setTimeout(() => {
+        const snapTarget = Math.round(currentRotation / itemSpacing) * itemSpacing;
+        targetRotation = snapTarget;
+      }, 150);
     };
 
-    // Initialize wheel position
-    updateWheel(0);
+    // Start animation loop
+    updateWheel();
 
     wheel.addEventListener('touchstart', handleTouchStart, { passive: true });
     wheel.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -92,6 +128,7 @@ const Layout = ({ children }) => {
     wheel.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
+      cancelAnimationFrame(animationFrame);
       wheel.removeEventListener('touchstart', handleTouchStart);
       wheel.removeEventListener('touchmove', handleTouchMove);
       wheel.removeEventListener('touchend', handleTouchEnd);
