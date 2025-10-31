@@ -41,7 +41,7 @@ const Psychedelics = () => {
       </section>
 
       <section className="centered pad-36">
-        <img src="/artefacts/psychedelic-art.PNG" alt="Psychedelics artwork" className="glowing-image w-79" />
+        <img src="/artefacts/psychedelic-art.PNG" alt="Psychedelics artwork" className="glowing-image w-79 breathing-element" style={{'--delay': '0.3s'}} />
       </section>
 
       <section className="explore-intro breathing-element" style={{"--delay": "1s"}}>
@@ -50,7 +50,7 @@ const Psychedelics = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}>
           <div className="card-inner">
             <a href="https://www.netflix.com/be-en/title/81183477" target="_blank" rel="noopener noreferrer">
               <img src="https://i.ytimg.com/vi/bxABOiay6oA/hq720.jpg" alt="Fantastic Fungi" />
@@ -61,7 +61,7 @@ const Psychedelics = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '2.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '2.0s'}}>
           <div className="card-inner">
             <a href="https://www.netflix.com/be-en/title/80229847" target="_blank" rel="noopener noreferrer">
               <img src="https://www.sunstonetherapies.com/wp-content/uploads/2024/02/image.png" alt="How to Change Your Mind" />
@@ -72,7 +72,7 @@ const Psychedelics = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}>
           <div className="card-inner">
             <a href="https://www.netflix.com/be-en/title/81409016" target="_blank" rel="noopener noreferrer">
               <img src="https://m.media-amazon.com/images/S/pv-target-images/394b4c2338e183a0d14c6d93ad7e297e37197db8c95b9ba9bf49ceb077771d95.jpg" alt="Magic Medicine" />
@@ -85,7 +85,7 @@ const Psychedelics = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '3.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '3.0s'}}>
           <div className="card-inner">
             <a href="https://www.netflix.com/be-en/title/80229847" target="_blank" rel="noopener noreferrer">
               <img src="https://i.ytimg.com/vi/fwZqVqbkyLM/mqdefault.jpg" alt="DMT: The Spirit Molecule" />
@@ -96,7 +96,7 @@ const Psychedelics = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=kxFTWk9lLDU" target="_blank" rel="noopener noreferrer">
               <img src="https://i.ytimg.com/vi/AQY43_3tvCA/maxresdefault.jpg" alt="Psychedelics Talk" />
@@ -107,7 +107,7 @@ const Psychedelics = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '4.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '4.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=uvntuZzXcAM" target="_blank" rel="noopener noreferrer">
               <img src="https://i.ytimg.com/vi/uvntuZzXcAM/maxresdefault.jpg" alt="Psychedelic Ascension" />
@@ -120,7 +120,7 @@ const Psychedelics = () => {
       </section>
 
       <section className="centered pad-27">
-        <img src="/artefacts/chart.webp" alt="Psychedelics chart" className="glowing-image w-79" />
+        <img src="/artefacts/chart.webp" alt="Psychedelics chart" className="glowing-image w-79 breathing-element" style={{'--delay': '2.5s'}} />
       </section>
 
       <footer className="footer">

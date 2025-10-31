@@ -40,7 +40,8 @@ const PhD = () => {
           style={{
             flex: '0 0 auto',
             maxHeight: '100%',
-            objectFit: 'contain'
+            objectFit: 'contain',
+            '--delay': '0.3s'
           }}
           className="main-img"
         />
@@ -51,9 +52,10 @@ const PhD = () => {
             flex: '0 0 auto',
             maxHeight: '100%',
             marginLeft: '333px',
-            objectFit: 'contain'
+            objectFit: 'contain',
+            '--delay': '1.0s'
           }}
-          className="second-img glowing-image"
+          className="second-img glowing-image breathing-element"
         />
       </div>
 

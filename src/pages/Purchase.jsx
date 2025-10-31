@@ -89,11 +89,11 @@ const Purchase = () => {
 
       <header className="header">
         <h1 className="float-card">
-          <div className="card-inner">A Multiverse of Love</div>
+          <div className="card-inner breathing-element">A Multiverse of Love</div>
         </h1>
       </header>
 
-      <section className="centered" style={{paddingBottom: '9px'}}>
+      <section className="centered breathing-element" style={{paddingBottom: '9px'}}>
         <img 
           alt="A Multiverse of Love"
           className="glowing-image w-42"

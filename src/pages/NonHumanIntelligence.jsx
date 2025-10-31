@@ -43,7 +43,7 @@ const NonHumanIntelligence = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=Kx6iN6hdtLA" target="_blank" rel="noopener noreferrer">
               <img src="https://upload.wikimedia.org/wikipedia/en/6/60/The_Phenomenon_2020.jpg" alt="The Phenomenon poster" />
@@ -54,7 +54,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '2.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '2.0s'}}>
           <div className="card-inner">
             <a href="https://tv.apple.com/us/movie/moment-of-contact/umc.cmc.eq4hi5uneea0v3a7e1sqrq9f" target="_blank" rel="noopener noreferrer">
               <img src="https://m.media-amazon.com/images/M/MV5BMGI2MTVlNTUtOWY1OC00YjQ3LThlMGQtOTRlMDIyNDMwZWNmXkEyXkFqcGc@._V1_.jpg" alt="Moment of Contact poster" />
@@ -65,7 +65,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}>
           <div className="card-inner">
             <a href="https://tv.apple.com/be/movie/the-program/umc.cmc.o1nsjudjqe5lwmr48wdrloo6" target="_blank" rel="noopener noreferrer">
               <img src="https://m.media-amazon.com/images/M/MV5BYTlkMWI0OWUtNmQ5Ni00OWY2LWI4NjItMTcyMGZkMzc0MzA0XkEyXkFqcGc@._V1_.jpg" alt="The Program poster" />
@@ -78,7 +78,7 @@ const NonHumanIntelligence = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '3.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '3.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=Yoy_7ZVlmoM" target="_blank" rel="noopener noreferrer">
               <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Avi_Loeb_in_2023_02.jpg" alt="Avi Loeb lecture" />
@@ -89,7 +89,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=e2DqdOw6Uy4" target="_blank" rel="noopener noreferrer">
               <img src="https://martaricci.de/wp-content/uploads/2023/10/SOL_Foundation_Logo_MartaRicciDesign.jpg" alt="Garry Nolan" />
@@ -100,7 +100,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '4.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '4.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=Rpl0FrdJWfs" target="_blank" rel="noopener noreferrer">
               <img src="https://thedebrief.b-cdn.net/wp-content/uploads/2023/06/Nell.jpeg" alt="Karl Nell interview" />
@@ -113,7 +113,7 @@ const NonHumanIntelligence = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '4.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '4.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=ow7FqiegixQ" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab67656300005f1fcaee605431f1b510b54b3d24" alt="James Lacatski interview" />
@@ -124,7 +124,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '5.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '5.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=R8TqBrrqL4U" target="_blank" rel="noopener noreferrer">
               <img src="https://m.media-amazon.com/images/M/MV5BN2QyMjUwZTctNTU2OS00MjhkLWJkOTAtZTVhZDA2ZDZhMGU5XkEyXkFqcGc@._V1_.jpg" alt="David Grusch on Joe Rogan" />
@@ -135,7 +135,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '5.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '5.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=DkU7ZqbADRs" target="_blank" rel="noopener noreferrer">
               <img src="https://i.ytimg.com/vi/DkU7ZqbADRs/maxresdefault.jpg" alt="Age of Disclosure documentary" />
@@ -148,7 +148,7 @@ const NonHumanIntelligence = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '6.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '6.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=KQ7Dw-739VY" target="_blank" rel="noopener noreferrer">
               <img src="https://www.gop.gov/images/facebook-meta-25.jpg" alt="UAP hearing congress 1" />
@@ -158,7 +158,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '6.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '6.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=kT2iWKZr0qA" target="_blank" rel="noopener noreferrer">
               <img src="https://www.gop.gov/images/facebook-meta-25.jpg" alt="UAP hearing congress 2" />
@@ -168,7 +168,7 @@ const NonHumanIntelligence = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '7.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '7.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=LBKRr5OvF6E&t=6195s" target="_blank" rel="noopener noreferrer">
               <img src="https://www.gop.gov/images/facebook-meta-25.jpg" alt="UAP hearing congress 3" />

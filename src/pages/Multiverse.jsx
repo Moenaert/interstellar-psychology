@@ -35,11 +35,11 @@ const Multiverse = () => {
       </section>
 
       <section className="centered pad-36">
-        <img src="/artefacts/thirdeye.jpg" alt="Third eye" className="glowing-image w-79" />
+        <img src="/artefacts/thirdeye.jpg" alt="Third eye" className="glowing-image w-79 breathing-element" style={{'--delay': '0.3s'}} />
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=4FF2XkzGMCg&list=PLk4Cf9CNJx1g-hEODcwrVRYP_Rryy3-XC" target="_blank" rel="noopener noreferrer">
               <img src="https://images.squarespace-cdn.com/content/v1/5e56dde39e190014f11146cd/1582759026358-ZWUDZCWG5V5KOFY1CSS4/iu.jpeg" alt="Modern Intuitionist" />
@@ -50,7 +50,7 @@ const Multiverse = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '2.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '2.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=c-oaLJVjVnM" target="_blank" rel="noopener noreferrer">
               <img src="https://ufo-network.com/wp-content/uploads/2022/08/Awakenings-Release-Feature-2-scaled.jpg.webp" alt="Awakenings" />
@@ -62,7 +62,7 @@ const Multiverse = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}>
           <div className="card-inner">
             <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd949630c-df64-4d1a-9b31-d2731277a2e4_700x392.jpeg" alt="Shutter Island poster" />
             <h3>Shutter Island</h3>
@@ -72,7 +72,7 @@ const Multiverse = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card breathing-element" style={{'--delay': '3.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '3.0s'}}>
           <div className="card-inner">
             <a href="https://soundcloud.com/gilles-moenaert-336318042/multiversum-ombudsman-m4a?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" rel="noopener noreferrer">
               <img 
@@ -86,7 +86,7 @@ const Multiverse = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}
+        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=wCGF5f2s9W8" target="_blank" rel="noopener noreferrer">
               <img 
@@ -101,7 +101,7 @@ const Multiverse = () => {
           </div>
         </div>
 
-        <div className="video-card breathing-element" style={{'--delay': '4.0s'}}
+        <div className="video-card breathing-element" style={{'--delay': '4.0s'}}>
           <div className="card-inner">
             <a href="https://www.youtubetrimmer.com/view/?v=maOwdSb8j2Q&start=258&end=647&loop=0" target="_blank" rel="noopener noreferrer">
               <img 
@@ -118,8 +118,8 @@ const Multiverse = () => {
       </section>
 
       <section className="centered pad-27 responsive-image-row">
-        <img src="/artefacts/einstein.jpg" alt="Einstein" className="glowing-image responsive-img" />
-        <img src="/artefacts/thirdeyethailand.jpg" alt="Third eye Thailand" className="glowing-image responsive-img" />
+        <img src="/artefacts/einstein.jpg" alt="Einstein" className="glowing-image responsive-img breathing-element" style={{'--delay': '0.5s'}} />
+        <img src="/artefacts/thirdeyethailand.jpg" alt="Third eye Thailand" className="glowing-image responsive-img breathing-element" style={{'--delay': '1.0s'}} />
       </section>
 
       <div className="footer">
