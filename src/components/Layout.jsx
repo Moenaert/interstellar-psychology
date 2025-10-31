@@ -65,9 +65,9 @@ const Layout = ({ children }) => {
     let animationFrame = null;
 
     const updateWheel = () => {
-      // Apply momentum/friction - like a loose spinning wheel
+      // Apply momentum/friction - balanced wheel spin
       if (!isDragging) {
-        velocity *= 0.95; // Light friction for longer spin
+        velocity *= 0.92; // Moderate friction for controlled spin
         currentRotation += velocity;
         
         // Only snap when velocity is very low
@@ -124,11 +124,11 @@ const Layout = ({ children }) => {
       const deltaY = currentY - lastY;
       const deltaTime = Math.max(1, currentTime - lastTime);
       
-      // Calculate velocity for momentum (higher multiplier for more responsive spin)
-      velocity = (deltaY / deltaTime) * 25; // Increased from 16 for more spin
+      // Calculate velocity for momentum - negative to match rotation direction
+      velocity = -(deltaY / deltaTime) * 18; // Negative to match currentRotation direction
       
       // Direct manipulation while dragging
-      currentRotation -= deltaY * 1.2; // Increased sensitivity
+      currentRotation -= deltaY * 1.2;
       
       lastY = currentY;
       lastTime = currentTime;
@@ -142,7 +142,7 @@ const Layout = ({ children }) => {
 
     const handleWheel = (e) => {
       e.preventDefault();
-      velocity += e.deltaY * 0.15; // Increased for more responsive spin
+      velocity += e.deltaY * 0.1; // Reduced for less loose spin
       // No immediate snap, let it spin freely
     };
 
