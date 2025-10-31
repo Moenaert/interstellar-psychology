@@ -65,14 +65,18 @@ const Layout = ({ children }) => {
     let animationFrame = null;
 
     const updateWheel = () => {
-      // Smooth interpolation
-      const diff = targetRotation - currentRotation;
-      currentRotation += diff * 0.15; // Smooth easing
-
-      // Apply momentum/friction
+      // Apply momentum/friction - like a loose spinning wheel
       if (!isDragging) {
-        velocity *= 0.92; // Friction
+        velocity *= 0.95; // Light friction for longer spin
         currentRotation += velocity;
+        
+        // Only snap when velocity is very low
+        if (Math.abs(velocity) < 0.5) {
+          const snapTarget = Math.round(currentRotation / itemSpacing) * itemSpacing;
+          const diff = snapTarget - currentRotation;
+          currentRotation += diff * 0.1; // Gentle snap
+          velocity *= 0.85; // Dampen velocity during snap
+        }
       }
 
       // Update each item's position
@@ -120,12 +124,11 @@ const Layout = ({ children }) => {
       const deltaY = currentY - lastY;
       const deltaTime = Math.max(1, currentTime - lastTime);
       
-      // Calculate velocity for momentum
-      velocity = (deltaY / deltaTime) * 16; // Scale for 60fps
+      // Calculate velocity for momentum (higher multiplier for more responsive spin)
+      velocity = (deltaY / deltaTime) * 25; // Increased from 16 for more spin
       
       // Direct manipulation while dragging
-      currentRotation -= deltaY * 0.8;
-      targetRotation = currentRotation;
+      currentRotation -= deltaY * 1.2; // Increased sensitivity
       
       lastY = currentY;
       lastTime = currentTime;
@@ -133,19 +136,14 @@ const Layout = ({ children }) => {
 
     const handleTouchEnd = () => {
       isDragging = false;
-      // Snap to nearest item
-      const snapTarget = Math.round(currentRotation / itemSpacing) * itemSpacing;
-      targetRotation = snapTarget;
+      // Let momentum carry it, no immediate snap
+      // Wheel will naturally slow down and snap when velocity < 0.5
     };
 
     const handleWheel = (e) => {
       e.preventDefault();
-      velocity += e.deltaY * 0.1;
-      // Snap to nearest item
-      setTimeout(() => {
-        const snapTarget = Math.round(currentRotation / itemSpacing) * itemSpacing;
-        targetRotation = snapTarget;
-      }, 150);
+      velocity += e.deltaY * 0.15; // Increased for more responsive spin
+      // No immediate snap, let it spin freely
     };
 
     // Start animation loop
