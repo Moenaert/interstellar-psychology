@@ -1358,3 +1358,27 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
               inset 0 -80px 60px -40px rgba(0, 0, 0, 0.8);
   z-index: 5000;
 }
+
+/* Shift wheel buttons to left for full visibility */
+.sidebar-nav {
+  width: 320px !important;
+  max-width: 85% !important;
+}
+
+.wheel-container a {
+  left: 20% !important;
+  transform: translate(0, -50%) !important;
+  text-align: left !important;
+  max-width: 250px !important;
+}
+
+@media (max-width: 768px) {
+  .sidebar-nav {
+    width: 280px !important;
+  }
+  
+  .wheel-container a {
+    left: 15% !important;
+    max-width: 220px !important;
+  }
+}
