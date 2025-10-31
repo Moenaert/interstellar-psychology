@@ -1324,3 +1324,37 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
 .sidebar-nav {
   contain: layout style paint;
 }
+
+/* Fix sidebar overflow - show full buttons */
+.sidebar-nav {
+  overflow: visible !important;
+}
+
+.wheel-container {
+  overflow: visible !important;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure buttons stay within sidebar bounds */
+.wheel-container a {
+  max-width: 90%;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Clip content outside sidebar nicely */
+.sidebar-nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  box-shadow: inset 0 80px 60px -40px rgba(0, 0, 0, 0.8),
+              inset 0 -80px 60px -40px rgba(0, 0, 0, 0.8);
+  z-index: 5000;
+}
