@@ -24,7 +24,7 @@ const Psychedelics = () => {
       <div className="particles" id="particles"></div>
 
       <header className="header breathing-element" style={{"--delay": "0s"}}>
-        <h1 className="float-card">
+        <h1>
           <div className="card-inner">Psychedelics</div>
         </h1>
       </header>

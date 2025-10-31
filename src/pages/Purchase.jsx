@@ -87,9 +87,9 @@ const Purchase = () => {
     <>
       <div className="particles" id="particles"></div>
 
-      <header className="header">
-        <h1 className="float-card">
-          <div className="card-inner breathing-element">A Multiverse of Love</div>
+      <header className="header breathing-element">
+        <h1>
+          <div className="card-inner">A Multiverse of Love</div>
         </h1>
       </header>
 
