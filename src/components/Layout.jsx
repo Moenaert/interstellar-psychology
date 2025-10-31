@@ -28,15 +28,22 @@ const Layout = ({ children }) => {
     const items = Array.from(wheel.querySelectorAll('a'));
     const itemCount = items.length;
     
-    let currentRotation = 0;
-    let targetRotation = 0;
+    // Find active page and snap to it initially
+    const activeIndex = items.findIndex(item => {
+      const href = item.getAttribute('href');
+      return href === location.pathname;
+    });
+    
+    const itemSpacing = 100; // Distance between items in pixels
+    const initialRotation = activeIndex >= 0 ? activeIndex * itemSpacing : 0;
+    
+    let currentRotation = initialRotation;
+    let targetRotation = initialRotation;
     let velocity = 0;
     let lastY = 0;
     let lastTime = 0;
     let isDragging = false;
     let animationFrame = null;
-
-    const itemSpacing = 100; // Distance between items in pixels
 
     const updateWheel = () => {
       // Smooth interpolation
@@ -134,7 +141,7 @@ const Layout = ({ children }) => {
       wheel.removeEventListener('touchend', handleTouchEnd);
       wheel.removeEventListener('wheel', handleWheel);
     };
-  }, [isSidebarOpen]);
+  }, [isSidebarOpen, location.pathname]);
 
   return (
     <>
