@@ -1384,3 +1384,14 @@ z-index: 5000;
     text-align: center !important;
   }
 }
+
+/* Prevent page scroll when touching sidebar on mobile */
+.sidebar-nav {
+  touch-action: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wheel-container {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}

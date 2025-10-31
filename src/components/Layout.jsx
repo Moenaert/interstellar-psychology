@@ -16,6 +16,25 @@ const Layout = ({ children }) => {
     setIsSidebarOpen(false);
   };
 
+  // Prevent body scroll when sidebar is open (mobile)
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [isSidebarOpen]);
+
   const isActive = (path) => {
     return location.pathname === path;
   };
@@ -92,6 +111,9 @@ const Layout = ({ children }) => {
 
     const handleTouchMove = (e) => {
       if (!isDragging) return;
+      
+      e.preventDefault(); // Prevent page scroll
+      e.stopPropagation(); // Stop event bubbling
       
       const currentY = e.touches[0].clientY;
       const currentTime = Date.now();
