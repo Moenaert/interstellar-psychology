@@ -1219,3 +1219,49 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
     width: 4px;
   }
 }
+
+/* Wheel-like scrolling effect */
+.sidebar-nav {
+  scroll-snap-type: y mandatory;
+  scroll-padding: 50% 0;
+}
+
+.sidebar-nav a,
+.sidebar-nav .float-card {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* Add spacing between items for wheel effect */
+.sidebar-nav {
+  gap: 30px;
+}
+
+/* Mobile-specific wheel enhancements */
+@media (max-width: 768px) {
+  .sidebar-nav {
+    scroll-snap-type: y mandatory;
+    gap: 40px;
+    padding-top: 50vh;
+    padding-bottom: 50vh;
+  }
+  
+  .sidebar-nav a,
+  .sidebar-nav .float-card {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    flex-shrink: 0;
+  }
+}
+
+/* Smooth transitions for wheel effect */
+.sidebar-nav a,
+.sidebar-nav .float-card {
+  transition: transform 0.3s ease, opacity 0.3s ease, scale 0.3s ease;
+}
+
+/* Scale effect - make centered item larger */
+.sidebar-nav a:hover,
+.sidebar-nav .float-card:hover {
+  transform: scale(1.05);
+}
