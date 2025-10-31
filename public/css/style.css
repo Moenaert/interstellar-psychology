@@ -709,8 +709,9 @@ body {
 
 /* Desktop button layout */
 #button-container {
-  position: absolute; top: 40%; left: 50%; transform: translate(-50%, -40%);
+  position: fixed; top: 40%; left: 50%; transform: translate(-50%, -40%);
   display: grid; grid-template-columns: repeat(5, auto); grid-gap: 20px; justify-content: center;
+  z-index: 10;
 }
 #button-container .row2 {
   grid-column: span 5;
