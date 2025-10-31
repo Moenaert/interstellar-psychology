@@ -90,14 +90,12 @@ const Layout = ({ children }) => {
         const translateY = adjustedOffset * itemSpacing;
         const distance = Math.abs(adjustedOffset);
         
-        // Smooth scaling and opacity based on distance from center
+        // Smooth scaling based on distance from center, no blur
         const scale = Math.max(0.7, 1.2 - distance * 0.25);
-        const opacity = Math.max(0.3, 1 - distance * 0.35);
-        const blur = Math.min(distance * 1.5, 4);
         
         item.style.transform = `translate(0, calc(-50% + ${translateY}px)) scale(${scale})`;
-        item.style.opacity = opacity;
-        item.style.filter = `blur(${blur}px)`;
+        item.style.opacity = 1;
+        item.style.filter = 'none';
         item.style.zIndex = Math.round(100 - distance * 10);
       });
 
