@@ -1408,3 +1408,28 @@ z-index: 5000;
   touch-action: pan-y;
   overscroll-behavior: contain;
 }
+
+/* Breathing animation for floating elements */
+@keyframes breathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.02);
+  }
+}
+
+.breathing-element {
+  animation: breathe 4s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform;
+}
+
+/* Different breathing rhythms for variety */
+.breathing-element:nth-child(odd) {
+  animation-duration: 4.5s;
+}
+
+.breathing-element:nth-child(even) {
+  animation-duration: 5s;
+}

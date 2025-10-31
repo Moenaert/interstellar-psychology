@@ -23,13 +23,13 @@ const Telepathy = () => {
     <>
       <div className="particles" id="particles"></div>
 
-      <header className="header">
+      <header className="header breathing-element" style={{'--delay': '0s'}}>
         <h1 className="float-card">
           <div className="card-inner">Telepathy</div>
         </h1>
       </header>
 
-      <section className="intro">
+      <section className="intro breathing-element" style={{'--delay': '0.5s'}}>
         <p>
           In a world that often dismisses the extraordinary as mere fantasy,
           <em> The Telepathy Tapes</em> explores the profound abilities of
@@ -38,13 +38,13 @@ const Telepathy = () => {
         </p>
       </section>
 
-      <section className="explore-intro">
+      <section className="explore-intro breathing-element" style={{'--delay': '1s'}}>
         <p>Open your mind and explore the trippy realm of Telepathy through these mind-bending videos.</p>
         <p>Dive deep into the cosmic rabbit hole and awaken your third eye!</p>
       </section>
 
       <section className="video-grid">
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=mxLpiSuvOJk&list=PL6lsUJdGLFx7OGLRQCQfHQPWcMDPc5Ey" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab6765630000ba8a5eae6355858122d6e416ab7f" alt="The Telepathy Tapes" />
@@ -55,7 +55,7 @@ const Telepathy = () => {
           </div>
         </div>
 
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '2s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=fHp43kKxatM&t=3780s" target="_blank" rel="noopener noreferrer">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTKqJBSdVFawx7jUfhJiadpZSK3hUVBU9zLA&s" alt="Reality Check: NewsNation Deep Dive" />
@@ -70,7 +70,7 @@ const Telepathy = () => {
         </div>
       </section>
 
-      <footer className="footer">
+      <footer className="footer breathing-element" style={{'--delay': '2.5s'}}>
         <p>Interstellar Psychology <span className="heart">❤️</span></p>
       </footer>
     </>

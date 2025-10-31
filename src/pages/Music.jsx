@@ -25,13 +25,13 @@ const Music = () => {
     <>
       <div className="particles" id="particles"></div>
 
-      <header className="header">
+      <header className="header breathing-element" style={{'--delay': '0s'}}>
         <h1 className="float-card">
           <div className="card-inner">Music</div>
         </h1>
       </header>
 
-      <section className="intro">
+      <section className="intro breathing-element" style={{'--delay': '0.5s'}}>
         <p>
           In the quiet alchemy of creation, artists weave their souls into melodies,
           turning whispers of the divine into symphonies that echo in our hearts.
@@ -43,7 +43,7 @@ const Music = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '1s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=W0DM5lcj6mw" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="Imagine Dragons - Believer" />
@@ -54,7 +54,7 @@ const Music = () => {
           </div>
         </div>
 
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '1.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=w3viBe2Q0P8" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="Imagine Dragons - Radioactive" />
@@ -65,7 +65,7 @@ const Music = () => {
           </div>
         </div>
 
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '2s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=V5M2WZiAy6k" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a" alt="Imagine Dragons - Natural" />
@@ -78,7 +78,7 @@ const Music = () => {
       </section>
 
       <section className="video-grid">
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '2.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=SrtI7_VQYkg&list=RDSrtI7_VQYkg&start_radio=1" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab67616d0000b273a522147972088448423bfce7" alt="Mr Traumatik - Ark of the Covenant" />
@@ -89,7 +89,7 @@ const Music = () => {
           </div>
         </div>
 
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '3s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=fyxHLnDODbA" target="_blank" rel="noopener noreferrer">
               <img src="https://i.ebayimg.com/images/g/pxwAAOSwH-Bf6JFx/s-l400.jpg" alt="Yannick Noah - Simon Papa Tara" />
@@ -100,7 +100,7 @@ const Music = () => {
           </div>
         </div>
 
-        <div className="video-card">
+        <div className="video-card breathing-element" style={{'--delay': '3.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=1EQzCoF7uA8" target="_blank" rel="noopener noreferrer">
               <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTDl-oQaOUnpfQz5U73dt43tGTpScvTcOMEtwiqKeALQ-q2oLTW0S3kY-M4v9UqvoZ3s3a0fUWYvxQGP2HbSM441dPY_A0pgJYGRhiymw" alt="Mumford & Sons - Awake My Soul" />

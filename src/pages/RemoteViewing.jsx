@@ -23,17 +23,17 @@ const RemoteViewing = () => {
     <>
       <div className="particles" id="particles"></div>
 
-      <header className="header">
+      <header className="header breathing-element" style={{"--delay": "0s"}}>
         <h1 className="float-card">
           <div className="card-inner">Remote Viewing</div>
         </h1>
       </header>
 
-      <section className="intro">
+      <section className="intro breathing-element" style={{"--delay": "0.5s"}}>
         <p>Remote viewing is a technique where individuals use extrasensory perception to perceive distant or hidden objects, places, or events without physical interaction. It is often linked to consciousness theories suggesting that human awareness can transcend physical boundaries, tapping into a universal or collective consciousness.</p>
       </section>
 
-      <section className="explore-intro">
+      <section className="explore-intro breathing-element" style={{"--delay": "1s"}}>
         <p>Open your mind and explore the trippy realm of Remote Viewing through these mind-bending videos.</p>
         <p>Dive deep into the cosmic rabbit hole and awaken your third eye!</p>
       </section>

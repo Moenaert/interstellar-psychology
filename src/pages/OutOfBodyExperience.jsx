@@ -23,17 +23,17 @@ const OutOfBodyExperience = () => {
     <>
       <div className="particles" id="particles"></div>
 
-      <header className="header">
+      <header className="header breathing-element" style={{"--delay": "0s"}}>
         <h1 className="float-card">
           <div className="card-inner">Out of Body Experience</div>
         </h1>
       </header>
 
-      <section className="intro">
+      <section className="intro breathing-element" style={{"--delay": "0.5s"}}>
         <p>Many report a renewed sense of purpose, reduced fear of death, and increased spirituality or belief in an afterlife. Some undergo personality changes, becoming more compassionate or altruistic, while others may struggle with integrating the experience, facing skepticism or existential questions. NDEs can reshape one's worldview, relationships, and priorities, often leading to lasting psychological and spiritual transformation.</p>
       </section>
 
-      <section className="explore-intro">
+      <section className="explore-intro breathing-element" style={{"--delay": "1s"}}>
         <p>Open your mind and explore the trippy realm of Out of Body Experiences through these mind-bending videos.</p>
         <p>Dive deep into cosmic the rabbit hole and awaken your third eye!</p>
       </section>
