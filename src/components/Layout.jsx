@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AudioPlayer from './AudioPlayer';
 
@@ -6,6 +6,7 @@ const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const sidebarRef = useRef(null);
+  const wheelRef = useRef(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -18,6 +19,85 @@ const Layout = ({ children }) => {
   const isActive = (path) => {
     return location.pathname === path;
   };
+
+  // Infinite wheel scrolling effect
+  useEffect(() => {
+    if (!isSidebarOpen || !wheelRef.current) return;
+
+    const wheel = wheelRef.current;
+    const items = wheel.querySelectorAll('a');
+    const itemHeight = items[0]?.offsetHeight || 0;
+    const itemCount = items.length;
+    
+    let currentIndex = 0;
+    let startY = 0;
+    let isDragging = false;
+
+    const updateWheel = (index) => {
+      // Normalize index to loop
+      currentIndex = ((index % itemCount) + itemCount) % itemCount;
+      
+      items.forEach((item, i) => {
+        const offset = i - currentIndex;
+        const normalizedOffset = ((offset % itemCount) + itemCount) % itemCount;
+        const adjustedOffset = normalizedOffset > itemCount / 2 ? normalizedOffset - itemCount : normalizedOffset;
+        
+        const translateY = adjustedOffset * (itemHeight + 40);
+        const scale = adjustedOffset === 0 ? 1.1 : 0.85;
+        const opacity = adjustedOffset === 0 ? 1 : 0.5;
+        
+        item.style.transform = `translateY(${translateY}px) scale(${scale})`;
+        item.style.opacity = opacity;
+        item.style.transition = isDragging ? 'none' : 'all 0.3s ease';
+      });
+    };
+
+    const handleTouchStart = (e) => {
+      startY = e.touches[0].clientY;
+      isDragging = true;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging) return;
+      
+      const deltaY = e.touches[0].clientY - startY;
+      const threshold = 50;
+      
+      if (Math.abs(deltaY) > threshold) {
+        const direction = deltaY > 0 ? -1 : 1;
+        currentIndex += direction;
+        updateWheel(currentIndex);
+        startY = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      isDragging = false;
+      updateWheel(currentIndex);
+    };
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+      const direction = e.deltaY > 0 ? 1 : -1;
+      currentIndex += direction;
+      updateWheel(currentIndex);
+    };
+
+    // Initialize wheel position
+    updateWheel(0);
+
+    wheel.addEventListener('touchstart', handleTouchStart, { passive: true });
+    wheel.addEventListener('touchmove', handleTouchMove, { passive: false });
+    wheel.addEventListener('touchend', handleTouchEnd, { passive: true });
+    wheel.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      wheel.removeEventListener('touchstart', handleTouchStart);
+      wheel.removeEventListener('touchmove', handleTouchMove);
+      wheel.removeEventListener('touchend', handleTouchEnd);
+      wheel.removeEventListener('wheel', handleWheel);
+    };
+  }, [isSidebarOpen]);
 
   return (
     <>
@@ -37,6 +117,7 @@ const Layout = ({ children }) => {
       />
 
       <nav ref={sidebarRef} className={`sidebar-nav ${isSidebarOpen ? 'open' : ''}`}>
+        <div ref={wheelRef} className="wheel-container">
         <Link to="/" onClick={closeSidebar}>Interstellar Psychology</Link>
         <Link 
           to="/phd/music" 
@@ -108,6 +189,7 @@ const Layout = ({ children }) => {
         >
           🥚 Easter Egg
         </Link>
+        </div>
       </nav>
 
       {children}
