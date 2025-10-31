@@ -1090,3 +1090,16 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
     height: 13.1px;
   }
 }
+
+/* Video card inner wrapper fix */
+.video-card .card-inner {
+  display: contents;
+}
+
+.video-card .card-inner img,
+.video-card .card-inner h3,
+.video-card .card-inner p,
+.video-card .card-inner a {
+  position: relative;
+  z-index: 1;
+}

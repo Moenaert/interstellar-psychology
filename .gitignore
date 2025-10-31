@@ -1,2 +1,10 @@
 
 .DS_Store
+
+# React / Vite build files
+node_modules/
+dist/
+.vite/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
