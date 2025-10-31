@@ -1361,24 +1361,24 @@ z-index: 5000;
 
 /* Shift wheel buttons to left for full visibility */
 .sidebar-nav {
-  width: 320px !important;
-  max-width: 85% !important;
+  width: 400px !important;
+  max-width: 90% !important;
 }
 
 .wheel-container a {
-  left: 20% !important;
+  left: 15% !important;
   text-align: center !important;
-  max-width: 250px !important;
+  max-width: 300px !important;
 }
 
 @media (max-width: 768px) {
   .sidebar-nav {
-    width: 280px !important;
+    width: 340px !important;
   }
   
   .wheel-container a {
-    left: 15% !important;
-    max-width: 220px !important;
+    left: 12% !important;
+    max-width: 260px !important;
     text-align: center !important;
   }
 }
