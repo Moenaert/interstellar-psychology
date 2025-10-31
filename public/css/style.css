@@ -1170,3 +1170,52 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
     border-radius: 2px;
   }
 }
+
+/* Smooth native scrolling for sidebar - no conflicts */
+.sidebar-nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  .sidebar-nav {
+    padding-bottom: 100px; /* Extra space at bottom */
+  }
+  
+  /* Make buttons more touch-friendly */
+  .sidebar-nav .float-card,
+  .sidebar-nav a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Subtle scrollbar styling */
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+  }
+}
