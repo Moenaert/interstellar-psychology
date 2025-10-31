@@ -168,6 +168,12 @@ h1 {
   grid-template-columns: repeat(2, minmax(250px, 400px));
 }
 
+/* For grids with exactly 1 item, center it and limit width */
+.video-grid:has(.video-card:nth-child(1):last-child) {
+  grid-template-columns: minmax(250px, 400px);
+  justify-content: center;
+}
+
 /* --------------------
    Particles background
 --------------------- */
