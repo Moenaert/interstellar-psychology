@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AudioPlayer from './AudioPlayer';
 
 const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
+  const sidebarRef = useRef(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -17,6 +18,65 @@ const Layout = ({ children }) => {
   const isActive = (path) => {
     return location.pathname === path;
   };
+
+  // Enhanced wheel-like scrolling for mobile
+  useEffect(() => {
+    const sidebar = sidebarRef.current;
+    if (!sidebar) return;
+
+    let isScrolling;
+    let startY;
+    let scrollTop;
+
+    const handleTouchStart = (e) => {
+      startY = e.touches[0].pageY;
+      scrollTop = sidebar.scrollTop;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!startY) return;
+      
+      const touchY = e.touches[0].pageY;
+      const deltaY = startY - touchY;
+      
+      // Apply smooth scrolling with momentum
+      sidebar.scrollTop = scrollTop + deltaY;
+      
+      // Clear scrolling timeout
+      clearTimeout(isScrolling);
+      
+      // Set a timeout to detect when scrolling stops
+      isScrolling = setTimeout(() => {
+        // Snap to nearest item if needed
+        const items = sidebar.querySelectorAll('a');
+        const sidebarRect = sidebar.getBoundingClientRect();
+        
+        items.forEach((item) => {
+          const itemRect = item.getBoundingClientRect();
+          const itemCenter = itemRect.top + itemRect.height / 2;
+          const sidebarCenter = sidebarRect.top + sidebarRect.height / 2;
+          
+          if (Math.abs(itemCenter - sidebarCenter) < 50) {
+            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      }, 150);
+    };
+
+    const handleTouchEnd = () => {
+      startY = null;
+    };
+
+    sidebar.addEventListener('touchstart', handleTouchStart, { passive: true });
+    sidebar.addEventListener('touchmove', handleTouchMove, { passive: true });
+    sidebar.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      sidebar.removeEventListener('touchstart', handleTouchStart);
+      sidebar.removeEventListener('touchmove', handleTouchMove);
+      sidebar.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
 
   return (
     <>
@@ -35,7 +95,7 @@ const Layout = ({ children }) => {
         onClick={closeSidebar}
       />
 
-      <nav className={`sidebar-nav ${isSidebarOpen ? 'open' : ''}`}>
+      <nav ref={sidebarRef} className={`sidebar-nav ${isSidebarOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeSidebar}>Interstellar Psychology</Link>
         <Link 
           to="/phd/music" 

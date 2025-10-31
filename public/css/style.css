@@ -1128,3 +1128,45 @@ font-size: clamp(1rem, 2.2vw, 1.4rem);
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 255, 255, 0.5);
 }
+
+/* Enhanced wheel-like scrolling for mobile sidebar */
+@media (max-width: 768px) {
+  .sidebar-nav {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+    padding-bottom: 100px; /* Extra space at bottom */
+  }
+  
+  .sidebar-nav .float-card,
+  .sidebar-nav a {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+  
+  /* Improve touch scrolling momentum */
+  .sidebar-nav {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+  
+  /* Make buttons more touch-friendly */
+  .sidebar-nav .float-card,
+  .sidebar-nav a {
+    min-height: 48px; /* Minimum touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Smoother scrollbar for mobile */
+@media (max-width: 768px) {
+  .sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.4);
+    border-radius: 2px;
+  }
+}
