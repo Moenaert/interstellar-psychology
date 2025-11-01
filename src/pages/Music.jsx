@@ -81,7 +81,7 @@ const Music = () => {
         <div className="video-card breathing-element" style={{'--delay': '2.5s'}}>
           <div className="card-inner">
             <a href="https://www.youtube.com/watch?v=KnzmnTagueM&list=RDKnzmnTagueM&start_radio=1" target="_blank" rel="noopener noreferrer">
-              <img src="https://www.artstation.com/artwork/lDrd55" alt="Mr Traumatik - Ark of the Covenant" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFzmz3hRTEAqy84317sz6e4yoqd9r-TxxHpw&s" alt="Mr Traumatik - Ark of the Covenant" />
             </a>
             <h3>Jericho</h3>
             <p>Iniko</p>
