@@ -80,12 +80,12 @@ const Music = () => {
       <section className="video-grid">
         <div className="video-card breathing-element" style={{'--delay': '2.5s'}}>
           <div className="card-inner">
-            <a href="https://www.youtube.com/watch?v=SrtI7_VQYkg&list=RDSrtI7_VQYkg&start_radio=1" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.youtube.com/watch?v=KnzmnTagueM&list=RDKnzmnTagueM&start_radio=1" target="_blank" rel="noopener noreferrer">
               <img src="https://i.scdn.co/image/ab67616d0000b273a522147972088448423bfce7" alt="Mr Traumatik - Ark of the Covenant" />
             </a>
-            <h3>Ark of the Covenant</h3>
-            <p>Mr Traumatik ॐ</p>
-            <a href="https://www.youtube.com/watch?v=SrtI7_VQYkg&list=RDSrtI7_VQYkg&start_radio=1" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+            <h3>Jerichot</h3>
+            <p>Iniko</p>
+            <a href="https://www.youtube.com/watch?v=KnzmnTagueM&list=RDKnzmnTagueM&start_radio=1" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
           </div>
         </div>
 
